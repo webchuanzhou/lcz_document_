@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-03-11 16:39:43
+ * @LastEditTime: 2021-03-11 17:13:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -9,7 +9,7 @@
 - CSS
   - [布局](layout.md)
   
-- JavaScript
+- JavaScript基础篇
   - [闭包](closure.md)
   - [原型](prototype.md)
 
