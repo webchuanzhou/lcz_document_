@@ -1,13 +1,14 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-03-25 11:09:27
+ * @LastEditTime: 2021-03-25 16:50:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
 -->
 - CSS
   - [布局](css/layout.md)
+  - [重置样式基础](css/reset.md)
   
 - JavaScript基础篇
   - [字符串方法](js/jsString.md)
