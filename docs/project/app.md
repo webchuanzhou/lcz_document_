@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-12 10:14:12
- * @LastEditTime: 2021-03-12 11:38:01
+ * @LastEditTime: 2021-03-26 17:25:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\project\app.md
@@ -617,3 +617,8 @@ aesAddEncrypt(options.data)
 			this.make();
 		}
 ```
+
+## 14.安卓离线打包
+安卓离线打包需要 安卓的空壳包配置 可参考https://www.kancloud.cn/xiaoyulive/uniapp/1836326
+而且如果要使用支付宝或者微信的第三方sdk 需要在离线包中配置额外代码，
+犹豫本人不懂安卓代码 ， 都采用云打包
