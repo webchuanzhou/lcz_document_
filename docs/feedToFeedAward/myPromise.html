@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-01 16:13:49
- * @LastEditTime: 2021-04-01 17:29:14
+ * @LastEditTime: 2021-04-01 17:46:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\ceshi.html
@@ -118,7 +118,7 @@
                   // 因为不知道后面状态的变化情况，所以将成功回调和失败回调存储起来
                   // 等到执行成功失败函数的时候再传递
                   console.log('nnnn')
-                  this.successArr.push(fulfilledMicrotask)
+                  this.successArr.push(fulfilledMicrotask)   //坑 丢入的是微任务
                   this.errorArr.push(rejectedMicrotask)
                   console.log(this.successArr.length,'n2n2',this.errorArr.length)
                 }
@@ -166,55 +166,55 @@
             resolve(x)
           }
         }
-//         const promise = new myPromise((resolve, reject) => {
-//   resolve('succ')
-// })
+        const promise = new myPromise((resolve, reject) => {
+  resolve('succ')
+})
  
-// promise.then().then().then(value => console.log(value))
+promise.then().then().then(value => console.log(value))
 
-        var p1 = function(){
-            return new myPromise(function (resolve, reject) {
-                setTimeout(function () {
-                    console.log('11111');
-                    resolve("p1");
-                }, 1000)
-            })
-        };
-        function p2 () {
-            return new myPromise(function (resolve, reject) {
-                setTimeout(function () {
-                    console.log('22222');
-                    resolve("p2")
-                }, 1000)
-            })
-        }
-        function p3 () {
-            return new myPromise(function (resolve, reject) {
-                setTimeout(function () {
-                    console.log('33333');
-                    resolve("p3");
-                }, 1000);
-            })
-        }
-        function p4 () {
-            return new myPromise(function (resolve, reject) {
-                setTimeout(function () {
-                    console.log('44444');
-                    resolve("p4");
-                }, 1000);
-            })
-        }
+//         var p1 = function(){
+//             return new myPromise(function (resolve, reject) {
+//                 setTimeout(function () {
+//                     console.log('11111');
+//                     resolve("p1");
+//                 }, 1000)
+//             })
+//         };
+//         function p2 () {
+//             return new myPromise(function (resolve, reject) {
+//                 setTimeout(function () {
+//                     console.log('22222');
+//                     resolve("p2")
+//                 }, 1000)
+//             })
+//         }
+//         function p3 () {
+//             return new myPromise(function (resolve, reject) {
+//                 setTimeout(function () {
+//                     console.log('33333');
+//                     resolve("p3");
+//                 }, 1000);
+//             })
+//         }
+//         function p4 () {
+//             return new myPromise(function (resolve, reject) {
+//                 setTimeout(function () {
+//                     console.log('44444');
+//                     resolve("p4");
+//                 }, 1000);
+//             })
+//         }
 
-p1().then(function () {
-            console.log("我是回调");
-            return p2();
-        }).then(function () {
-            console.log("我是回调");
-            return p3();
-        }).then(function () {
-            console.log("我是回调");
-            return p4();
-        });
+// p1().then(function () {
+//             console.log("我是回调");
+//             return p2();
+//         }).then(function () {
+//             console.log("我是回调");
+//             return p3();
+//         }).then(function () {
+//             console.log("我是回调");
+//             return p4();
+//         });
 
     </script>
   </body>

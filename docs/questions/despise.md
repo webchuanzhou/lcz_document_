@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 15:57:51
- * @LastEditTime: 2021-04-01 15:41:10
+ * @LastEditTime: 2021-04-01 18:03:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\despise.md
@@ -185,3 +185,14 @@ function resolvePromise(promise2, x, resolve, reject) {
   }
 }
 ```
+总结.
+创建类以及构造函数,构造函数调用直接执行方法
+创建 2个数组缓存promise  3个promise状态常量 1个当前状态 1个成功的变量 1个失败信息的变量  
+创建 3个函数 resolve reject then 
+resolve 主要用于改状态 改成功值 循环走成功数组缓存
+reject  主要用于改状态 改成错误 循环走错误数组缓存
+then 创建当前类 丢出去 ， ing状态的时候推数组进去 推的是微任务queueMicrotask
+success状态 判断是不是 MyPromise 实例对象 是的话x.then(resolve, reject) 抛出，不是的话 resolve(x)
+error状态同上
+
+2个重写的静态方法resolve reject 以便于直接的链式操作 
