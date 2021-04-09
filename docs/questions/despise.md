@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 15:57:51
- * @LastEditTime: 2021-04-01 18:03:02
+ * @LastEditTime: 2021-04-01 18:07:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\despise.md
@@ -33,7 +33,7 @@ JS 中整数的最大安全范围可以查到是：9007199254740991
   add(a,b)
 ```
 
-##手写promise
+## 2.手写promise
 ```html
   // MyPromise.js
 

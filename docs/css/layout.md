@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:10:13
- * @LastEditTime: 2021-03-25 16:49:09
+ * @LastEditTime: 2021-04-08 18:03:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\docs\layout.md
@@ -20,7 +20,7 @@ IE 盒模型认为：盒子的实际尺寸 = 设置的宽/高 = 内容 + 内边�
 content-box：标准盒模型；
 border-box：IE 盒模型；
 
-## rem
+## rem布局
 rem(root em) 和 em 一样，也是一个相对长度单位，不过 rem 相对的是 HTML 的根元素 html。
 rem 由于是基于 html 的 font-size 来计算，所以通常用于自适应网站或者 H5 中。
 比如在做 H5 的时候，前端通常会让 UI 给 750px 宽的设计图，而在开发的时候可以基于 iPhone X 的尺寸 375px * 812px 来写页面，这样一来的话，就可以用下面的 JS 依据当前页面的视口宽度自动计算出根元素 html 的基准 font-size 是多少。
@@ -66,6 +66,44 @@ rem 由于是基于 html 的 font-size 来计算，所以通常用于自适应�
 }
 ```
 
+## h5 meta布局
+/*
+* initial-scale：初始缩放比例，也即是当页面第一次 load 的时候缩放比例。
+* maximum-scale：允许用户缩放到的最大比例。
+* minimum-scale：允许用户缩放到的最小比例。
+* user-scalable：用户是否可以手动缩放
+
+* 这边 initial-scale, maximum-scale 和minimum-scale 都要设置为scale 值。
+* 特别注意：meta的content中的值不要设置width
+*/
+
+```html
+    !function (w) {
+        InitView();
+        "onorientationchange" in w && w.addEventListener("orientationchange", function () {
+            InitView()
+        }, false);
+        w.addEventListener("resize", function () {
+            InitView()
+        }, false);
+
+        function InitView() {
+            var uiWidth = 750,
+                width = screen.width,
+                height = screen.height,
+                scale = width / uiWidth,
+                el = width.viewMeta || document.createElement('meta');
+                width.viewMeta || document.getElementsByTagName("head")[0].appendChild(el);
+            el.setAttribute('name', 'viewport');
+            el.setAttribute('content', "width=" + uiWidth + ", initial-scale=" + scale + ",maximum-scale=" + scale + ",minimum-scale=" + scale + ", user-scalable=no,target-densitydpi=device-dpi,minimal-ui,uc-fitscreen=no");
+            width.viewMeta = el;
+            window.viewPortNum = scale;
+        }
+
+        w.showPlaceholder = 1;
+    }(window);
+```
+
 ## 自定义属性
 
 之前我们通常是在预处理器里才可以使用变量，而现在 CSS 里也支持了变量的用法。通过自定义属性就可以在想要使用的地方引用它。
@@ -82,3 +120,15 @@ h1 {
     color: var(--theme-color);
 }
 ```
+
+## 溢出...
+单行超出省略
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+
+多行超出省略
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+overflow: hidden;
