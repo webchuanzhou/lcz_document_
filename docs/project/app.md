@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-12 10:14:12
- * @LastEditTime: 2021-03-26 17:25:50
+ * @LastEditTime: 2021-04-14 15:53:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\project\app.md
@@ -622,3 +622,11 @@ aesAddEncrypt(options.data)
 安卓离线打包需要 安卓的空壳包配置 可参考https://www.kancloud.cn/xiaoyulive/uniapp/1836326
 而且如果要使用支付宝或者微信的第三方sdk 需要在离线包中配置额外代码，
 犹豫本人不懂安卓代码 ， 都采用云打包
+
+## 15.支付功能
+在App端要申请微信的App支付，而小程序端则申请微信的小程序支付
+App端，支付宝支付 orderInfo 为 String 类型
+App端，微信支付 orderInfo 为 Object 类型
+支付宝小程序的 orderInfo(支付宝的规范为 tradeNO) 为 String 类型，表示支付宝交易号
+App端，苹果应用内支付 orderInfo 为Object 类型，{productid: 'productid'}。
+应用id（又称套装id，appid，BundleID，包名）

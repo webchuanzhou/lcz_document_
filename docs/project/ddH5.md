@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-25 11:09:06
- * @LastEditTime: 2021-03-25 11:16:31
+ * @LastEditTime: 2021-04-15 09:29:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\project\ddH5.md
@@ -50,4 +50,9 @@ corpId: 获取微应用的code  与后台换取token
     }
 }
 ```
+
+## vue开发钉钉H5微应用更新不及时解决方式
+
+1.项目域名后拼接版本号&version=v1.x
+2.服务端管理APP版本，前端在项目启动时判断本地缓存的版本与服务端版本是否一致。不一致刷新页面请求最新资源。
 

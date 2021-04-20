@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-03-25 16:50:49
+ * @LastEditTime: 2021-04-20 15:22:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -26,7 +26,7 @@
 
 - 优化
   - [Vue](optimization/vue.md)
-  
+  - [代码规范](optimization/code.md)
 - 面试题
   - [基础](questions/base.md)
   - [中级](questions/intermediate.md)
