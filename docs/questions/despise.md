@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 15:57:51
- * @LastEditTime: 2021-04-22 12:08:17
+ * @LastEditTime: 2021-04-22 12:11:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\despise.md
@@ -222,20 +222,25 @@ error状态同上
  * @param {*} name fn
  * @return {*}
  */
+
 判断构造函数中的缓存是否有发布名字， 有则追加发布函数，没有则创建此发布
+
 /**
  * @description:  2.订阅 $emit 判断订阅名是否存在与缓存中，存在就执行
  * @param {*} name once = false ...args
  * @return {*}  发布函数栈中执行
  */
+
 拿出该发布的函数栈
 循环发布函数栈中的函数
 可以操作是否订阅一次就摧毁发布栈(只执行一次)
+
 /**
  * @description:  3.取消订阅
  * @param {*} name fn
  * @return {*} 
  */
+ 
 拿初发布的函数栈，
 寻找发布栈内的函数 与 传入函数的下标
 通过数组裁剪对发布栈进行操作 splice(index,1)
