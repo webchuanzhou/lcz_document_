@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 09:49:25
- * @LastEditTime: 2021-04-20 16:10:24
+ * @LastEditTime: 2021-04-22 11:23:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\base.md
@@ -120,3 +120,4 @@ import 是编译时的 require 是运行时候的 ，性能上比require好很�
 原始类型中除了 null，其它类型都可以通过 typeof 来判断。
 instanceof 引用数据类型
 Object.prototype.toString.call()最佳判断
+

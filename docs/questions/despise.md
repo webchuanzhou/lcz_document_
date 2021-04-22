@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 15:57:51
- * @LastEditTime: 2021-04-01 18:07:58
+ * @LastEditTime: 2021-04-22 12:08:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\despise.md
@@ -196,3 +196,87 @@ success状态 判断是不是 MyPromise 实例对象 是的话x.then(resolve, re
 error状态同上
 
 2个重写的静态方法resolve reject 以便于直接的链式操作 
+
+## 3.手写兼容 类型判断
+```html
+  function typeOf(obj){
+    return Object.prototype.toString.call(obj).slice(8,-1).toLowerCase()
+  }
+
+  console.log(typeOf([])) // array
+  console.log(typeOf({})) // Object
+  console.log(typeOf(new Date())) // date
+
+```
+
+## 4.数组去重
+```html
+  es6 
+  [...new Set(arr)]
+```
+
+## 5. 事件订阅
+思路
+/**
+ * @description:  1.发布 $on 
+ * @param {*} name fn
+ * @return {*}
+ */
+判断构造函数中的缓存是否有发布名字， 有则追加发布函数，没有则创建此发布
+/**
+ * @description:  2.订阅 $emit 判断订阅名是否存在与缓存中，存在就执行
+ * @param {*} name once = false ...args
+ * @return {*}  发布函数栈中执行
+ */
+拿出该发布的函数栈
+循环发布函数栈中的函数
+可以操作是否订阅一次就摧毁发布栈(只执行一次)
+/**
+ * @description:  3.取消订阅
+ * @param {*} name fn
+ * @return {*} 
+ */
+拿初发布的函数栈，
+寻找发布栈内的函数 与 传入函数的下标
+通过数组裁剪对发布栈进行操作 splice(index,1)
+
+```html
+  class EventEmitter{
+    constructor(){
+      this.cache = {}
+    }
+
+    $on(name,fn){
+      if(this.cache[name]){
+        this.cache[name].push(fn)
+      }else{
+        this.cache[name] = [fn]
+      }
+    }
+
+    $off(name,fn){
+      let tasks = this.cache[name];
+      if(tasks){
+        const index = tasks.findIndex(f => f === fn || f.callback === fn)
+        if(index>=0){
+          tasks.splice(index,1)
+        }
+      }
+    }
+
+    $emit(name,once = false,...args){
+      if(this.cache[name]){
+        let tasks = this.cache[name].slice();
+
+        for(let fn of tasks){
+          fn(...args)
+        }
+
+        if(once){
+          delete this.cache[name]
+        }
+      }
+    }
+
+}
+```
