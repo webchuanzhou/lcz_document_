@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 15:57:51
- * @LastEditTime: 2021-04-22 12:12:46
+ * @LastEditTime: 2021-04-22 12:13:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\despise.md
@@ -241,7 +241,7 @@ error状态同上
  * @return {*} 
  */
  
-拿初发布的函数栈，
+拿出发布的函数栈，
 寻找发布栈内的函数 与 传入函数的下标
 通过数组裁剪对发布栈进行操作 splice(index,1)
 

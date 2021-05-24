@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-04-20 15:22:12
+ * @LastEditTime: 2021-05-08 14:55:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -25,6 +25,7 @@
   - [axios封装](request/axios.md)
 
 - 优化
+  - [公共全局](optimization/common.md)
   - [Vue](optimization/vue.md)
   - [代码规范](optimization/code.md)
 - 面试题

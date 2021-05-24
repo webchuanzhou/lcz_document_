@@ -324,3 +324,64 @@ beforeDestroy() {
 ### 第三方 UI 组件按需引入
 
 ### 图片使用懒加载方式
+
+### VsCode 插件 prettier
+根目录创建.prettierrc.js
+```html
+  module.exports = {
+    "printWidth": 120, // 超过最大值换行
+    "semi": false, // 句尾添加分号
+    "singleQuote": true // 使用单引号代替双引号
+};
+
+# 格式化所有文件（. 表示所有文件）
+npx prettier --write .
+
+```
+
+### VsCode 插件 EditorConfig 任何编辑器中都统一格式
+主要用于区分编辑器不同导致的问题
+根目录创建 .editorconfig
+使用方式 shift + alt +f
+```html
+    [*]
+    charset=utf-8
+    end_of_line=lf
+    insert_final_newline=false
+    indent_style=space
+    indent_size=2
+
+    [{*.ng,*.sht,*.html,*.shtm,*.shtml,*.htm}]
+    indent_style=space
+    indent_size=2
+
+    [{*.jhm,*.xslt,*.xul,*.rng,*.xsl,*.xsd,*.ant,*.tld,*.fxml,*.jrxml,*.xml,*.jnlp,*.wsdl}]
+    indent_style=space
+    indent_size=2
+
+    [{.babelrc,.stylelintrc,jest.config,.eslintrc,.prettierrc,*.json,*.jsb3,*.jsb2,*.bowerrc}]
+    indent_style=space
+    indent_size=2
+
+    [*.svg]
+    indent_style=space
+    indent_size=2
+
+    [*.js.map]
+    indent_style=space
+    indent_size=2
+
+    [*.less]
+    indent_style=space
+    indent_size=2
+
+    [*.vue]
+    indent_style=space
+    indent_size=2
+
+    [{.analysis_options,*.yml,*.yaml}]
+    indent_style=space
+    indent_size=2
+```
+
+### 代码 遵守 Airbnb JavaScript Style Guide 风格
