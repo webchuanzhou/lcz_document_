@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-05-08 14:55:58
+ * @LastEditTime: 2021-06-11 17:39:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -20,6 +20,12 @@
 - Vue2.x
   - [常用指令封装](vue2.x/directive.md)
 
+- Vue3.x
+  - [常用指令封装](vue3.x/directive.md)
+
+- webpack
+  - [vue_webpack5.x](webpack/vue3xWebpack.md)
+
 - 网络请求封装
   - [Fetch封装](request/fetch.md)
   - [axios封装](request/axios.md)
@@ -28,6 +34,7 @@
   - [公共全局](optimization/common.md)
   - [Vue](optimization/vue.md)
   - [代码规范](optimization/code.md)
+
 - 面试题
   - [基础](questions/base.md)
   - [中级](questions/intermediate.md)
@@ -37,5 +44,6 @@
 - 项目总结
   - [微信小程序Uni-app](project/wx.md)
   - [App端Uni-app](project/app.md)
+  - [Uni-app多端开发](project/uniMore.md)
   - [App端封装请求](project/request.md)
   - [钉钉微应用](project/ddH5.md)

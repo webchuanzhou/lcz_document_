@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-12 10:07:21
- * @LastEditTime: 2021-03-12 10:13:52
+ * @LastEditTime: 2021-06-11 17:16:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\project\wx.md
@@ -104,4 +104,30 @@
     })
   }
 
+```
+
+## 坑 3.微信支付
+```html
+    //微信小程序支付 provider, timeStamp, nonceStr, packages, signType, paySign,success,fail
+		wxPay({ commit },res){
+			return new Promise((resolve, reject) => {
+				let pay_info = JSON.parse(res.data.pay_info)
+				var _this = this;
+				uni.requestPayment({
+					provider:'wxpay',
+					timeStamp:pay_info.timeStamp,
+					nonceStr:pay_info.nonceStr,
+					package: pay_info.package,
+					signType:pay_info.signType,
+					paySign:pay_info.paySign,
+					success(res) {
+						resolve(res);
+					},
+					fail(err) {
+						reject(err)
+						console.log('微信支付失败:'+err)
+					}
+				});
+			})
+		},
 ```

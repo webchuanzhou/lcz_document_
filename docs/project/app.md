@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-12 10:14:12
- * @LastEditTime: 2021-04-14 15:53:52
+ * @LastEditTime: 2021-06-11 17:23:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\project\app.md
@@ -630,3 +630,41 @@ App端，微信支付 orderInfo 为 Object 类型
 支付宝小程序的 orderInfo(支付宝的规范为 tradeNO) 为 String 类型，表示支付宝交易号
 App端，苹果应用内支付 orderInfo 为Object 类型，{productid: 'productid'}。
 应用id（又称套装id，appid，BundleID，包名）
+
+## 16.app支付功能封装
+
+坑：微信本地基架运行微信支付，传输的是基架的配置不是源码视图中的配置会导致支付不成功，需要打包测试
+
+```html
+	appPay({ commit },params){
+			return new Promise((resolve, reject) => {
+				const {res , radioCurrentRecharge} = params
+				let pay_info =  radioCurrentRecharge == '1' ? res.data.pay_info : JSON.parse(res.data.pay_info)
+				console.log(res,213)
+				uni.requestPayment({
+				    provider: radioCurrentRecharge == '1' ? 'alipay' : 'wxpay',  
+				    orderInfo: res.data.pay_info, //微信、支付宝订单数据  
+				    success: function (res) {  
+						resolve(res)
+				        // console.log('success:' + JSON.stringify(res));  
+				    },  
+				    fail: function (err) {  
+						const message = err.errMsg || '';  
+						if (message.indexOf('[payment支付宝:62001]') !== -1) {  
+							uni.showModal({  
+								content: '支付宝支付失败,原因为: ' + message,  
+								showCancel: false  
+							});  
+						} else {  
+							console.log(message,23232)
+							uni.showModal({  
+								content: '微信支付失败,原因为: ' + message,  
+								showCancel: false  
+							});  
+						}
+						reject(err)
+				    }  
+				});
+			})
+		}
+```
