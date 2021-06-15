@@ -1,176 +1,178 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-01 16:13:49
- * @LastEditTime: 2021-04-01 17:46:56
+ * @LastEditTime: 2021-06-15 10:10:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\ceshi.html
 -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <title></title>
-  </head>
-  <body>
-    <script>
-        const PENDING = 'pending';
-        const FULFILLED = 'fulfilled';
-        const REJECTED = 'rejected';
-        class myPromise{
-          constructor(executor){
-            //进入会立即执行
-            try {
-              executor(this.resolve,this.reject)
-            }catch(error){
-              this.reject(error)
-            }
-          }
 
-          //定义状态  定义成功值  定义错误信息
+<head>
+  <meta charset="UTF-8" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <title></title>
+</head>
 
-          status = PENDING;
-          value = null;
-          errorMessage = null;
-
-          //定义2个数组队列
-
-          successArr = [];
-          errorArr = [];
-
-          //成功执行得函数  这边只有1次
-          resolve = (value)=>{
-            //微任务函数
-            if(this.status == PENDING){
-              //修改状态  赋值
-              this.status = FULFILLED;
-              console.log(this.status,888)
-              this.value = value;
-              //循环调用成功回调拿出来
-              while (this.successArr.length) {
-                // Array.shift() 取出数组第一个元素，然后（）调用，shift不是纯函数，取出后，数组将失去该元素，直到数组为空
-                this.successArr.shift()(value)
-                // console.log(this.successArr.shift()(value),2222)
-              }
-            }
-          }
-
-          //错误得函数
-          reject = (error)=>{
-            //微任务函数
-            if(this.status == PENDING){
-              //修改状态  赋值错误信息
-              this.status = REJECTED;
-
-              this.errorMessage = error;
-
-              //循环调用成功回调拿出来
-              while (this.errorArr.length) {
-                // Array.shift() 取出数组第一个元素，然后（）调用，shift不是纯函数，取出后，数组将失去该元素，直到数组为空
-                this.errorArr.shift()(error)
-              }
-            }
-          }
-
-          then = (successEnd,errorEnd) =>{
-            const realOnFulfilled = typeof successEnd === 'function' ? successEnd : value => value;
-            const realOnRejected = typeof errorEnd === 'function' ? errorEnd : errorMessage => {throw errorMessage};
-            console.log(this.status,999)
-             // 为了链式调用这里直接创建一个 MyPromise，并在后面 return 出去
-              const promise2 = new myPromise((resolve, reject) => {
-                const fulfilledMicrotask = () =>  {
-                  // 创建一个微任务等待 promise2 完成初始化
-                  queueMicrotask(() => {
-                    try{
-                      const x = realOnFulfilled(this.value);
-                      // 传入 resolvePromise 集中处理
-                      resolvePromise(promise2,x, resolve, reject);
-                      // successEnd(this.value)\
-                    }catch(error){
-                      reject(error)
-                    }
-                  })
-                }
-
-                const rejectedMicrotask = () => { 
-                  // 创建一个微任务等待 promise2 完成初始化
-                  queueMicrotask(() => {
-                      try{
-                        // 调用失败回调，并且把原因返回
-                        const x = realOnRejected(this.errorMessage);
-                        // 传入 resolvePromise 集中处理
-                        resolvePromise(promise2, x, resolve, reject);
-                      }catch(error){
-                        reject(error)
-                      }
-                  })
-                }
-
-                //成功后把值返回去
-                if(this.status == FULFILLED){
-                  fulfilledMicrotask()
-                //失败后把信息返回去
-                }else if(this.status == REJECTED){
-                  rejectedMicrotask()
-                }else if(this.status == PENDING){
-                  // 因为不知道后面状态的变化情况，所以将成功回调和失败回调存储起来
-                  // 等到执行成功失败函数的时候再传递
-                  console.log('nnnn')
-                  this.successArr.push(fulfilledMicrotask)   //坑 丢入的是微任务
-                  this.errorArr.push(rejectedMicrotask)
-                  console.log(this.successArr.length,'n2n2',this.errorArr.length)
-                }
-              })
-              //这边显示显示了3次
-              console.log(promise2,222)
-              return promise2
-            }
-
-             // resolve 静态方法
-            static resolve (parameter) {
-              // 如果传入 MyPromise 就直接返回
-              if (parameter instanceof myPromise) {
-                return parameter;
-              }
-
-              // 转成常规方式
-              return new myPromise(resolve =>  {
-                resolve(parameter);
-              });
-            }
-
-            // reject 静态方法
-            static reject (reason) {
-              return new myPromise((resolve, reject) => {
-                reject(reason);
-              });
-            }
-
-
+<body>
+  <script>
+    const PENDING = 'pending';
+    const FULFILLED = 'fulfilled';
+    const REJECTED = 'rejected';
+    class myPromise {
+      constructor(executor) {
+        //进入会立即执行
+        try {
+          executor(this.resolve, this.reject)
+        } catch (error) {
+          this.reject(error)
         }
-        function resolvePromise(promise2,x, resolve, reject) {
-          console.log(666)
-          if (promise2 === x) {
-            return reject(new TypeError('Chaining cycle detected for promise #<Promise>'))
-          }
-          // 判断x是不是 MyPromise 实例对象
-          if(x instanceof myPromise) {
-            // 执行 x，调用 then 方法，目的是将其状态变为 fulfilled 或者 rejected
-            // x.then(value => resolve(value), reason => reject(reason))
-            // 简化之后
-            x.then(resolve, reject)
-          } else{
-            // 普通值
-            resolve(x)
+      }
+
+      //定义状态  定义成功值  定义错误信息
+
+      status = PENDING;
+      value = null;
+      errorMessage = null;
+
+      //定义2个数组队列
+
+      successArr = [];
+      errorArr = [];
+
+      //成功执行得函数  这边只有1次
+      resolve = (value) => {
+        //微任务函数
+        if (this.status == PENDING) {
+          //修改状态  赋值
+          this.status = FULFILLED;
+          console.log(this.status, 888)
+          this.value = value;
+          //循环调用成功回调拿出来
+          while (this.successArr.length) {
+            // Array.shift() 取出数组第一个元素，然后（）调用，shift不是纯函数，取出后，数组将失去该元素，直到数组为空
+            this.successArr.shift()(value)
+            // console.log(this.successArr.shift()(value),2222)
           }
         }
-        const promise = new myPromise((resolve, reject) => {
-  resolve('succ')
-})
- 
-promise.then().then().then(value => console.log(value))
+      }
+
+      //错误得函数
+      reject = (error) => {
+        //微任务函数
+        if (this.status == PENDING) {
+          //修改状态  赋值错误信息
+          this.status = REJECTED;
+
+          this.errorMessage = error;
+
+          //循环调用成功回调拿出来
+          while (this.errorArr.length) {
+            // Array.shift() 取出数组第一个元素，然后（）调用，shift不是纯函数，取出后，数组将失去该元素，直到数组为空
+            this.errorArr.shift()(error)
+          }
+        }
+      }
+
+      then = (successEnd, errorEnd) => {
+        const realOnFulfilled = typeof successEnd === 'function' ? successEnd : value => value;
+        const realOnRejected = typeof errorEnd === 'function' ? errorEnd : errorMessage => { throw errorMessage };
+        console.log(this.status, 999)
+        // 为了链式调用这里直接创建一个 MyPromise，并在后面 return 出去
+        const promise2 = new myPromise((resolve, reject) => {
+          const fulfilledMicrotask = () => {
+            // 创建一个微任务等待 promise2 完成初始化
+            queueMicrotask(() => {
+              try {
+                const x = realOnFulfilled(this.value);
+                // 传入 resolvePromise 集中处理
+                resolvePromise(promise2, x, resolve, reject);
+                // successEnd(this.value)\
+              } catch (error) {
+                reject(error)
+              }
+            })
+          }
+
+          const rejectedMicrotask = () => {
+            // 创建一个微任务等待 promise2 完成初始化
+            queueMicrotask(() => {
+              try {
+                // 调用失败回调，并且把原因返回
+                const x = realOnRejected(this.errorMessage);
+                // 传入 resolvePromise 集中处理
+                resolvePromise(promise2, x, resolve, reject);
+              } catch (error) {
+                reject(error)
+              }
+            })
+          }
+
+          //成功后把值返回去
+          if (this.status == FULFILLED) {
+            fulfilledMicrotask()
+            //失败后把信息返回去
+          } else if (this.status == REJECTED) {
+            rejectedMicrotask()
+          } else if (this.status == PENDING) {
+            // 因为不知道后面状态的变化情况，所以将成功回调和失败回调存储起来
+            // 等到执行成功失败函数的时候再传递
+            console.log('nnnn')
+            this.successArr.push(fulfilledMicrotask)   //坑 丢入的是微任务
+            this.errorArr.push(rejectedMicrotask)
+            console.log(this.successArr.length, 'n2n2', this.errorArr.length)
+          }
+        })
+        //这边显示显示了3次
+        console.log(promise2, 222)
+        return promise2
+      }
+
+      // resolve 静态方法
+      static resolve(parameter) {
+        // 如果传入 MyPromise 就直接返回
+        if (parameter instanceof myPromise) {
+          return parameter;
+        }
+
+        // 转成常规方式
+        return new myPromise(resolve => {
+          resolve(parameter);
+        });
+      }
+
+      // reject 静态方法
+      static reject(reason) {
+        return new myPromise((resolve, reject) => {
+          reject(reason);
+        });
+      }
+
+
+    }
+    function resolvePromise(promise2, x, resolve, reject) {
+      console.log(666)
+      if (promise2 === x) {
+        return reject(new TypeError('Chaining cycle detected for promise #<Promise>'))
+      }
+      // 判断x是不是 MyPromise 实例对象
+      if (x instanceof myPromise) {
+        // 执行 x，调用 then 方法，目的是将其状态变为 fulfilled 或者 rejected
+        // x.then(value => resolve(value), reason => reject(reason))
+        // 简化之后
+        x.then(resolve, reject)
+      } else {
+        // 普通值
+        resolve(x)
+      }
+    }
+    const promise = new myPromise((resolve, reject) => {
+      resolve('succ')
+    })
+
+    promise.then().then().then(value => console.log(value))
 
 //         var p1 = function(){
 //             return new myPromise(function (resolve, reject) {
@@ -216,6 +218,7 @@ promise.then().then().then(value => console.log(value))
 //             return p4();
 //         });
 
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-06-11 17:39:52
+ * @LastEditTime: 2021-06-15 10:31:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -47,3 +47,7 @@
   - [Uni-app多端开发](project/uniMore.md)
   - [App端封装请求](project/request.md)
   - [钉钉微应用](project/ddH5.md)
+
+- 基础用法
+  - [ts](baseuse/ts.md)
+  - [componentApi](baseuse/componentApi.md)
