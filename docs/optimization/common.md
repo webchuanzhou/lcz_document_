@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-05-08 14:55:37
- * @LastEditTime: 2021-06-11 17:51:43
+ * @LastEditTime: 2021-06-16 15:02:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\optimization\common.md
@@ -134,5 +134,37 @@ main.js 全局挂载验证方法
   if (errInfo && !status) {
     return Toast.fail(errInfo)
   }
+  
+```
+
+## 前端项目工程化webpack
+```html
+  //获取moudules文件下所有js文件；
+  const modulesFiles = require.context('./dirFun', true, /\.js$/)
+  const event = modulesFiles.keys().reduce((modules, modulePath) => {
+    //获取文件名
+    const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+    //文件路径获取值（value）
+    const value = modulesFiles(modulePath)
+    modules[moduleName] = value.default
+    return modules
+  }, {})
+
+```
+event 是一个object key value 的形式
+
+
+## 前端项目工程化vite2
+```html
+  const files = import.meta.globEager('./modules/*.js')
+
+  const modules: any = {}
+  for (const key in files) {
+    modules[key.replace(/(\.\/module\/|\.js)/g, '')] = files[key].default
+  }
+
+  Object.keys(modules).forEach(item => {
+    modules[item]['namespaced'] = true
+  })
   
 ```
