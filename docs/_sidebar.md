@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-06-15 10:31:39
+ * @LastEditTime: 2021-06-16 22:56:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -51,3 +51,6 @@
 - 基础用法
   - [ts](baseuse/ts.md)
   - [componentApi](baseuse/componentApi.md)
+
+- 学习记录
+  - [React](study/react.md)
