@@ -1,3 +1,8 @@
+# 代码规范参考
+eslint + prettier
+
+https://blog.csdn.net/weixin_42349568/article/details/117651262
+
 # HTML篇
 
 ### 启用标准模式
