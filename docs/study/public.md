@@ -1,11 +1,12 @@
 <!--
  * @Author: lcz
  * @Date: 2021-06-16 22:58:29
- * @LastEditTime: 2021-06-16 23:42:07
+ * @LastEditTime: 2021-06-22 16:19:11
  * @LastEditors: Please set LastEditors
  * @Description: 发布
  * @FilePath: /lcz_document/docs/study/public.md
 -->
+测试更新
 # 准备
 1.一台linux服务器
 
@@ -139,4 +140,11 @@ d：代表后台启动
 xxx：是刚刚创建的镜像名称。
 //查看运行中的容器
 docker ps
+// docker 运行容器 指定端口
+docker run -d -p 8080:80 xx:XXX
+xx： 代表容器名称 
+XXX： 带表标签
+// docker 停止关闭容器
+docker stop xxx
+xxx：容器id
 ```
