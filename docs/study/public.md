@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-06-16 22:58:29
- * @LastEditTime: 2021-06-22 16:19:11
+ * @LastEditTime: 2021-06-24 18:02:28
  * @LastEditors: Please set LastEditors
  * @Description: 发布
  * @FilePath: /lcz_document/docs/study/public.md
@@ -130,21 +130,59 @@ COPY dist/ /usr/share/nginx/html/
 ```html
 // 创建 docker-vue就是镜像的名字 要注意后面有一个点，别忘掉了~
   docker build -t docker-vue .
+
+//删除镜像
+docker rmi -f xxx
+xxx:镜像id
+
 // 通过命令docker images来查看镜像，一个刚才创建的，一个是之前pull的nginx镜像。
   docker images
+
 //有了镜像，我们再创建容器
 docker run -d --name xx -p 8080:80 xxx
 d：代表后台启动
 --name xx：这是创建的容器名称。
 -p 8080:80: 是将nginx的80映射到你服务器的8080端口(注意你服务器的端口是否开放8080，其他端口也可以)。
 xxx：是刚刚创建的镜像名称。
+
+
 //查看运行中的容器
 docker ps
+
 // docker 运行容器 指定端口
 docker run -d -p 8080:80 xx:XXX
 xx： 代表容器名称 
 XXX： 带表标签
+
 // docker 停止关闭容器
 docker stop xxx
 xxx：容器id
+
+// docker 强制停止容器
+docker kill xxx
+xxx：容器id
+
+//容器停止退出
+exit
+
+//容器不停止退出
+chrt + p + q
+
+//删除容器
+docker rm xxx
+xxx:容器id
+
+//进入容器
+docker exec -it xxx /bin/bash
+-it:交互模式
+xxx:容器id
+//进入容器后开启新的终端，可以在里面操作
+
+或者
+
+docker attach xxx
+xxx:容器id
+//下面进去的话会正在执行代码
+
+
 ```
