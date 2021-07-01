@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-06-16 22:58:29
- * @LastEditTime: 2021-06-24 18:02:28
+ * @LastEditTime: 2021-07-01 11:17:14
  * @LastEditors: Please set LastEditors
  * @Description: 发布
  * @FilePath: /lcz_document/docs/study/public.md
@@ -128,7 +128,7 @@ COPY dist/ /usr/share/nginx/html/
 ```
 接下来就是创建自己的镜像
 ```html
-// 创建 docker-vue就是镜像的名字 要注意后面有一个点，别忘掉了~
+// 创建 docker-vue就是镜像的名字 要注意后面有一个点，别忘掉了~ 要在dockerfile目录下
   docker build -t docker-vue .
 
 //删除镜像
