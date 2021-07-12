@@ -1,0 +1,41 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-06-06 11:11:53
+ * @LastEditTime: 2021-06-06 11:43:03
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /lcz_document/docs/currying.html
+-->
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='keywords' content=''>
+  <meta name='description' content=''>
+  <title></title>
+</head>
+<body>
+  <script>
+    const cost = curring(function(){
+      let arr=Array.from(arguments);
+      return arr.reduce((total,item)=>{
+        return total + item
+      })
+    })
+    function curring(fn){
+      var arr = [];
+      return function(){
+        if(arguments.length === 0){
+          return fn.apply(null,arr)
+        }else{
+          arr = [...arr,...arguments];
+          //arguments.callee  curring与调用该函数名一样
+          return arguments.callee; 
+        }
+      }
+    }
+    let s = cost(1)(2)()
+    console.log(s,23332)
+  </script>
+</body>
+</html>
