@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-05-08 14:55:37
- * @LastEditTime: 2021-06-16 15:02:24
+ * @LastEditTime: 2021-07-15 14:41:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\optimization\common.md
@@ -91,6 +91,9 @@ export default function regFrom(from, rule) {
   let info = [null, true]
   for (let i = 0, lenght = formArr.length; i < lenght; i++) {
     const item = rule[formArr[i]]
+    if (item === undefined || item === null) {
+      continue
+    }
     if (Array.isArray(item)) {
       var [error, status] = arrMap(item, from, formArr[i])
     } else if (item.constructor === Object) {
