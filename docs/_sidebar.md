@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-06-28 10:53:12
+ * @LastEditTime: 2021-07-16 17:14:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -56,3 +56,6 @@
 - 学习记录
   - [React](study/react.md)
   - [docker+vue+ftp+linux+Nginx](study/public.md)
+  
+- eslint+prettier
+  - [前端代码规范eslint+prettier](code.md)
