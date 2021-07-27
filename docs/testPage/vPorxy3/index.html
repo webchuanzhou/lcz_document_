@@ -1,0 +1,48 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-07-27 10:27:45
+ * @LastEditTime: 2021-07-27 10:31:01
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \lcz_document\docs\testPage\vPorxy3\index.html
+-->
+<!--
+ * @Author: your name
+ * @Date: 2021-07-27 10:18:33
+ * @LastEditTime: 2021-07-27 10:27:27
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \lcz_document\docs\testPage\vProxy2\index.html
+-->
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='keywords' content=''>
+  <meta name='description' content=''>
+  <title></title>
+</head>
+<body>
+  <div id="app" style="color:red;"></div>
+</body>
+<script>
+  //模拟vue 对象
+let data = {
+  msg:1
+}
+//模拟Vue实列
+let vm = new Proxy(data,{
+  get(target,key){
+    return target[key]
+  },
+  set(target,key,val){
+    if(target[key] == val) return ;
+    target[key] = val;
+    document.getElementById('app').innerHTML = vm.msg
+  }
+})
+setTimeout(()=>{
+  data.msg = 5
+},1000)
+</script>
+</html>

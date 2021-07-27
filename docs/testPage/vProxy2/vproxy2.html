@@ -1,0 +1,41 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-07-27 10:18:33
+ * @LastEditTime: 2021-07-27 10:27:27
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \lcz_document\docs\testPage\vProxy2\index.html
+-->
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='keywords' content=''>
+  <meta name='description' content=''>
+  <title></title>
+</head>
+<body>
+  <div id="app" style="color:red;"></div>
+</body>
+<script>
+  //模拟vue 对象
+let data = {
+  msg:1
+}
+//模拟Vue实列
+let vm = {}
+Object.defineProperty(vm,'msg',{
+  get(){
+    return data.msg
+  },
+  set(value){
+    if(data.msg == value) return;
+    data.msg = value
+    document.querySelector('#app').textContent = data.msg
+  }
+})
+setTimeout(()=>{
+  data.msg = 5
+},1000)
+</script>
+</html>
