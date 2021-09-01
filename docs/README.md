@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:38:17
- * @LastEditTime: 2021-03-11 17:19:47
+ * @LastEditTime: 2021-08-06 10:10:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\README.md
@@ -17,3 +17,5 @@ https://docsify.js.org/#/zh-cn/custom-navbar
 # 运行方式
 docsify serve ./docs
 > 
+浏览器断点调试
+https://blog.csdn.net/zam183/article/details/89468157

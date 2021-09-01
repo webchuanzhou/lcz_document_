@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-16 09:50:05
- * @LastEditTime: 2021-06-30 15:42:41
+ * @LastEditTime: 2021-08-06 11:35:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\intermediate.md
@@ -156,3 +156,9 @@ Map在涉及频繁添加和删除密钥对的场景中可能表现得更好。
 set是强引用，WeakSet()是弱引用，不使用的时候会被垃圾回收
 WeakSet存储的是对象
 WeakMap存储的是键与值
+
+## 12.微服务为什么不能用ifrome
+1.url 不同步。浏览器刷新 iframe url 状态丢失、后退前进按钮无法使用。
+2.UI 不同步，DOM 结构不共享。想象一下屏幕右下角 1/4 的 iframe 里来一个带遮罩层的弹框，同时我们要求这个弹框要浏览器居中显示，还要浏览器 resize 时自动居中..
+3.全局上下文完全隔离，内存变量不共享。iframe 内外系统的通信、数据同步等需求，主应用的 cookie 要透传到根域名都不同的子应用中实现免登效果。
+4.慢。每次子应用进入都是一次浏览器上下文重建、资源重新加载的过程。

@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-07-16 17:14:21
+ * @LastEditTime: 2021-09-01 17:20:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -48,6 +48,8 @@
   - [Uni-app多端开发](project/uniMore.md)
   - [App端封装请求](project/request.md)
   - [钉钉微应用](project/ddH5.md)
+  - [react后台管理](project/reactAntdAdmin.md)
+  - [cocos2d](project/cocos2dJs.md)
 
 - 基础用法
   - [ts](baseuse/ts.md)
@@ -56,6 +58,7 @@
 - 学习记录
   - [React](study/react.md)
   - [docker+vue+ftp+linux+Nginx](study/public.md)
+  - [cocos2d](study/cocos2d.md)
   
 - eslint+prettier
   - [前端代码规范eslint+prettier](code.md)
