@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-11 18:06:32
- * @LastEditTime: 2021-03-11 18:19:14
+ * @LastEditTime: 2021-09-02 16:02:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\jsArray.md
@@ -185,4 +185,76 @@
   return x < 1;
   }); 
   console.log(arr3); 　　　　　　　　// false
+```
+
+## 15.类数组转数组
+```html
+    let arrayLike = {
+        '0': 'a',
+        '1': 'b',
+        '2': 'c',
+        length: 3
+    };
+    let data = [].slice.call(arrayLike)  //es5 
+    let data = Array.from(arrayLike)  //es6
+    // ['a', 'b', 'c']
+    
+    Array.from({ length: 3 });
+    // [ undefined, undefined, undefined ]
+```
+
+## 16.Array.of()用于将一组值，转换为数组
+```html
+    Array.of(3,1,8) //[3,1,8]
+```
+
+## 17.find 找到及返回 不继续找
+```html
+    console.log(array.find(el=>(el == 2)))
+```
+
+## 18.findIndex 找到就返回下标，没找到就返回-1
+```html
+    console.log([1, 2, 3].findIndex(element => element > 2)) //2
+    console.log([1, 2, 3].findIndex(element => element > 3)) // -1
+```
+
+## 19.Flat数组扁平化
+```html
+    let arr = [1,2,3,4,[1,2,3,4,[2,3,4]]]
+    arr.flat()
+    //[1, 2, 3, 4, 1, 2, 3, 4, Array(3)]
+    arr.flat().flat()
+    //[1, 2, 3, 4, 1, 2, 3, 4, 2, 3, 4]
+    arr.flat(Infinity)
+    //[1, 2, 3, 4, 1, 2, 3, 4, 2, 3, 4]
+    et arr = [[1,2,3,4],[2,3,4,5],[3,4,5],[6,7,8,[1,3,4]]]
+    arr.flat(Infinity)
+    //[1, 2, 3, 4, 2, 3, 4, 5, 3, 4, 5, 6, 7, 8, 1, 3, 4]
+```
+
+## 20.flatMap结合
+```html
+    let arr= [1,2,3,4,5]
+    arr.flatMap((el)=>([el,el*2]))
+    //[1, 2, 2, 4, 3, 6, 4, 8, 5, 10]
+```
+
+## 21.entries对象转二维数组
+```html
+    let obj = {
+        key1:'13',
+        key2:'24',
+        key3:'36'
+    }
+    Object.entries(obj)
+    //[[key1,'13'], [key2,'24'], [key3,'36']] 转回对象
+    Object.fromEntries([[key1,'13'], [key2,'24'], [key3,'36']])
+
+    //对象转数组对象
+    let c  = Object.entries(obj).map(el=>{
+        let [a,b] = el;
+        return {[a]:b}
+    })
+    [{key1: '13'},{key2: '24'},{key3: '36'}]
 ```
