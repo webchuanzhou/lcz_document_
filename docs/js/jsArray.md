@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-11 18:06:32
- * @LastEditTime: 2021-09-02 16:02:45
+ * @LastEditTime: 2021-09-02 16:20:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\jsArray.md
@@ -199,8 +199,7 @@
     let data = Array.from(arrayLike)  //es6
     // ['a', 'b', 'c']
     
-    Array.from({ length: 3 });
-    // [ undefined, undefined, undefined ]
+    
 ```
 
 ## 16.Array.of()用于将一组值，转换为数组
@@ -257,4 +256,36 @@
         return {[a]:b}
     })
     [{key1: '13'},{key2: '24'},{key3: '36'}]
+```
+
+## 22. Array.from
+```html
+  Array.from({ length: 3 });
+  // [ undefined, undefined, undefined ]
+  // 第二个参数可传递一个回调函数
+  Array.from(ary, (item, index) => `${item}777`) // => ["姜姒777", "徐扶墙777"]
+
+  // 取出name属性值
+  const ary = [
+    { name: 'jack', age: 56 },
+    { name: 'pony', age: 50 },
+    { name: 'coderljw', age: 23 }
+  ]
+  Array.from(ary, ({name}) => name)
+```
+
+## 23.reduce(callback, initValue) & reduceRight(callback, initValue)
+```html
+  onst ary = [1, 2, 3, 4, 5]
+
+  // 神奇的reduce，第二个参数为初始值，不传时会拿第零个元素作为初始值
+  // total：上一个回调函数的返回值；current：当前项的值；currentIndex：当前项的索引；
+  ary.reduce((total, current, currentIndex) => total + current) // => 15
+  ary.reduce((total, current, currentIndex) => total + current, 7) // => 22
+
+  // 与reduce类似，不过从最后一项开始累加，不传初始值时会拿最后一个元素作为初始值
+  ary.reduceRight((total, current, currentIndex) => total + current) // => 15
+
+  // 在空数组上调用 reduce 或 reduceRight 且未提供初始值，会导致类型错误（使用时最好写上初始值哟！）
+  [].reduce((total, current, currentIndex) => total + current) // Uncaught TypeError: Reduce of empty array with no initial value
 ```

@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-09-02 09:48:57
+ * @LastEditTime: 2021-09-02 16:29:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -14,6 +14,8 @@
   - [基础](js/base.md)
   - [字符串方法](js/jsString.md)
   - [数组方法](js/jsArray.md)
+  - [对象方法](js/jsObject.md)
+  - [函数方法](js/jsfunction.md)
 
 - 移动端
   - [移动端开发踩坑记录](mobile/mobile.md)
