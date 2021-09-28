@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-09-03 10:25:15
+ * @LastEditTime: 2021-09-28 16:57:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -53,7 +53,7 @@
   - [钉钉微应用](project/ddH5.md)
   - [react后台管理](project/reactAntdAdmin.md)
   - [cocos2d](project/cocos2dJs.md)
-
+  - [H5微信JS-SDK](project/H5WX_JS_SDK.md)
 - 基础用法
   - [ts](baseuse/ts.md)
   - [componentApi](baseuse/componentApi.md)

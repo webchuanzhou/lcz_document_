@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-09-02 09:48:45
- * @LastEditTime: 2021-09-02 12:25:17
+ * @LastEditTime: 2021-09-23 15:55:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\react.md
@@ -332,3 +332,50 @@ ReactDOM.render(<App/>,appRoot);
 性能优化上，类组件主要依靠 shouldComponentUpdate 阻断渲染来提升性能，而函数组件依靠 React.memo 缓存渲染结果来提升性能。
 从上手程度而言，类组件更容易上手，从未来趋势上看，由于React Hooks 的推出，函数组件成了社区未来主推的方案。
 类组件在未来时间切片与并发模式中，由于生命周期带来的复杂度，并不易于优化。而函数组件本身轻量简单，且在 Hooks 的基础上提供了比原先更细粒度的逻辑组织与复用，更能适应 React 的未来发展。
+
+## setState 是同步的还是异步的
+setState 调用本身就是同步的，而外面之所以不能立即拿到结果就是因为 React 的批处理机制。
+正是因为 setState 是同步的，当同时触发多次 setState 时浏览器会一直被JS线程阻塞，那么那么浏览器就会掉帧，导致页面卡顿，所以 React 才引入了批处理的机制，主要是为了将同一上下文中触发的更新合并为一个更新。
+```html
+    componentDidMount() {
+    this.setState({val: this.state.val + 1});
+    console.log(this.state.val);   
+    this.setState({val: this.state.val + 1});
+    console.log(this.state.val);   
+
+    setTimeout(() => {
+      this.setState({val: this.state.val + 1});
+      console.log(this.state.val); 
+      this.setState({val: this.state.val + 1});
+      console.log(this.state.val);  
+    }, 0);
+  }
+  // 0 0 2 3
+```
+合并机制原理：
+```html
+processPendingState: function (props, context) {
+  var inst = this._instance;
+  var queue = this._pendingStateQueue;
+  var replace = this._pendingReplaceState;
+  this._pendingReplaceState = false;
+  this._pendingStateQueue = null;
+
+  if (!queue) {
+   return inst.state;
+  }
+
+  if (replace && queue.length === 1) {
+   return queue[0];
+  }
+
+  var nextState = _assign({}, replace ? queue[0] : inst.state);
+  for (var i = replace ? 1 : 0; i < queue.length; i++) {
+   var partial = queue[i];
+   _assign(nextState, typeof partial === 'function' ? partial.call(inst, nextState, props, context) : partial);
+  }
+
+  return nextState;
+ },
+
+```

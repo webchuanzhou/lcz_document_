@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-15 10:48:31
- * @LastEditTime: 2021-09-02 16:13:49
+ * @LastEditTime: 2021-09-16 10:45:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\js\base.md
@@ -53,4 +53,17 @@
     // 若是以数字开头的字符串，截取到非数字前面，或截取到第二个小数点前面
     parseFloat('43.9.6jack') // => 43.9
     parseFloat('love') // => NaN
+```
+
+## 4. === 与 Object.is() 区别
+正常情况 === 与 Object.is() 一致 
+区别:
+```html
+    ===:
+    NaN === NaN; // => false
+    -0 === +0; // => true
+
+    Object.is():
+    Object.is(NaN, NaN); // => true
+    Object.is(-0, +0); // => false
 ```
