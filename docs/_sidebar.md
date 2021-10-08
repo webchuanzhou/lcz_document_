@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-09-28 16:57:50
+ * @LastEditTime: 2021-10-08 10:49:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -9,6 +9,7 @@
 - CSS
   - [布局](css/layout.md)
   - [重置样式基础](css/reset.md)
+  - [积累](css/accumulation.md)
   
 - JavaScript基础篇
   - [基础](js/base.md)
