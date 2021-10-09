@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-10-08 10:49:48
+ * @LastEditTime: 2021-10-09 10:39:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -17,12 +17,14 @@
   - [数组方法](js/jsArray.md)
   - [对象方法](js/jsObject.md)
   - [函数方法](js/jsfunction.md)
+  - [积累](js/accumulation.md)
 
 - 移动端
   - [移动端开发踩坑记录](mobile/mobile.md)
 
 - Vue2.x
   - [常用指令封装](vue2.x/directive.md)
+  - [优化](vue2.x/optimization.md)
 
 - Vue3.x
   - [常用指令封装](vue3.x/directive.md)
@@ -38,6 +40,7 @@
   - [公共全局](optimization/common.md)
   - [Vue](optimization/vue.md)
   - [代码规范](optimization/code.md)
+  - [小妙招](optimization/littleTrick.md)
 
 - 面试题
   - [基础](questions/base.md)
@@ -55,9 +58,12 @@
   - [react后台管理](project/reactAntdAdmin.md)
   - [cocos2d](project/cocos2dJs.md)
   - [H5微信JS-SDK](project/H5WX_JS_SDK.md)
+
 - 基础用法
   - [ts](baseuse/ts.md)
   - [componentApi](baseuse/componentApi.md)
+  - [md](baseuse/md.md)
+  - [npm与Yarn](baseuse/npmYarn.md)
 
 - 学习记录
   - [React](study/react.md)
@@ -69,3 +75,7 @@
 
 - readingBooks
   - [react+进阶之路](readingBooks/reactTo.md)
+  - [红宝书4](readingBooks/red4.md)
+
+- 源码理解
+  - [axios](sourceCode/axios.md)

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-15 10:48:31
- * @LastEditTime: 2021-09-16 10:45:58
+ * @LastEditTime: 2021-10-09 10:07:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\js\base.md
@@ -66,4 +66,18 @@
     Object.is():
     Object.is(NaN, NaN); // => true
     Object.is(-0, +0); // => false
+```
+
+## 5.冒泡排序
+```js
+var arr=[9,1,2,34,21,125,65,34,32];
+for(var i = 0 ;i<arr.length-1;i++){
+    for(var j=0;j>arr.length-1-i;j++){
+        if(arr[j]<arr[j+1]){
+            arr[j]^=arr[j+1];
+            arr[j+1]^=arr[j];
+            arr[j]^=arr[j+1];
+        }
+    }
+}
 ```

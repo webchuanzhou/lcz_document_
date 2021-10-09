@@ -1,11 +1,12 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:10:13
- * @LastEditTime: 2021-09-17 18:49:44
+ * @LastEditTime: 2021-10-09 09:45:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\docs\layout.md
 -->
+
 
 
 ## 盒模型
@@ -102,61 +103,4 @@ rem 由于是基于 html 的 font-size 来计算，所以通常用于自适应�
 
         w.showPlaceholder = 1;
     }(window);
-```
-
-## 自定义属性
-
-之前我们通常是在预处理器里才可以使用变量，而现在 CSS 里也支持了变量的用法。通过自定义属性就可以在想要使用的地方引用它。
-自定义属性也和普通属性一样具有级联性，申明在 :root 下的时候，在全文档范围内可用，而如果是在某个元素下申明自定义属性，则只能在它及它的子元素下才可以使用。
-自定义属性必须通过 --x 的格式申明，比如：--theme-color: red; 使用自定义属性的时候，需要用 var 函数。比如：
-
-```html
-<!-- 定义自定义属性 -->
-:root {
-    --theme-color: red;
-}
-<!-- 使用变量 -->
-h1 {
-    color: var(--theme-color);
-}
-```
-
-## 溢出...
-单行超出省略
-overflow: hidden;
-text-overflow:ellipsis;
-white-space: nowrap;
-
-多行超出省略
-display: -webkit-box;
--webkit-box-orient: vertical;
--webkit-line-clamp: 3;
-overflow: hidden;
-
-## 所有水平垂直居中
-```html
-.allCenter{
-    height: 100vh;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-pack: center;
-    -webkit-box-align: center;
-    display: -moz-box;
-    -moz-box-orient: vertical;
-    -moz-box-pack: center;
-    -moz-box-align: center;
-    display: -o-box;
-    -o-box-orient: vertical;
-    -o-box-pack: center;
-    -o-box-align: center;
-    display: -ms-box;
-    -ms-box-orient: vertical;
-    -ms-box-pack: center;
-    -ms-box-align: center;
-    display: box;
-    box-orient: vertical;
-    box-pack: center;
-    box-align: center;
-    box-sizing: border-box;
-}
 ```
