@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-10-12 10:15:15
- * @LastEditTime: 2021-10-12 10:27:41
+ * @LastEditTime: 2021-10-12 16:35:47
  * @LastEditors: Please set LastEditors
  * @Description: react 基础面试题
  * @FilePath: \lcz_document\docs\questions\reactBase.md
@@ -117,21 +117,26 @@ class ErrorBoundary extends React.Component<IProps, IState> {
 
 ## 类组件和函数组件之间的区别是啥？
 函数组件的性能比类组件的性能要高，因为类组件使用的时候要实例化，而函数组件直接执行函数取返回结果即可。为了提高性能，尽量使用函数组件。
-区别	函数组件	类组件
-是否有 this	没有	有
-是否有生命周期	没有	有
-是否有状态 state	没有	有
+- - -
+区别|函数组件|类组件
+-|-|-|
+是否有this|没有|有
+是否有生命周期|没有|有
+是否有状态state|没有|有
 
 ## React 中 refs 干嘛用的？
-Refs 提供了一种访问在render方法中创建的 DOM 节点或者 React 元素的方法。
+Refs 提供了一种访问在render方法中创建的 DOM 节点或者 React 组件的。
 
 ## 如何创建 refs
 元素上绑定ref即可
+```html
 <div ref={(div)=>{this.div = div}}></div>
+```
 或者
+```js
 this.div = React.createRef();
 <div ref={this.div}></div>
-
+```
 ## state 和 props 区别是啥？
 state 是当前组件的状态控制
 props 是外部传入的数据参数
@@ -175,3 +180,30 @@ useState 是一个内置的 React Hook。useState(0) 返回一个元组，其中
 
 ## 为什么 JSX 中的组件名要以大写字母开头？
 因为 React 要知道当前渲染的是组件还是 HTML 元素。
+
+## 在构造函数调用 super 并将 props 作为参数传入的作用是啥？
+在调用 super() 方法之前，子类构造函数无法使用this引用，ES6 子类也是如此。将 props 参数传递给 super() 调用的主要原因是在子构造函数中能够通过this.props来获取传入的 props。
+传递 props
+```js
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props);  // { name: 'sudheer',age: 30 }
+  }
+}
+```
+没传递 props
+```js
+class MyComponent extends React.Component {
+  constructor(props) {
+    super();
+    console.log(this.props); // undefined
+    // 但是 Props 参数仍然可用
+    console.log(props); // Prints { name: 'sudheer',age: 30 }
+  }
+  render() {
+    // 构造函数外部不受影响
+    console.log(this.props) // { name: 'sudheer',age: 30 }
+  }
+}
+```

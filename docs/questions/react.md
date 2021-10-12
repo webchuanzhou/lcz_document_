@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-09-02 09:48:45
- * @LastEditTime: 2021-10-12 10:27:12
+ * @LastEditTime: 2021-10-12 16:45:53
  * @LastEditors: Please set LastEditors
  * @Description: react 面试题
  * @FilePath: \lcz_document\docs\questions\react.md
@@ -131,18 +131,52 @@ PureComponent:这可以防止不必要地重新渲染类组件
 
 ## 什么是纯函数？
 一个函数的返回结果只依赖于它的参数，并且在执行过程里面没有副作用，我们就把这个函数叫做纯函数。
-1.相同输入总是会返回相同的输出。
-2.不产生副作用。
-3.不依赖于外部状态。
+1. 不产生副作用。(什么是副作用:不能再函数中修改传入进来的值，改了传进来的值就是有副作用)
+2. 不依赖于外部状态。
+
+> 副作用解读
+```js
+ // 无副作用
+const a = 1
+const foo = (obj, b) => {
+  return obj.x + b
+}
+const counter = { x: 1 }
+foo(counter, 2)                       // => 3
+counter.x                             // => 1
+
+// 修改一下 ，再观察(修改了外部变量，产生了副作用。)
+const a = 1
+const foo = (obj, b) => {
+  obj.x = 2;
+  return obj.x + b
+}
+const counter = { x: 1 }
+foo(counter, 2)                       // => 4
+counter.x                             // => 2
+```
+> 不依赖于外部状态
+```js
+    //  非纯函数 返回值与a相关，无法预料
+    const a = 1
+    const foo = (b) => a + b
+    foo(2)                    // => 3
+
+    // 纯函数 返回结果只依赖于它的参数 x 和 b，foo(1, 2) 永远是 3。今天是 3，明天也是 3，在服务器跑是 3，在客户端跑也 3，不管你外部发生了什么变化，foo(1, 2) 永远是 3。只要 foo 代码不改变，你传入的参数是确定的，那么 foo(1, 2) 的值永远是可预料的。
+    const a = 1
+    const foo = (x, b) => x + b
+    foo(1, 2) // => 3
+```
 
 ## 当调用setState时，React render 是如何工作的？
-虚拟 DOM 渲染:当render方法被调用时，它返回一个新的组件的虚拟 DOM 结构。当调用setState()时，render会被再次调用，因为默认情况下shouldComponentUpdate总是返回true，所以默认情况下 React 是没有优化的。
+当调用setState()时，render会被再次调用，因为默认情况下shouldComponentUpdate总是返回true，所以默认情况下 React 是没有优化的。
+- - -
 原生 DOM 渲染:React 只会在虚拟DOM中修改真实DOM节点，而且修改的次数非常少——这是很棒的React特性，它优化了真实DOM的变化，使React变得更快。
 
 ## 如何避免在React重新绑定实例？
-1.将事件处理程序定义为内联箭头函数
-2.使用箭头函数来定义方法：
-3.使用带有 Hooks 的函数组件
+1. 将事件处理程序定义为内联箭头函数(针对于jsx中的元素绑定事件)
+2. 使用箭头函数来定义方法：(针对于js调用方法)
+3. 使用带有 Hooks 的函数组件
 
 ## React 事件机制
 React并不是将click事件绑定到了div的真实DOM上，而是在document处监听了所有的事件，当事件发生并且冒泡到document处的时候，React将事件内容封装并交由真正的处理函数运行。这样的方式不仅仅减少了内存的消耗，还能在组件挂在销毁时统一订阅和移除事件。
