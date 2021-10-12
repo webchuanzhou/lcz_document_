@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-10-09 10:39:01
+ * @LastEditTime: 2021-10-12 10:15:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -47,6 +47,7 @@
   - [中级](questions/intermediate.md)
   - [高级](questions/senior.md)
   - [手写题](questions/despise.md)
+  - [react基础题](questions/reactBase.md)
   - [react](questions/react.md)
 
 - 项目总结

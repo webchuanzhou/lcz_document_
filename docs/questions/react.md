@@ -1,31 +1,11 @@
 <!--
- * @Author: your name
+ * @Author: lcz
  * @Date: 2021-09-02 09:48:45
- * @LastEditTime: 2021-09-23 15:55:15
+ * @LastEditTime: 2021-10-12 10:27:12
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: react 面试题
  * @FilePath: \lcz_document\docs\questions\react.md
 -->
-## 类组件和函数组件之间的区别是啥？
-函数组件的性能比类组件的性能要高，因为类组件使用的时候要实例化，而函数组件直接执行函数取返回结果即可。为了提高性能，尽量使用函数组件。
-区别	函数组件	类组件
-是否有 this	没有	有
-是否有生命周期	没有	有
-是否有状态 state	没有	有
-
-## React 中 refs 干嘛用的？
-Refs 提供了一种访问在render方法中创建的 DOM 节点或者 React 元素的方法。
-
-## 如何创建 refs
-元素上绑定ref即可
-<div ref={(div)=>{this.div = div}}></div>
-或者
-this.div = React.createRef();
-<div ref={this.div}></div>
-
-## state 和 props 区别是啥？
-state 是当前组件的状态控制
-props 是外部传入的数据参数
 
 ## 什么是高阶组件？
 高阶组件(HOC)是接受一个组件并且返回一个新的组件
@@ -64,40 +44,7 @@ HOC 可以用于以下许多用例
 在 HTML 中，表单元素如 <input>、<textarea>和<select>通常维护自己的状态，并根据用户输入进行更新。当用户提交表单时，来自上述元素的值将随表单一起发送。
 而 React 的工作方式则不同。包含表单的组件将跟踪其状态中的输入值，并在每次回调函数(例如onChange)触发时重新渲染组件，因为状态被更新。以这种方式由 React 控制其值的输入表单元素称为受控组件。
 ```
-## 讲讲什么是 JSX ？
-JSX 代码本身不能被浏览器读取，必须使用Babel和webpack等工具将其转换为传统的JS。
-(可以在jsx中写html代码)
 
-## 为什么不直接更新 state 呢 ?
-试图直接更新 state ，则不会重新渲染组件
-需要使用setState()
-
-## React 的生命周期方法有哪些？
-componentWillMount:在渲染之前执行，用于根组件中的 App 级配置。
-
-
-componentDidMount：在第一次渲染之后执行，可以在这里做AJAX请求，DOM 的操作或状态更新以及设置事件监听器。
-
-
-componentWillReceiveProps：在初始化render的时候不会执行，它会在组件接受到新的状态(Props)时被触发，一般用于父组件状态更新时子组件的重新渲染
-
-
-shouldComponentUpdate：确定是否更新组件。默认情况下，它返回true。如果确定在 state 或 props 更新后组件不需要在重新渲染，则可以返回false，这是一个提高性能的方法。
-
-
-componentWillUpdate：在shouldComponentUpdate返回 true 确定要更新组件之前件之前执行。
-
-
-componentDidUpdate：它主要用于更新DOM以响应props或state更改。
-
-
-componentWillUnmount：它用于取消任何的网络请求，或删除与组件关联的所有事件监听器
-
-## 使用 React Hooks 好处是啥？
-Hooks 通常支持提取和重用跨多个组件通用的有状态逻辑，而无需承担高阶组件或渲染 props 的负担。Hooks 可以轻松地操作函数组件的状态，而不需要将它们转换为类组件。
-
-## React 中的 useState() 是什么？
-useState 是一个内置的 React Hook。useState(0) 返回一个元组，其中第一个参数count是计数器的当前状态，setCounter 提供更新计数器状态的方法。
 
 ## React 中的StrictMode(严格模式)是什么？？
 React 的StrictMode是一种辅助组件，可以帮助咱们编写更好的 react 组件，可以使用<StrictMode />包装一组组件，并且可以帮咱们以下检查：
@@ -245,9 +192,6 @@ setState（） 如果传入的是null 不会重新调用render
 对新旧两棵树进行一个深度优先遍历，这样每一个节点都会一个标记，在到深度遍历的时候，每遍历到一和个节点，就把该节点和新的节点树进行对比，如果有差异就放到一个对象里面
 遍历差异对象，根据差异的类型，根据对应对规则更新VNode
 
-## React如何判断什么时候重新渲染组件？
-当React将要渲染组件时会执行shouldComponentUpdate方法来看它是否返回true（组件应该更新，也就是重新渲染）。所以需要重写shouldComponentUpdate方法让它根据情况返回true或者false来告诉React什么时候重新渲染什么时候跳过重新渲染。
-
 ## React声明组件有哪几种方法，有什么不同？
 React 声明组件的三种方式：
 
@@ -321,18 +265,6 @@ class App extends React.Component{
 ReactDOM.render(<App/>,appRoot);
 ```
 
-## 类组件与函数组件有什么异同？
-相同点：
-组件是 React 可复用的最小代码片段，它们会返回要在页面中渲染的 React 元素。也正因为组件是 React 的最小编码单位，所以无论是函数组件还是类组件，在使用方式和最终呈现效果上都是完全一致的。
-我们甚至可以将一个类组件改写成函数组件，或者把函数组件改写成一个类组件（虽然并不推荐这种重构行为）。从使用者的角度而言，很难从使用体验上区分两者，而且在现代浏览器中，闭包和类的性能只在极端场景下才会有明显的差别。所以，基本可认为两者作为组件是完全一致的。
-不同点：
-
-它们在开发时的心智模型上却存在巨大的差异。类组件是基于面向对象编程的，它主打的是继承、生命周期等核心概念；而函数组件内核是函数式编程，主打的是 immutable、没有副作用、引用透明等特点。
-之前，在使用场景上，如果存在需要使用生命周期的组件，那么主推类组件；设计模式上，如果需要使用继承，那么主推类组件。但现在由于 React Hooks 的推出，生命周期概念的淡出，函数组件可以完全取代类组件。其次继承并不是组件最佳的设计模式，官方更推崇“组合优于继承”的设计概念，所以类组件在这方面的优势也在淡出。
-性能优化上，类组件主要依靠 shouldComponentUpdate 阻断渲染来提升性能，而函数组件依靠 React.memo 缓存渲染结果来提升性能。
-从上手程度而言，类组件更容易上手，从未来趋势上看，由于React Hooks 的推出，函数组件成了社区未来主推的方案。
-类组件在未来时间切片与并发模式中，由于生命周期带来的复杂度，并不易于优化。而函数组件本身轻量简单，且在 Hooks 的基础上提供了比原先更细粒度的逻辑组织与复用，更能适应 React 的未来发展。
-
 ## setState 是同步的还是异步的
 setState 调用本身就是同步的，而外面之所以不能立即拿到结果就是因为 React 的批处理机制。
 正是因为 setState 是同步的，当同时触发多次 setState 时浏览器会一直被JS线程阻塞，那么那么浏览器就会掉帧，导致页面卡顿，所以 React 才引入了批处理的机制，主要是为了将同一上下文中触发的更新合并为一个更新。
@@ -379,3 +311,49 @@ processPendingState: function (props, context) {
  },
 
 ```
+
+## fiber 是什么？
+React Fiber 是一种基于浏览器的单线程调度算法。
+
+## 调用 setState 之后发生了什么？
+1. 在 setState 的时候，React 会为当前节点创建一个 updateQueue 的更新列队。
+2. 然后会触发 reconciliation 过程，在这个过程中，会使用名为 Fiber 的调度算法，开始生成新的 Fiber 树， 
+3. Fiber 算法的最大特点是可以做到异步可中断的执行。
+4. 然后 React Scheduler 会根据优先级高低，先执行优先级高的节点，具体是执行 doWork 方法。
+5. 在 doWork 方法中，React 会执行一遍 updateQueue 中的方法，以获得新的节点。然后对比新旧节点，为老节点打上 更新、插入、替换 等 Tag。
+6. 当前节点 doWork 完成后，会执行 performUnitOfWork 方法获得新节点，然后再重复上面的过程。
+7. 当所有节点都 doWork 完成后，会触发 commitRoot 方法，React 进入 commit 阶段。
+8. 在 commit 阶段中，React 会根据前面为各个节点打的 Tag，一次性更新整个 dom 元素。
+(创建一个更新列队,然后会Fiber 的调度算法，生成新的Fiber树，)
+
+## 为什么虚拟dom 会提高性能?
+虚拟dom 相当于在 JS 和真实 dom 中间加了一个缓存，利用 diff 算法避免了没有必要的 dom 操作，从而提高性能。
+
+
+
+## 什么是 Portals？
+Portals 提供了把子节点渲染到父组件以外的DOM树
+ReactDom.createPortal(child,container);
+列子：(全局弹出层)
+
+
+## React有哪些优化性能的手段?
+> 类组件中的优化手段
+1. 使用纯组件 PureComponent 作为基类
+2. 使用React.memo 高阶函数包装组件
+3. 使用shouldComponentUpdate 生命周期函数自定义渲染逻辑
+
+> 方法组件的优化手段
+1. 使用useMemo
+2. 使用useCallBack
+
+> 其他方式
+1. 使用唯一值作为下标
+2. 必要的时候用CSS隐藏组件，而不是条件判断
+3. 使用Suspense 和 lazy 进行懒加载
+
+## 为什么 React 元素有一个 $$typeof 属性？
+目的是为了防止XSS攻击
+
+## 什么是 suspense 组件?
+Suspense 让组件“等待”某个异步操作，直到该异步操作结束即可渲染。中途由suspense渲染
