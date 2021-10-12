@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-10-12 10:15:38
+ * @LastEditTime: 2021-10-12 17:27:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -72,7 +72,7 @@
   - [cocos2d](study/cocos2d.md)
   
 - eslint+prettier
-  - [前端代码规范eslint+prettier](code.md)
+  - [前端代码规范eslint+prettier](rules/code.md)
 
 - readingBooks
   - [react+进阶之路](readingBooks/reactTo.md)

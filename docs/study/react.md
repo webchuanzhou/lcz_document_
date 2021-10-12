@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-16 20:20:26
- * @LastEditTime: 2021-07-09 17:07:59
+ * @LastEditTime: 2021-10-12 17:24:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /lcz_document/docs/study/react.md
 -->
 
 ## 1.打包后本地开启虚拟服务
-```html
+```js
   //全局安装服务
   npm i serve -g
   //运行
@@ -16,7 +16,7 @@
 ```
 ## 2.取消点击3秒延迟
  目录 public index.html
-```html
+```js
   <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
   <script>
       if ('addEventListener' in document) {
@@ -31,7 +31,7 @@
 ```
 ## 3.配置全局scss公共变量
 config-overrides.js
-```html
+```js
   const { override, adjustStyleLoaders   } = require("customize-cra");
   module.exports = override(
   // 配置全局scss引入
@@ -50,7 +50,7 @@ config-overrides.js
 
 ## 4.antd-mobile 配置按需引入以及定制主题
 
-```html
+```js
 const { override, fixBabelImports , addLessLoader  } = require("customize-cra");
 const theme = require('./antd-theme')
 module.exports = override(
@@ -69,7 +69,7 @@ module.exports = override(
 ```
 主题文档变量参考地址：https://github.com/ant-design/ant-design-mobile/blob/master/components/style/themes/default.less           
 主题文件：antd-theme.json
-```html
+```js
 {
     "@color-text-base": "red",
     "@fill-base": "red",
@@ -80,7 +80,7 @@ module.exports = override(
 
 ## 5.配置代理
 src 目录下配置 setupProxy.js
-```html
+```js
 // http-proxy-middleware 脚手架中已自带 如果没有需要自行安装
 const proxy = require('http-proxy-middleware');
 
@@ -102,7 +102,7 @@ module.exports = function(app){
 
 ## 6.全局index.jsx 代码配置
 
-```html
+```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css' //重置样式
@@ -124,7 +124,7 @@ ReactDOM.render(
 
 ## 7.路由懒加载以及懒加载中页面显示的组件 以及Switch匹配到即不往下执行
 
-```html
+```js
   import React, { Component ,lazy ,Suspense} from 'react'
   import { Route, Switch , Redirect} from 'react-router-dom'
   <!-- 加载组件 -->
@@ -158,7 +158,7 @@ redux-devtools-extension 开发环境测试查看redux状态工具
 文件目录结构           
 ![Image text](../assets/app/redux.png)
 store.js
-```html
+```js
 // 中间键 支持异步action 函数都是异步的，对象都是同步的
 import thunk from 'redux-thunk'
 // 开发环境测试查看redux状态
@@ -171,12 +171,12 @@ export default store
 ```
 constant.js     
 常量文件统一后期方便管理同一个字符串
-```html
+```js
 export const ADD = 'add';
 export const REDUCE = 'reduce';
 ```
 actions中的文件      
-```html
+```js
 import { ADD, REDUCE } from '../constant'
 //同步action
 export const createAddAction = data => ({type: ADD, data})
@@ -193,7 +193,7 @@ export const createAsyncAddAction = (data,time) => {
 ```
 reducers
 index.js 用于导入全部的reduce进行注册
-```html
+```js
 import { combineReducers } from 'redux'
 
 import count from './count.js'
@@ -206,7 +206,7 @@ export default combineReducers({
 ```
 
 recudes状态管理组件
-```html
+```js
 import { ADD, REDUCE } from '../constant'
 const number = 0
 export default function countReducer(preState = number, action) {
@@ -224,7 +224,7 @@ export default function countReducer(preState = number, action) {
 ```
 
 页面中使用
-```html
+```js
 import { connect } from 'react-redux'
 import { createAddAction, createReduceAction, createAsyncAddAction } from '../../redux/actions/count'
 class Home extends PureComponent {
@@ -267,7 +267,7 @@ export default connect(state => ({
 ```
 拆分connent中的reduce
 
-```html
+```js
 const mapStateToProps = state => ({
   count: state.count,
 })
@@ -283,7 +283,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 ## 9.hooks 的使用
 hooks的使用是为了让函数式组件能像类组件一样 有生命周期  state变量 等           
 基础用法
-```html
+```js
 import React from 'react'
 export default function HooksTets() {
   const [count, setCount] = React.useState(0)
@@ -355,20 +355,20 @@ Fragment 相当于vue中的template
 只接收一个参数key 用于diff            
 优点是:页面中不会带有标签          
 
-```html
+```js
 <Fragment>
   页面中的元素
 </Fragment>
 ```
 另外一种实现方式空标签           
 缺点：不能有任何的键值队，否则无效
-```html
+```js
 <>
 </>
 ```
 ## 3.ZNavLink 组件封装
 封装
-```html
+```js
   import React, { Component } from 'react'
   import { NavLink } from 'react-router-dom'
   import './index.scss'
@@ -385,6 +385,6 @@ Fragment 相当于vue中的template
 
 ```
 使用
-```html
+```js
   <ZNavLink to="/home" children="首页"/>
 ```

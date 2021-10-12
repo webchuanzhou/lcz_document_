@@ -1,14 +1,14 @@
 <!--
  * @Author: lcz
  * @Date: 2021-06-11 17:27:18
- * @LastEditTime: 2021-06-11 17:32:41
+ * @LastEditTime: 2021-10-12 17:23:25
  * @LastEditors: Please set LastEditors
  * @Description: vue3.x 指令封装
  * @FilePath: \lcz_document\docs\vue3.x\directive.md
 -->
 # 常用指令
 全局注册
-```html
+```js
   import focus from '@directive/focus' //聚焦
   import placeholderBlock from '@directive/placeholderBlock' //占位符
   const event = {
@@ -27,7 +27,7 @@
 ```
 
 ## 元素外点击操作
-```html
+```js
 export default (app) => {
   app.directive('outside', {
     mounted(el,binding) {
@@ -52,7 +52,7 @@ export default (app) => {
 ```
 
 ## 拷贝copy
-```html
+```js
 import { Toast } from 'vant'
 export default (app) => {
   app.directive('copy', {
@@ -97,7 +97,7 @@ export default (app) => {
 ```
 
 ## 输入限制
-```html
+```js
 export default (app) => {
   app.directive('enterNumber', {
     beforeMount(el, binding, vnode) {
@@ -163,7 +163,7 @@ export default (app) => {
 ```
 
 ## 检测图片是否加载成功
-```html
+```js
   let imageIsExist = function (url) {
   return new Promise((resolve) => {
     var img = new Image()
@@ -204,7 +204,7 @@ export default (app) => {
 ```
 
 ## 聚焦
-```html
+```js
   export default (app) => {
   app.directive('focus', {
     mounted(el, { value }) {
@@ -226,7 +226,7 @@ export default (app) => {
 ```
 
 ## 图片懒加载
-```html
+```js
 import common from '@/componentApi/commConfig' //拿取默认展示图片
 let timer = null // 创建一个监听器
 let observer = new IntersectionObserver((entries) => {
@@ -272,7 +272,7 @@ export default (app) => {
 ```
 
 ## 块占用 
-```html
+```js
   function randomString(e) {
   e = e || 27
   var t = '0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM',

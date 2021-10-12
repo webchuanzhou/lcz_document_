@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-12 19:40:11
- * @LastEditTime: 2021-09-18 10:01:27
+ * @LastEditTime: 2021-10-12 17:23:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /lcz_document/docs/study/git.md
 -->
 ## 找回checkout丢失的代码 前提是要有commit提交记录
-```html
+```js
     git branch // 查看当前分支
     git reflog // 查看所有操作记录 找到提交的id号
     git checkout  xxxx  //切换分支
@@ -20,8 +20,7 @@
 ```
 
 ## 从当前分支创建新的分支
-```html
-    
+```js
     git checkout master  //切换分支
     git pull //拉去代码
     git checkout -b newMaster //从当前分支创建一个新分支

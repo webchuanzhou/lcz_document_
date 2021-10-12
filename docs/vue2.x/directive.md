@@ -1,14 +1,14 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:53:41
- * @LastEditTime: 2021-03-11 16:25:20
+ * @LastEditTime: 2021-10-12 17:23:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\directive.md
 -->
 # 基本常用指令
 ## 元素外点击关闭元素
-```html
+```js
 //新建clickOutside.js
 export const clickOutside = {
     // 初始化指令
@@ -41,7 +41,7 @@ directives:{clickOutside},
 <el v-click-outside="func"></el>
 ```
 ## 限制输入小数位数
-```html
+```js
 //新建enterNumber.js
   export default Vue => {
   Vue.directive('enterNumber', {
@@ -168,7 +168,7 @@ Vue.use(errImg)
 
 ## 动态绑定新值与老值对比添加状态
 
-```html
+```js
 <!-- 新建立 oldNumber.js -->
   export default (Vue)=>{
     Vue.directive('oldNumber', {
@@ -207,7 +207,7 @@ Vue.use(oldNumber)
 ```
 
 ## 滚动加载
-```html
+```js
   <!-- zInfiniteScroll.js -->
   export default (Vue)=>{
     Vue.directive('zInfiniteScroll', { 
@@ -288,7 +288,7 @@ if(this.listLoading || this.dataCount <= this.list.length){
 ```
 
 ## loading指令
-```html
+```js
   <!-- loading文件夹
     -index.js
     -loading.vue

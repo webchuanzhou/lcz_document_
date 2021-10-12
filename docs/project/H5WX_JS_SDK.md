@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-09-28 16:57:27
- * @LastEditTime: 2021-09-28 17:37:25
+ * @LastEditTime: 2021-10-12 17:19:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\project\H5WX_JS_SDK.md
@@ -300,4 +300,12 @@ export default {
   right: 0;
 }
 </style>
+```
+
+## 域名回调的坑 本地可以 发布后不行。。
+本人使用的是Node.env.回调域名 ->字符串形式，跳转会被转义，导致回调域名匹配不成功
+- - -
+${process.env.VUE_APP_RETURN_URL} 不可为字符串
+```js
+  location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${process.env.VUE_APP_APPID}&redirect_uri=${process.env.VUE_APP_RETURN_URL}&response_type=code&scope=snsapi_userinfo&state=login&connect_redirect=1#wechat_redirect`;
 ```

@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-06-11 17:38:36
- * @LastEditTime: 2021-06-11 17:42:14
+ * @LastEditTime: 2021-10-12 17:23:34
  * @LastEditors: Please set LastEditors
  * @Description: webpack5.x封装
  * @FilePath: \lcz_document\docs\webpack\vue3xWebpack.md
@@ -9,7 +9,7 @@
 
 
 ## vue3.x + webpack 2021-06-01
-```html
+```js
 const path = require('path')
 // 分析包内容
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin

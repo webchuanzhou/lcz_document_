@@ -1,13 +1,13 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 16:28:18
- * @LastEditTime: 2021-03-11 17:16:49
+ * @LastEditTime: 2021-10-12 17:25:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\axios.md
 -->
 ## axios
-```html
+```js
 <!-- 部分库需要自行改动 -->
 import axios from 'axios'
 import { Message ,Notification } from 'element-ui'

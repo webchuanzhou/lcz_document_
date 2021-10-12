@@ -1,13 +1,13 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 16:26:54
- * @LastEditTime: 2021-03-11 17:16:57
+ * @LastEditTime: 2021-10-12 17:25:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\fetch.md
 -->
 ## fetch封装
-```html
+```js
   import configs from '@/../config/config'
 export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
   type = type.toUpperCase()
