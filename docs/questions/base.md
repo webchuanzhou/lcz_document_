@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 09:49:25
- * @LastEditTime: 2021-10-12 18:27:13
+ * @LastEditTime: 2021-10-13 11:45:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\base.md
@@ -21,7 +21,7 @@
 3. 绑定this
 4. 返回新对象
 - - -
-实现
+new关键字实现原理
 ```js
   function create(){
     //创建一个空对象
@@ -36,7 +36,30 @@
     return typeof result == 'object' ? result :  obj
   }
 ```
-## 2.js作用域与作用域链
+## 2.js作用域与作用域链(全局上下文，函数上下文)
+1. 全局作用域（全局上下文）
+2. 局部作用域（函数上下文）
+3. eval作用域（eval上下文）
+```js
+//全局
+var a = 10
+function  foo(i){
+  //局部作用域
+  var b =20;
+  //找局部作用域
+  console.log(b)
+  //找全局作用域 -> 形成的链就是作用域链
+  console.log(a)
+}
+foo()
+```
+### ps. JS 的执行上下文和作用域到底有什么区别和联系？
+> 执行上下文
+简单概括来说就是代码执行期间，所在的一个容器环境，或者说是一个内存空间，代码执行之时，需要在当前上下文查找，所定义得数据变量。
+> 作用域
+在源代码编译整机器码执行之前，编译器需要依赖的一个作用对象。用于查找当前环境所定义得变量等，最终输出整体词法树(ast)
+总得来说，两者形似，但生不逢时
+
 ## 3.es6用了哪些
 ## 4.vue2.0跟3.0的区别有哪些
 ## 5.this指向是如何工作的
@@ -54,12 +77,96 @@
 ## 14.chrome如何支持小于12px的字体
 ## 15.url输入后的过程
 ## 16.深拷贝与浅拷贝的区别
+> 区别
+浅拷贝只能拷贝第一层
+> 浅拷贝
+```js
+ let a = {age:1}
+ //方式1 Object.assgin()
+ let b = Object.assgin({},a)
+ //方式2 ...扩展运算符
+ let c = {...a}
+ a.age = 2
+ console.log(b.age,c.age) // 1
+```
+> 深拷贝
+* JSON.parse(JSON.stringify(obj))
+缺点
+1. 会忽略undefined
+2. 会忽略symbol
+3. 会忽略函数
+4. 不能解决循环引用对象
+> 循环引用对象
+会报错
+```js
+  let obj = {
+  a: 1,
+  b: {
+      c: 2,
+      d: 3,
+    },
+  }
+  obj.c = obj.b
+  obj.e = obj.a
+  obj.b.c = obj.c
+  obj.b.d = obj.b
+  obj.b.e = obj.b.c
+  let newObj = JSON.parse(JSON.stringify(obj))
+  console.log(newObj)
+```
+
+* 递归深拷贝（详见手写题）
+> 扩展
+MessageChannel() 不深拷贝函数的情况下实现方式(MessageChannel iframe 的消息传递实现方式)
+1. 不会忽略undefined（√）
+2. 不会忽略symbol（√）
+3. 会忽略函数（X）
+4. 能解决循环引用对象（√）
+```js
+  function copyMessageChannel(obj){
+    return new Promise((resolve,reject)=>{
+      const {port1 , port2} = new MessageChannel();
+      port2.onmessage = ev => resolve(ev.data);
+      port1.postMessage(obj)
+    })
+  }
+  let obj = {
+    a: 1,
+    b: {
+      c: 2,
+      d: 3,
+    },
+  }
+  obj.c = obj.b
+  obj.b.c = obj.c
+  obj.b.d = obj.b
+  obj.b.e = obj.b.c
+  (async ()=>{
+    const clone = await copyMessageChannel(obj)
+    console.log(clone)
+  })()
+```
+
+
 ## 17.option预请求的理解
 ## 18.object.create 与new object的区别
 ## 19.说说对原型的理解，原型链
 ## 20.v-model的原理
 ## 21.宏任务与微任务
 ## 22.闭包
+外层函数包裹内层函数以及受保护的变量，内层函数中调用外层函数保护的变量就是闭包,外层函数并return 内层函数。
+调用完成后要释放，避免内存泄漏
+> 优点: 变量私有化
+> 缺点: 内存泄露
+```js
+  function a(){
+    let b = 1;
+    function c(){
+      console.log(b)
+    }
+    return c
+  }
+```
 ## 23.promise
 ## 24.es6
 ## 25.为什么组件中的data必须是个函数
@@ -291,3 +398,46 @@ var foo = {
 alert(foo + "1"); // 21
 alert(foo + 1); // 3
 ```
+
+## 61.模块化
+在有Babel的情况下，我们可以直接使⽤ES6的模块化
+```js
+export function a(){}
+export function b(){}
+
+import {a,b} from 'xxx'
+
+export default b(){}
+import b from 'xxx'
+```
+commonJs
+```js
+  //a.js
+  module.exports = {
+    a :1
+  }
+  // or
+  exports.a = 1
+
+  // b,js
+  var module = require('./a.js')
+  module.a //=>1
+```
+> commonjs 与 es6模块化的区别
+commonjs 支持动态导入 require(${path}/xx.js),es6不支持 但是有提案
+- - -
+区别|commonjs|es6babel
+-|-|-|
+动态导入|支持 require(${path}/xx.js)|不支持 但是有提案
+是否同步导入|是(用于服务端，文件都在本地，同步导入即便卡了主线程影响不大)|否(异步导入，用于浏览器文件需要下载，如果同步导入对渲染影响很大)
+导出值是否同一个内存|否（导出是值拷贝）导出的值变了需要重新导入一次|是 (导入导出指向同一个内存地址，导出值会跟随导入的值变化)
+
+AMD
+```js
+define(['/a','/b'], function(a, b) {
+  a.do()
+  b.do()
+})
+```
+
+## 62.防抖与节流
