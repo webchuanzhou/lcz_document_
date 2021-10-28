@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 15:57:51
- * @LastEditTime: 2021-04-22 12:13:55
+ * @LastEditTime: 2021-10-26 15:53:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\despise.md
 -->
 ## 1.大型整数相加
 JS 中整数的最大安全范围可以查到是：9007199254740991
-```html
+```js
   let a = "9007199254740991";
   let b = "1234567899999999999"
   function add(a,b){
@@ -34,7 +34,7 @@ JS 中整数的最大安全范围可以查到是：9007199254740991
 ```
 
 ## 2.手写promise
-```html
+```js
   // MyPromise.js
 
 // 先定义三个常量表示状态
@@ -197,8 +197,8 @@ error状态同上
 
 2个重写的静态方法resolve reject 以便于直接的链式操作 
 
-## 3.手写兼容 类型判断
-```html
+## 3.手写兼容 类型判断typeOf
+```js
   function typeOf(obj){
     return Object.prototype.toString.call(obj).slice(8,-1).toLowerCase()
   }
@@ -210,8 +210,8 @@ error状态同上
 ```
 
 ## 4.数组去重
-```html
-  es6 
+```js
+  //es6 
   [...new Set(arr)]
 ```
 
@@ -245,7 +245,7 @@ error状态同上
 寻找发布栈内的函数 与 传入函数的下标
 通过数组裁剪对发布栈进行操作 splice(index,1)
 
-```html
+```js
   class EventEmitter{
     constructor(){
       this.cache = {}

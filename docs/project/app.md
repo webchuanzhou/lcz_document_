@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-12 10:14:12
- * @LastEditTime: 2021-06-11 17:23:32
+ * @LastEditTime: 2021-10-27 15:18:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\project\app.md
 -->
 ## 1. 兼容ios 和安卓高度不够问题
   App.vue 文件
-```html
+```js
   onLaunch: function() {
     // #ifdef APP-PLUS
       plus.screen.lockOrientation("portrait-primary"); 
@@ -18,7 +18,7 @@
 
 ## 2. 后台超过3分钟，退出登录操作
   App.vue 文件
-```html
+```js
 
   import Vue from 'vue'
 	var time = ''
@@ -80,7 +80,7 @@
 
 ## 4. 配置页面
 pages.json
-```html
+```json
   基础页面
   {
     "path": "pages/wallet/ImportPage", // 路径
@@ -135,7 +135,7 @@ pages.json
 ```
 ![Image text](https://gitee.com/webchuanzhou/lcz_document/raw/master/docs/assets/app/lan1.png)
 i18n.js
-```html
+```js
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import messages from './langs'
@@ -190,7 +190,7 @@ const app = new Vue({
 部分组件引入生成二维码 ios 可行 安卓不可行  
 最终觉得引入第三方SDK包
 参考根目录下的 applugin->ercode
-```html
+```js
   import uQRCode from '@/js_sdk/Sansnn-uQRCode/uqrcode.js'
 
   async make() {
@@ -234,7 +234,7 @@ http://www.jisuxz.com/down/66524.html
 
 ## 8. 强制App 竖屏
 App.vue
-```html
+```js
   onLaunch: function() {
 			// 竖屏 
 			// #ifdef APP-PLUS
@@ -250,7 +250,7 @@ App.vue
 
 ## 9. 版本更新 强制更新与确认更新
 App.vue
-```html
+```js
   //是否有版本更新
 			VersionUpdate(){
 				if(process.env.NODE_ENV == 'production'){
@@ -429,13 +429,13 @@ App.vue
 ```
 
 ## 11.视频坑
-```html
- ios与安卓中视频用的是原生Video ,是属于顶级标签，无论如何修改z-index 都无效
+ios与安卓中视频用的是原生Video ,是属于顶级标签，无论如何修改z-index 都无效
  如果遇到弹框组件
  弹出组件先摧毁视频，关闭组件在重置视频文件才行
 
  如何在顶级Video 加图片 与 文字  需要参考文档
  实现方式不一
+```js
  <video 
     :src="videoSrc" 
     class="imageVideo" 
@@ -476,7 +476,7 @@ aesAddEncrypt(options.data)
 
 ## 13.海报分享
 辗转反侧 本来想要html2canvas 但是兼容性不好，最终决定使用canvas合成，但是必需要是2张图 需要ui配合，如果需要写入文案什么的比较懒麻烦，最终还是1张图与二维码的合成实现
-```html
+```js
   2个html标签
   1个展示在页面中
   <view style="height:936rpx;width:100%;margin-bottom:60rpx;">
@@ -635,7 +635,7 @@ App端，苹果应用内支付 orderInfo 为Object 类型，{productid: 'product
 
 坑：微信本地基架运行微信支付，传输的是基架的配置不是源码视图中的配置会导致支付不成功，需要打包测试
 
-```html
+```js
 	appPay({ commit },params){
 			return new Promise((resolve, reject) => {
 				const {res , radioCurrentRecharge} = params
@@ -667,4 +667,185 @@ App端，苹果应用内支付 orderInfo 为Object 类型，{productid: 'product
 				});
 			})
 		}
+```
+
+## 序列图->针动画
+animation 组件
+```vue
+<template>
+	<div  ref="animation" :style="{'width':width,'height':height}">
+		<!-- #ifdef APP-PLUS -->
+			<image :src="imgsShow" alt="" mode="aspectFill" class="imgAnimation"/>
+		<!-- #endif -->
+		<!-- #ifdef H5 -->
+			<div ref="animationDiv"  :style="{'width':width,'height':height}" style="position:relative"></div>
+			<!-- <img :src="imgsShow" alt="" class="imgAnimation" v-if="imgsShow"/> -->
+		<!-- #endif -->
+	</div>
+</template>
+<script>
+export default {
+	name: 'animation',
+	data() {
+		return {
+			imgsShow: '', //图片展示地址
+			promiseAll:[],//app 图片请求存放
+			animationTimer:null, //定时执行动画
+		}
+	},
+	props: {
+		//总图片数量
+		total: {
+		  type: Number,
+		  default: 0,
+		},
+		//图片找寻基础路径
+		baseUrl: {
+		  type: String,
+		  default: '',
+		},
+		//几位小数
+		baseZero: {
+		  type: Number,
+		  default: 3,
+		},
+		//图片类型
+		imgType: {
+		  type: String,
+		  default: 'png',
+		},
+		//宽
+		width:{
+			type: String,
+			default: '100%',
+		},
+		//高
+		height:{
+			type: String,
+			default: '100%',
+		},
+		//是否只执行一次
+		isExecuteOnce:{
+			type: Boolean,
+			default: false,
+		}
+	},
+	methods: {
+		//H5针动画
+		animationSatrtH5() {
+			let imgList = []
+			let domWrapper = this.$refs.animationDiv;
+			for (let i = 0; i <= this.total; i++) {
+				this.promiseAll[i] = new Promise((resolve, reject) => {
+					imgList[i] = new Image()
+					const context = require.context('@/static', true, /\.(png|jpg)$/);
+					imgList[i].src = context('.' + this.baseUrl + String(i).padStart(this.baseZero, '0') + '.png')
+					imgList[i].onload = ()=> {
+						resolve(imgList[i])
+					}
+				})
+			}
+			let current = 0
+			let domList = [];
+			Promise.all(this.promiseAll).then(img => {
+				for (const img of imgList) {
+					const domItem = document.createElement('div');
+					domItem.classList = 'animation';
+					domItem.style.width = '100%'
+					domItem.style.height = '100%'
+					domItem.style.backgroundImage = `url(${img.src})`;
+					domItem.style.backgroundSize = `cover`;
+					domItem.style.opacity = 0;
+					domItem.style.position = 'absolute';
+					domItem.style.top = 0;
+					domItem.style.left = 0;
+					domWrapper.appendChild(domItem);
+					domList.push(domItem);
+				}
+				this.animationTimer = setInterval(() => {
+					domList[current].style.opacity = 0;
+					current = ++current % this.total;
+					domList[current].style.opacity = 1;
+					this.isExecuteOnce && this.ExecuteOnce(current)
+				}, 40)
+			}).catch(err => {
+				console.log('失败了' + err)
+				setTimeout(()=>{
+					this.animationSatrtH5()
+				},500)
+			})
+		},
+		//App 针动画
+		async animationSatrtApp() {
+			for (let i = 0; i <= this.total; i++) {
+				this.promiseAll[i] = await this.getImg(i)
+				console.log(this.promiseAll[i])
+			}
+			//检查是否有图片没加载成功
+			this.findImgError()
+		},
+		// 默认地址图片加载
+		async getImg(i){
+			let isImg = null
+			await uni.getImageInfo({ src: `/static${this.baseUrl}${String(i).padStart(this.baseZero, '0')}.${this.imgType}` }).then(img => {
+				//报错
+				if (img?.[0]?.errCode) {
+					isImg = null
+				} else {
+					isImg =  img?.[1]?.path ?? null
+				}
+			})
+			return isImg;
+		},
+		//检查是否有加载错误的图片
+		async findImgError(){
+			let {promiseAll} = this;
+			let errorIndex = promiseAll.findIndex(el=>(!el && typeof(el)!='undefined' && el!=0))
+			//找到图片加载错误的下标
+			if(errorIndex != '-1'){
+				console.log('错误下标:'+errorIndex)
+				this.promiseAll[errorIndex] = await this.getImg(errorIndex)
+				setTimeout(()=>{
+					this.findImgError()
+				},100)
+			}else{
+				let current = 0
+				this.animationTimer = setInterval(() => {
+					current = ++current % this.total
+					this.imgsShow = String(this.promiseAll[current])
+					this.isExecuteOnce && this.ExecuteOnce(current)
+				}, 40)
+			}
+		},
+		//只执行一次动画
+		ExecuteOnce(current){
+			if(this.isExecuteOnce && this.total-1 == current){
+				clearInterval(this.animationTimer)
+				this.animationTimer = null
+			}
+		}
+	},
+	created() {},
+	mounted() {
+		// #ifdef H5
+		this.animationSatrtH5()
+		// #endif
+		// #ifdef APP-PLUS
+		this.animationSatrtApp()
+		// #endif
+	},
+}
+</script>
+<style rel="stylesheet/scss" lang="scss" scoped>
+	.imgAnimation{
+		width:100%;
+		height:100%;
+	}
+</style>
+
+```
+> animation 组件使用
+/xulie/sandclock 图片存放地址
+```html
+<Animation :total="60" :base-url="'/xulie/sandclock'"  :base-zero="3" img-type="png" width="72rpx" height="84rpx"/>
 ```

@@ -1,20 +1,24 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-09 09:47:16
- * @LastEditTime: 2021-10-09 09:47:16
+ * @LastEditTime: 2021-10-27 16:42:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\js\accumulation.md
 -->
 ## 1.require 如何动态循环引入img图片 ，因为有hash 不能正常引入？
-解决：对象的方式引入
+>解决：对象的方式引入
 ```js
 let abc = {
   title:item.title,
   img:require(item.img)
 }
 ```
-
+> 方式2:
+```js
+  const context = require.context('@/static', true, /\.(png|jpg)$/);
+  context('./url' + String(i).padStart(this.baseZero, '0') + '.png')
+```
 ## 2.解析有效日期
 触发：在苹果系统上解析YYYY-MM-DD HH:mm:ss这种日期格式会报错Invalid Date，但在安卓系统上解析这种日期格式完全无问题。
 ```js
@@ -29,7 +33,7 @@ let abc = {
   const openBtn = document.getElementById("open-btn"); 
   const closeBtn = document.getElementById("close-btn"); openBtn.addEventListener("click", e => { 
     e.stopPropagation(); 
-  const scrollTop = document.scrollingElement.scrollTop; body.classList.add("static"); body.style.top = `-${scrollTop}px`; }); closeBtn.addEventListener("click", e => { 
+    const scrollTop = document.scrollingElement.scrollTop; body.classList.add("static"); body.style.top = `-${scrollTop}px`; }); closeBtn.addEventListener("click", e => { 
     e.stopPropagation();
     body.classList.remove("static"); body.style.top = ""; 
   });

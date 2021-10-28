@@ -1,13 +1,13 @@
 <!--
  * @Author: lcz
  * @Date: 2021-06-11 17:27:18
- * @LastEditTime: 2021-10-12 17:23:25
+ * @LastEditTime: 2021-10-27 18:38:05
  * @LastEditors: Please set LastEditors
  * @Description: vue3.x 指令封装
  * @FilePath: \lcz_document\docs\vue3.x\directive.md
 -->
 # 常用指令
-全局注册
+> 全局注册
 ```js
   import focus from '@directive/focus' //聚焦
   import placeholderBlock from '@directive/placeholderBlock' //占位符

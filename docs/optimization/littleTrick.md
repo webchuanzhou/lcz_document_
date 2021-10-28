@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-10-09 10:38:02
- * @LastEditTime: 2021-10-09 10:40:44
+ * @LastEditTime: 2021-10-18 15:21:59
  * @LastEditors: Please set LastEditors
  * @Description: 代码优化小妙招
  * @FilePath: \lcz_document\docs\optimization\littleTrick.md
@@ -29,4 +29,24 @@ if(value !== null && value !== undefined && value !== ''){
 if(value??'' !== ''){
   //...
 }
+```
+
+## 函数缓存
+```js
+  const cacheFun = (fn)=>{
+    let cache = {}
+    return (...args)=>{
+      const _args = JSON.stringify(args)
+      return cache[_args]  || (cache[_args] = fn.apply(fn,args))
+    }
+  }
+
+  const add = function(a, b) {
+    console.log('开始缓存')
+    return a + b
+  }
+ 
+  const adder = memorize(add)
+  console.log(adder(2, 6)) // 输出结果: 开始缓存 8
+  console.log(adder(2, 6)) // 输出结果: 8 
 ```
