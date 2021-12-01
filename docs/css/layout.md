@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:10:13
- * @LastEditTime: 2021-10-09 09:45:17
+ * @LastEditTime: 2021-12-01 11:51:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\docs\layout.md
@@ -26,7 +26,7 @@ rem(root em) 和 em 一样，也是一个相对长度单位，不过 rem 相对�
 rem 由于是基于 html 的 font-size 来计算，所以通常用于自适应网站或者 H5 中。
 比如在做 H5 的时候，前端通常会让 UI 给 750px 宽的设计图，而在开发的时候可以基于 iPhone X 的尺寸 375px * 812px 来写页面，这样一来的话，就可以用下面的 JS 依据当前页面的视口宽度自动计算出根元素 html 的基准 font-size 是多少。
 
-```html
+```js
   (function (doc, win) {
     var docEl = doc.documentElement,
         resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
@@ -78,7 +78,7 @@ rem 由于是基于 html 的 font-size 来计算，所以通常用于自适应�
 * 特别注意：meta的content中的值不要设置width
 */
 
-```html
+```js
     !function (w) {
         InitView();
         "onorientationchange" in w && w.addEventListener("orientationchange", function () {
@@ -103,4 +103,106 @@ rem 由于是基于 html 的 font-size 来计算，所以通常用于自适应�
 
         w.showPlaceholder = 1;
     }(window);
+```
+
+
+## Grid 布局
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title></title>
+    <style>
+      /* 父"容器"（container） 子 项目（item） */
+      /* 网格 网格的行与列 */
+      .xm{
+        display: grid;
+        /*  1行3个 每个占比 */
+        /* grid-template-columns: 33.33% 33.33% 33.33%;
+        grid-template-rows: 33.33% 33.33% 33.33%; */
+
+        /* 3*1  1行3个 */
+        /* grid-template-columns:  repeat(3, 33.33%);
+        grid-template-rows:  repeat(3, 33.33%); */
+
+        /* 3*3 一行9个 宽度为 100px 20px 80px 一轮*/
+        /* grid-template-columns:  repeat(3, 100px 20px 80px);
+        grid-template-rows:  repeat(3, 100px 20px 80px); */
+
+        /* 表示每列宽度100px，然后自动填充，直到容器不能放置更多的列。 */
+        grid-template-columns: repeat(auto-fill, 20%);
+
+        /* 如果两列的宽度分别为1fr和2fr，就表示后者是前者的两倍。 按照栅格布局12等分测试*/
+        /* grid-template-columns: 2fr 6fr 2fr 2fr; */
+
+        /* 也可与px结合 */
+        /* grid-template-columns: 20px 6fr 2fr 2fr; */
+
+        /* grid-template-columns:2fr 6fr 2fr minmax(10px,0.5fr); */
+
+        /* auto */
+        /* grid-template-columns: 100px 50px auto 100px; */
+
+
+        /* 布局实现 */
+        /* grid-template-columns: 70% 30%; */
+        /* 12网格实现 */
+        /* grid-template-columns: repeat(12, 1fr); */
+
+        /* 项目排序方式  start | end | center | stretch */
+        /* stretch：拉伸，占满单元格的整个宽度（默认值）。 */
+        justify-items:end; 
+        align-items:end;
+        
+        /* 合写 */
+        /* place-items: <align-items> <justify-items>; */
+
+        /* 项目排序方式  start | end | center | stretch | space-around | space-between | space-evenly*/
+        /* justify-content:end;
+        align-content:end; */
+        
+        /* 合写 */
+        /* place-content: <align-content> <justify-content> */
+      }
+      /* 网格间距 */
+      .gap{
+
+        /* 单写行间距 */
+        /* grid-row-gap:20px;
+        grid-column-gap:20px; */
+
+        /* 合写行间距 如果省略了第二个值就与第一个值一样*/
+        grid-gap:20px 20px;
+      }
+      .rq{
+        height: 200px;
+      }
+      .rq5{
+        /* 网格线开始1结束5 */
+        grid-column-start: 1;
+        grid-column-end: 5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="xm gap">
+      <div class="rq5"><p>1</p></div>
+      <div class="rq"><p>2</p></div>
+      <div class="rq"><p>3</p></div>
+      <div class="rq"><p>4</p></div>
+      <div class="rq"><p>5</p></div>
+      <div class="rq"><p>6</p></div>
+      <div class="rq"><p>7</p></div>
+      <div class="rq"><p>8</p></div>
+      <div class="rq"><p>9</p></div>
+      <div class="rq"><p>10</p></div>
+      <div class="rq"><p>11</p></div>
+      <div class="rq"><p>12</p></div>
+    </div>
+  </body>
+</html>
+
 ```

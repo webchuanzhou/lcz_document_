@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-10-12 17:27:50
+ * @LastEditTime: 2021-11-04 16:13:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -65,6 +65,7 @@
   - [componentApi](baseuse/componentApi.md)
   - [md](baseuse/md.md)
   - [npm与Yarn](baseuse/npmYarn.md)
+  - [regexp](baseuse/regexp.md)
 
 - 学习记录
   - [React](study/react.md)
@@ -77,6 +78,8 @@
 - readingBooks
   - [react+进阶之路](readingBooks/reactTo.md)
   - [红宝书4](readingBooks/red4.md)
+  - [effective js](readingBooks/effective.md)
 
 - 源码理解
   - [axios](sourceCode/axios.md)
+  - [min-vue](sourceCode/min-vue.md)

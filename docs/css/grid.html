@@ -1,0 +1,104 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-11-30 11:46:22
+ * @LastEditTime: 2021-11-30 15:31:35
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: \lcz_document\docs\css\grid.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title></title>
+    <style>
+      /* 父"容器"（container） 子 项目（item） */
+      /* 网格 网格的行与列 */
+      .xm{
+        display: grid;
+        /*  1行3个 每个占比 */
+        /* grid-template-columns: 33.33% 33.33% 33.33%;
+        grid-template-rows: 33.33% 33.33% 33.33%; */
+
+        /* 3*1  1行3个 */
+        /* grid-template-columns:  repeat(3, 33.33%);
+        grid-template-rows:  repeat(3, 33.33%); */
+
+        /* 3*3 一行9个 宽度为 100px 20px 80px 一轮*/
+        /* grid-template-columns:  repeat(3, 100px 20px 80px);
+        grid-template-rows:  repeat(3, 100px 20px 80px); */
+
+        /* 表示每列宽度100px，然后自动填充，直到容器不能放置更多的列。 */
+        grid-template-columns: repeat(auto-fill, 20%);
+
+        /* 如果两列的宽度分别为1fr和2fr，就表示后者是前者的两倍。 按照栅格布局12等分测试*/
+        /* grid-template-columns: 2fr 6fr 2fr 2fr; */
+
+        /* 也可与px结合 */
+        /* grid-template-columns: 20px 6fr 2fr 2fr; */
+
+        /* grid-template-columns:2fr 6fr 2fr minmax(10px,0.5fr); */
+
+        /* auto */
+        /* grid-template-columns: 100px 50px auto 100px; */
+
+
+        /* 布局实现 */
+        /* grid-template-columns: 70% 30%; */
+        /* 12网格实现 */
+        /* grid-template-columns: repeat(12, 1fr); */
+
+        /* 项目排序方式  start | end | center | stretch */
+        /* stretch：拉伸，占满单元格的整个宽度（默认值）。 */
+        justify-items:end; 
+        align-items:end;
+        
+        /* 合写 */
+        /* place-items: <align-items> <justify-items>; */
+
+        /* 项目排序方式  start | end | center | stretch | space-around | space-between | space-evenly*/
+        /* justify-content:end;
+        align-content:end; */
+        
+        /* 合写 */
+        /* place-content: <align-content> <justify-content> */
+      }
+      /* 网格间距 */
+      .gap{
+
+        /* 单写行间距 */
+        /* grid-row-gap:20px;
+        grid-column-gap:20px; */
+
+        /* 合写行间距 如果省略了第二个值就与第一个值一样*/
+        grid-gap:20px 20px;
+      }
+      .rq{
+        height: 200px;
+      }
+      .rq5{
+        /* 网格线开始1结束5 */
+        grid-column-start: 1;
+        grid-column-end: 5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="xm gap">
+      <div class="rq5"><p>1</p></div>
+      <div class="rq"><p>2</p></div>
+      <div class="rq"><p>3</p></div>
+      <div class="rq"><p>4</p></div>
+      <div class="rq"><p>5</p></div>
+      <div class="rq"><p>6</p></div>
+      <div class="rq"><p>7</p></div>
+      <div class="rq"><p>8</p></div>
+      <div class="rq"><p>9</p></div>
+      <div class="rq"><p>10</p></div>
+      <div class="rq"><p>11</p></div>
+      <div class="rq"><p>12</p></div>
+    </div>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 09:49:25
- * @LastEditTime: 2021-10-27 15:12:57
+ * @LastEditTime: 2021-11-12 18:03:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\base.md
@@ -73,7 +73,22 @@ foo()
 
 ## 4.vue2.0 跟 3.0 的区别有哪些
 
+待优化
+
+> vue3.0
+> diff
+
+1. diff 算法 新增静态标记 快速找到更新了 dom 树
+2. 使用 proxy 进行双向数据绑定
+3. 源码使用 ts 重写，更好的类型推导
+4. 提供了 composition api，为更好的逻辑复用与代码组织
+   > vue2.0
+5. 虚拟 dom 发生改变，它是通过全量比较 diff，进行检测
+6. Object.defineProperty 进行双向数据绑定，通过重写数组的 8 大方法，不能监听对象
+
 ## 5.this 指向是如何工作的
+
+谁调用 this 就指向谁
 
 ## 6.面向对象的三大特性，封装继承多态
 
@@ -93,9 +108,16 @@ foo()
 
 ## 12.跨域问题，以及解决方案
 
+1. cros
+2. iframe
+3. jsonp
+   ....
+
 ## 13.前端的安全性问题 xss csrf 上传 sql
 
 ## 14.chrome 如何支持小于 12px 的字体
+
+transform：translate(0.8)
 
 ## 15.url 输入后的过程
 
@@ -276,7 +298,13 @@ plugin 是扩展器，丰富 webpack 本身，loader 结束后，执行 plugin �
 
 ## 50.页面刷新后 vuex 中的数据丢失了 如何处理
 
+1. localStorge
+2. sessionStroage
+3. cookie
+
 ## 51.为什么要用 vuex,localStorge 不行吗
+
+1. localStorge 存储有上限 存多了读取会有时间差
 
 ## 52. Vue 的 template 是如何编译的
 
@@ -382,23 +410,6 @@ import 是编译时的 require 是运行时候的 ，性能上比 require 好很
 - Object.prototype.toString.call()最佳判断
 
 ---
-
-instanceof 实现原理
-
-```js
-function instance_of(left, right) {
-  //获取类型的原型
-  let prototype = right.prototype
-  //获取对象的原理
-  left = left.__proto__
-  //判断对象的类型是否等于类型的原型
-  while (true) {
-    if (left === null) return false
-    if (prototype === left) return true
-    left = left.__proto__
-  }
-}
-```
 
 ## 60.对象如何转基础数据类型(感觉有点鸡肋目前)
 
@@ -924,9 +935,56 @@ class SqQueue {
 }
 ```
 
-## undefined和undeclared
+## undefined 和 undeclared
+
 ```js
-var a ;
-typeof a; // "undefined"
+var a
+typeof a // "undefined"
 typeof b // erenceError: b is not defined  // undeclared
 ```
+
+## ajax 和 axios、fetch 的区别
+
+> ajax
+
+1. 本身是针对 MVC 的编程,不符合现在前端 MVVM 的浪潮
+2. 基于原生的 XHR 开发，XHR 本身的架构不清晰。
+3. JQuery 整个项目太大，单纯使用 ajax 却要引入整个 JQuery 非常的不合理
+
+> axios
+
+1. 从浏览器中创建 XMLHttpRequest
+2. 支持 Promise API
+3. 客户端支持防止 CSRF
+4. 提供了一些并发请求的接口（重要，方便了很多的操作）
+5. 从 node.js 创建 http 请求
+6. 拦截请求和响应
+7. 转换请求和响应数据
+8. 取消请求
+9. 自动转换 JSON 数据
+
+> fetch
+
+1.  语法简洁，更加语义化
+2.  基于标准 Promise 实现，支持 async/await
+3.  同构方便，使用 [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)
+4.  更加底层，提供的 API 丰富（request, response）
+5.  脱离了 XHR，是 ES 规范里新的实现方式
+
+
+## typeof为什么对null错误的显示
+这只是 JS 存在的一个悠久 Bug。在 JS 的最初版本中使用的是 32 位系统，为了性能考虑使用低位存储变量的类型信息，000 开头代表是对象然而 null 表示为全零，所以将它错误的判断为 object
+
+## ["1","2","3"].map(parseInt)的输出结果是多少?
+二进制
+```js
+parseInt('1', 0, ['1','2','3'])
+parseInt('2', 1, ['1','2','3'])
+parseInt('3', 2, ['1','2','3'])
+```
+* parseInt('1', 0, ['1','2','3']): radix为0时，默认取10，最后返回1
+* parseInt('2', 1, ['1','2','3']): radix取值为2~36，返回NaN
+* parseInt('3', 2, ['1','2','3']): radix取值为2，二进制只包括0，1，返回NaN
+
+## a.b.c.d 和 a['b']['c']['d']，哪个性能更高？
+应该是 a.b.c.d 比 a['b']['c']['d'] 性能高点，后者还要考虑 [ ] 中是变量的情况，再者，从两种形式的结构来看，显然编译器解析前者要比后者容易些，自然也就快一点。
