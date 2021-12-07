@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-11-04 16:13:09
+ * @LastEditTime: 2021-12-06 11:40:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -29,6 +29,8 @@
 - Vue3.x
   - [常用指令封装](vue3.x/directive.md)
 
+- React
+  - [Hooks](react/hooks.md)
 - webpack
   - [vue_webpack5.x](webpack/vue3xWebpack.md)
 
@@ -71,6 +73,7 @@
   - [React](study/react.md)
   - [docker+vue+ftp+linux+Nginx](study/public.md)
   - [cocos2d](study/cocos2d.md)
+  - [vue3](study/vue3.md)
   
 - eslint+prettier
   - [前端代码规范eslint+prettier](rules/code.md)

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-09 09:47:16
- * @LastEditTime: 2021-11-12 17:49:55
+ * @LastEditTime: 2021-12-07 14:27:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\js\accumulation.md
@@ -67,16 +67,73 @@ function uuid() {
 }
 ```
 
-## 5.Object.prototype.toString.call() 
+## 5.Object.prototype.toString.call()
+
 ```js
-toString.call(()=>{})       // [object Function]
-toString.call({})           // [object Object]
-toString.call([])           // [object Array]
-toString.call('')           // [object String]
-toString.call(22)           // [object Number]
-toString.call(undefined)    // [object undefined]
-toString.call(null)         // [object null]
-toString.call(new Date)     // [object Date]
-toString.call(Math)         // [object Math]
-toString.call(window)       // [object Window]
+toString.call(() => {}) // [object Function]
+toString.call({}) // [object Object]
+toString.call([]) // [object Array]
+toString.call('') // [object String]
+toString.call(22) // [object Number]
+toString.call(undefined) // [object undefined]
+toString.call(null) // [object null]
+toString.call(new Date()) // [object Date]
+toString.call(Math) // [object Math]
+toString.call(window) // [object Window]
 ```
+
+## ??合并空运算符
+
+假设变量 a 不存在，我们希望给系统一个默认值，一般我们会使用||运算符。但是在 javascript 中空字符串，0，false 都会执行||运算符，所以 ECMAScript2020 引入合并空运算符解决该问题，只允许在值为 null 或未定义时使用默认值。
+
+<!-- null 和 undefined 时才会执行 ??  -->
+
+```js
+const name = ''
+
+console.log(name || 'yd') // yd;
+console.log(name ?? 'yd') // '';
+```
+
+## 声明和初始化数组
+
+```js
+const array = Array(5).fill('');
+// 输出
+(5) ["", "", "", "", ""]
+
+const matrix = Array(5).fill(0).map(() => Array(5).fill(0))
+// 输出
+(5) [Array(5), Array(5), Array(5), Array(5), Array(5)]
+0: (5) [0, 0, 0, 0, 0]
+1: (5) [0, 0, 0, 0, 0]
+2: (5) [0, 0, 0, 0, 0]
+3: (5) [0, 0, 0, 0, 0]
+4: (5) [0, 0, 0, 0, 0]
+length: 5
+```
+
+## void 0 与 undefined 的区别
+
+> 为什么用 void 0 来代替 undefined
+> undefined 可以被重写  
+> undefined 在 ES5 中已经是全局对象的一个只读（read-only）属性了，它不能被重写。但是在局部作用域中，还是可以被重写的。
+
+```js
+;(function () {
+  var undefined = 10
+
+  // 10 -- chrome
+  alert(undefined)
+})()
+
+;(function () {
+  undefined = 10
+
+  // undefined -- chrome
+  alert(undefined)
+})()
+```
+
+> 为什么选择 void 0 作为 undefined 的替代
+> void 运算符能对给定的表达式进行求值，然后返回 undefined。也就是说，void 后面你随便跟上一个表达式，返回的都是 undefined，如 void (2), void (‘hello’)。并且 void 是不能被重写的。但为什么是 void 0 呢，void 0 是表达式中最短的。用 void 0 代替 undefined 能节省字节。不少 JavaScript 压缩工具在压缩过程中，正是将 undefined 用 void 0 代替掉了。

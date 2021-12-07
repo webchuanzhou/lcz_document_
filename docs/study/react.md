@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-16 20:20:26
- * @LastEditTime: 2021-10-12 17:24:11
+ * @LastEditTime: 2021-12-06 10:37:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /lcz_document/docs/study/react.md
@@ -387,4 +387,16 @@ Fragment 相当于vue中的template
 使用
 ```js
   <ZNavLink to="/home" children="首页"/>
+```
+
+## react Hooks 中useMemo 跟 vue的computer 原理一样
+使用方式
+```js
+import {userState,useMemo} from 'react';
+function Memo(){
+  const [name,setName] = useState('lcz');
+  const [food,setFood] = useState('拉面');
+  //useMemo  == computer
+  const msg = useMemo(()=>(`我是${name},我吃${food}`),[name,food]);
+}
 ```

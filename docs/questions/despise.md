@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 15:57:51
- * @LastEditTime: 2021-10-28 17:52:54
+ * @LastEditTime: 2021-12-07 10:32:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\despise.md
@@ -224,6 +224,30 @@ console.log(typeOf(new Date())) // date
 ```js
 //es6
 ;[...new Set(arr)]
+```
+
+hash 去重
+
+```js
+function unique2(arr) {
+  var obj = {}
+  return arr.filter(ele => {
+    if (!obj[ele]) {
+      obj[ele] = true
+      return true
+    }
+  })
+}
+
+function unique3(arr) {
+  var result = []
+  arr.forEach(ele => {
+    if (result.indexOf(ele) == -1) {
+      result.push(ele)
+    }
+  })
+  return result
+}
 ```
 
 ## 5. 事件订阅
@@ -1111,5 +1135,69 @@ Promise.prototype.finally = function (callback) {
       throw err
     }
   )
+}
+```
+
+## 39.字符串去重
+```js
+String.prototype.unique = function () {
+    var obj = {},
+        str = '',
+        len = this.length;
+    for (var i = 0; i < len; i++) {
+        if (!obj[this[i]]) {
+            str += this[i];
+            obj[this[i]] = true;
+        }
+    }
+    return str;
+}
+
+
+function uniq(str) {
+    return str.replace(/(\w)\1+/g, '$1')
+}
+
+```
+## 40.判断字符串是否是回文
+```js
+function isPalindrome(str) {
+    str = str.replace(/\W/g, '').toLowerCase();
+    console.log(str)
+    return (str == str.split('').reverse().join(''))
+}
+
+function isPalina(str) {
+    if (Object.prototype.toString.call(str) !== '[object String]') {
+        return false;
+    }
+    var len = str.length;
+    for (var i = 0; i < len / 2; i++) {
+        if (str[i] != str[len - 1 - i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+```
+
+## 41.异步加载script
+```js
+function loadScript(url, callback) {
+    var oscript = document.createElement('script');
+    if (oscript.readyState) { // ie8及以下版本
+        oscript.onreadystatechange = function () {
+            if (oscript.readyState === 'complete' || oscript.readyState === 'loaded') {
+                callback();
+            }
+        }
+    } else {
+        oscript.onload = function () {
+            callback()
+        };
+    }
+    oscript.src = url;
+    document.body.appendChild(oscript);
 }
 ```

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-11 18:06:32
- * @LastEditTime: 2021-09-02 16:20:58
+ * @LastEditTime: 2021-12-03 14:46:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\jsArray.md
@@ -275,17 +275,69 @@
 ```
 
 ## 23.reduce(callback, initValue) & reduceRight(callback, initValue)
-```html
+```js
   onst ary = [1, 2, 3, 4, 5]
 
   // 神奇的reduce，第二个参数为初始值，不传时会拿第零个元素作为初始值
   // total：上一个回调函数的返回值；current：当前项的值；currentIndex：当前项的索引；
-  ary.reduce((total, current, currentIndex) => total + current) // => 15
-  ary.reduce((total, current, currentIndex) => total + current, 7) // => 22
+  ary.reduce((total, current, currentIndex, currentArray) => total + current) // => 15
+  ary.reduce((total, current, currentIndex, currentArray) => total + current, 7) // => 22
 
   // 与reduce类似，不过从最后一项开始累加，不传初始值时会拿最后一个元素作为初始值
-  ary.reduceRight((total, current, currentIndex) => total + current) // => 15
+  ary.reduceRight((total, current, currentIndex, currentArray) => total + current) // => 15
 
   // 在空数组上调用 reduce 或 reduceRight 且未提供初始值，会导致类型错误（使用时最好写上初始值哟！）
-  [].reduce((total, current, currentIndex) => total + current) // Uncaught TypeError: Reduce of empty array with no initial value
+  [].reduce((total, current, currentIndex, currentArray) => total + current) // Uncaught TypeError: Reduce of empty array with no initial value
+
+
+  //链接不均匀得数组
+  let data = [
+  ["The","red", "horse"],
+  ["Plane","over","the","ocean"],
+  ["Chocolate","ice","cream","is","awesome"], 
+  ["this","is","a","long","sentence"]
+]
+let dataConcat = data.map(item=>item.reduce((a,i)=>`${a} ${i}`))
+
+// 结果
+['The red horse', 
+'Plane over the ocean', 
+'Chocolate ice cream is awesome', 
+'this is a long sentence']
+
+// 移除数组中重复的项目
+let dupes = [1,2,3,'a','a','f',3,4,2,'d','d']
+let withOutDupes = dupes.reduce((total,curVal)=>{
+  if(!total.includes(curVal)){total.push(curVal)}
+  return total
+},[])
+
+// 按某个字段分组
+let obj = [
+  {name: 'Alice', job: 'Data Analyst', country: 'AU'},
+  {name: 'Bob', job: 'Pilot', country: 'US'},
+  {name: 'Lewis', job: 'Pilot', country: 'US'},
+  {name: 'Karen', job: 'Software Eng', country: 'CA'},
+  {name: 'Jona', job: 'Painter', country: 'CA'},
+  {name: 'Jeremy', job: 'Artist', country: 'SP'},
+]
+
+let group = obj.reduce((total,curVal)=>{
+  let params = curVal.country;
+  if(!total[params]){
+    total[params] = []
+  }
+  total[params].push(curVal)
+  return total;
+},[])
+
+// leetCode 括号验证
+[..."(())()(()())"].reduce((a,i)=> i==='('?a+1:a-1,0);
+
+// 数组扁平化 
+let flattened = [[3, 4, 5], [2, 5, 3], [4, 5, 6]].reduce(
+  (singleArr, nextArray) => singleArr.concat(nextArray), [])
+
+// 结果：[3, 4, 5, 2, 5, 3, 4, 5, 6]
+
 ```
