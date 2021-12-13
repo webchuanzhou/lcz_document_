@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-09 09:47:16
- * @LastEditTime: 2021-12-07 14:27:04
+ * @LastEditTime: 2021-12-13 11:02:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\js\accumulation.md
@@ -65,6 +65,10 @@ function uuid() {
   var uuid = s.join('')
   return uuid
 }
+```
+> 方式2一行生成UUid
+```js
+URL.createObjectURL(new Blob()).substr(-36)
 ```
 
 ## 5.Object.prototype.toString.call()
