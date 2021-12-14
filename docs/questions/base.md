@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 09:49:25
- * @LastEditTime: 2021-11-12 18:03:28
+ * @LastEditTime: 2021-12-14 12:19:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\base.md
@@ -971,20 +971,191 @@ typeof b // erenceError: b is not defined  // undeclared
 4.  更加底层，提供的 API 丰富（request, response）
 5.  脱离了 XHR，是 ES 规范里新的实现方式
 
+## typeof 为什么对 null 错误的显示
 
-## typeof为什么对null错误的显示
 这只是 JS 存在的一个悠久 Bug。在 JS 的最初版本中使用的是 32 位系统，为了性能考虑使用低位存储变量的类型信息，000 开头代表是对象然而 null 表示为全零，所以将它错误的判断为 object
 
 ## ["1","2","3"].map(parseInt)的输出结果是多少?
+
 二进制
+
 ```js
-parseInt('1', 0, ['1','2','3'])
-parseInt('2', 1, ['1','2','3'])
-parseInt('3', 2, ['1','2','3'])
+parseInt('1', 0, ['1', '2', '3'])
+parseInt('2', 1, ['1', '2', '3'])
+parseInt('3', 2, ['1', '2', '3'])
 ```
-* parseInt('1', 0, ['1','2','3']): radix为0时，默认取10，最后返回1
-* parseInt('2', 1, ['1','2','3']): radix取值为2~36，返回NaN
-* parseInt('3', 2, ['1','2','3']): radix取值为2，二进制只包括0，1，返回NaN
+
+- parseInt('1', 0, ['1','2','3']): radix 为 0 时，默认取 10，最后返回 1
+- parseInt('2', 1, ['1','2','3']): radix 取值为 2~36，返回 NaN
+- parseInt('3', 2, ['1','2','3']): radix 取值为 2，二进制只包括 0，1，返回 NaN
 
 ## a.b.c.d 和 a['b']['c']['d']，哪个性能更高？
+
 应该是 a.b.c.d 比 a['b']['c']['d'] 性能高点，后者还要考虑 [ ] 中是变量的情况，再者，从两种形式的结构来看，显然编译器解析前者要比后者容易些，自然也就快一点。
+
+## 后端一次给你 10 万条数据，如何优雅展示
+
+> 直接渲染, 因为一次性渲染出 10w 个节点，是非常耗时间的，咱们可以来看一下耗时，差不多要消耗 12 秒，非常消耗时间
+
+```js
+const renderList = async () => {
+  console.time('列表时间')
+  const list = await getList()
+  list.forEach(item => {
+    const div = document.createElement('div')
+    div.className = 'sunshine'
+    div.innerHTML = `<img src="${item.src}" /><span>${item.text}</span>`
+    container.appendChild(div)
+  })
+  console.timeEnd('列表时间')
+}
+renderList()
+```
+
+> setTimeout 分页渲染 把 10w 按照每页数量 limit 分成总共 Math.ceil(total / limit)页，然后利用 setTimeout
+
+```js
+const renderList = async () => {
+  console.time('列表时间')
+  const list = await getList()
+  console.log(list)
+  const total = list.length
+  const page = 0
+  const limit = 200
+  const totalPage = Math.ceil(total / limit)
+
+  const render = page => {
+    if (page >= totalPage) return
+    setTimeout(() => {
+      for (let i = page * limit; i < page * limit + limit; i++) {
+        const item = list[i]
+        const div = document.createElement('div')
+        div.className = 'sunshine'
+        div.innerHTML = `<img src="${item.src}" /><span>${item.text}</span>`
+        container.appendChild(div)
+      }
+      render(page + 1)
+    }, 0)
+  }
+  render(page)
+  console.timeEnd('列表时间')
+}
+```
+
+> requestAnimationFrame ,requestAnimationFrame 代替 setTimeout，减少了重排的次数，极大提高了性能，建议大家在渲染方面多使用 requestAnimationFrame
+
+```js
+const renderList = async () => {
+  console.time('列表时间')
+  const list = await getList()
+  console.log(list)
+  const total = list.length
+  const page = 0
+  const limit = 200
+  const totalPage = Math.ceil(total / limit)
+
+  const render = page => {
+    if (page >= totalPage) return
+    // 使用requestAnimationFrame代替setTimeout
+    requestAnimationFrame(() => {
+      for (let i = page * limit; i < page * limit + limit; i++) {
+        const item = list[i]
+        const div = document.createElement('div')
+        div.className = 'sunshine'
+        div.innerHTML = `<img src="${item.src}" /><span>${item.text}</span>`
+        container.appendChild(div)
+      }
+      render(page + 1)
+    })
+  }
+  render(page)
+  console.timeEnd('列表时间')
+}
+```
+
+> 文档碎片 + requestAnimationFrame
+> 文档碎片的好处
+> 1、之前都是每次创建一个 div 标签就 appendChild 一次，但是有了文档碎片可以先把 1 页的 div 标签先放进文档碎片中，然后一次性 appendChild 到 container 中，这样减少了 appendChild 的次数，极大提高了性能
+> 2、页面只会渲染文档碎片包裹着的元素，而不会渲染文档碎片
+
+```js
+const renderList = async () => {
+  console.time('列表时间')
+  const list = await getList()
+  console.log(list)
+  const total = list.length
+  const page = 0
+  const limit = 200
+  const totalPage = Math.ceil(total / limit)
+
+  const render = page => {
+    if (page >= totalPage) return
+    requestAnimationFrame(() => {
+      // 创建一个文档碎片
+      const fragment = document.createDocumentFragment()
+      for (let i = page * limit; i < page * limit + limit; i++) {
+        const item = list[i]
+        const div = document.createElement('div')
+        div.className = 'sunshine'
+        div.innerHTML = `<img src="${item.src}" /><span>${item.text}</span>`
+        // 先塞进文档碎片
+        fragment.appendChild(div)
+      }
+      // 一次性appendChild
+      container.appendChild(fragment)
+      render(page + 1)
+    })
+  }
+  render(page)
+  console.timeEnd('列表时间')
+}
+```
+>懒加载
+为了比较通俗的讲解，咱们启动一个vue前端项目，后端服务还是开着
+其实实现原理很简单，咱们通过一张图来展示，就是在列表尾部放一个空节点blank，然后先渲染第1页数据，向上滚动，等到blank出现在视图中，就说明到底了，这时候再加载第二页，往后以此类推。
+至于怎么判断blank出现在视图上，可以使用getBoundingClientRect方法获取top属性
+
+```vue
+<script setup lang="ts">
+import { onMounted, ref, computed } from 'vue'
+const getList = () => {
+  // 跟上面一样的代码
+}
+
+const container = ref<HTMLElement>() // container节点
+const blank = ref<HTMLElement>() // blank节点
+const list = ref<any>([]) // 列表
+const page = ref(1) // 当前页数
+const limit = 200 // 一页展示
+// 最大页数
+const maxPage = computed(() => Math.ceil(list.value.length / limit))
+// 真实展示的列表
+const showList = computed(() => list.value.slice(0, page.value * limit))
+const handleScroll = () => {
+  // 当前页数与最大页数的比较
+  if (page.value > maxPage.value) return
+  const clientHeight = container.value?.clientHeight
+  const blankTop = blank.value?.getBoundingClientRect().top
+  if (clientHeight === blankTop) {
+    // blank出现在视图，则当前页数加1
+    page.value++
+  }
+}
+
+onMounted(async () => {
+  const res = await getList()
+  list.value = res
+})
+</script>
+
+<template>
+  <div id="container" @scroll="handleScroll" ref="container">
+    <div class="sunshine" v-for="(item) in showList" :key="item.tid">
+      <img :src="item.src" />
+      <span>{{ item.text }}</span>
+    </div>
+    <div ref="blank"></div>
+  </div>
+</template>
+
+```
