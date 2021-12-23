@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-09-02 09:48:45
- * @LastEditTime: 2021-10-12 16:45:53
+ * @LastEditTime: 2021-12-17 10:02:45
  * @LastEditors: Please set LastEditors
  * @Description: react 面试题
  * @FilePath: \lcz_document\docs\questions\react.md
@@ -391,3 +391,33 @@ ReactDom.createPortal(child,container);
 
 ## 什么是 suspense 组件?
 Suspense 让组件“等待”某个异步操作，直到该异步操作结束即可渲染。中途由suspense渲染
+
+## 类写法继承原理
+```jsx
+class Greeting extends React.Component {
+  render() {
+    return <p>Hello</p>;
+  }
+}
+
+let c = new Greeting();
+console.log(c.__proto__); // Greeting.prototype
+console.log(c.__proto__.__proto__); // React.Component.prototype
+console.log(c.__proto__.__proto__.__proto__); // Object.prototype
+
+c.render();      // 在 c.__proto__ (Greeting.prototype) 上找到
+c.setState();    // 在 c.__proto__.__proto__ (React.Component.prototype) 上找到
+c.toString();    // 在 c.__proto__.__proto__.__proto__ (Object.prototype) 上找到
+```
+>换句话说，当你在使用类的时候，实例的 __proto__ 链「镜像」了类的层级结构：
+```jsx
+reeting
+  → React.Component
+    → Object (间接的)
+
+// `__proto__` 链
+new Greeting()
+  → Greeting.prototype
+    → React.Component.prototype
+      → Object.prototype
+```

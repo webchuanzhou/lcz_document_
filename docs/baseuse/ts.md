@@ -1,14 +1,14 @@
 <!--
  * @Author: lcz
  * @Date: 2021-06-15 10:14:57
- * @LastEditTime: 2021-06-15 12:06:38
+ * @LastEditTime: 2021-12-22 16:53:18
  * @LastEditors: Please set LastEditors
  * @Description: ts base
  * @FilePath: \lcz_document\docs\baseuse\ts.md
 -->
 
 ## 基础类型检测
-```html
+```js
   let anyNumber: any = 1;
   let anyBoolean: any = true;
   let antString: any = 'string1';
@@ -25,7 +25,7 @@
 ```
 
 ## 函数
-```html
+```js
   //例子 ：函数后带返回类型
   function function_name(val):return_type{
     return val
@@ -71,7 +71,7 @@ let employeeName = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
 ```
 
 ## 数组
-```html
+```js
 //数组
 var multi:number[] = [1,2,3,23,24,25]  
 //多维数组
@@ -79,7 +79,7 @@ var multi:number[][] = [[1,2,3],[23,24,25]]
 ```
 
 ## 联合类型
-```html
+```js
   var val:string|number
   val = 'hello'
   console.log(val)
@@ -88,7 +88,7 @@ var multi:number[][] = [[1,2,3],[23,24,25]]
 ```
 
 ## 接口
-```html
+```js
   //定义接口
   interface IPerson{
     first:string,
@@ -131,7 +131,7 @@ var multi:number[][] = [[1,2,3],[23,24,25]]
 ```
 
 ## 单继承
-```html
+```js
   interface person{
     age:number
   }
@@ -148,7 +148,7 @@ var multi:number[][] = [[1,2,3],[23,24,25]]
 ```
 
 ## 多继承
-```html
+```js
   interface person1{
     name:string
   }

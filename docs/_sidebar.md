@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-12-14 09:41:30
+ * @LastEditTime: 2021-12-15 17:18:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -35,6 +35,8 @@
 
 - React
   - [Hooks](react/hooks.md)
+  - [Hoc](react/hoc.md)
+
 - webpack
 
   - [vue_webpack5.x](webpack/vue3xWebpack.md)
@@ -57,6 +59,7 @@
   - [中级](questions/intermediate.md)
   - [高级](questions/senior.md)
   - [手写题](questions/despise.md)
+  - [手写题2](questions/despise2.md)
   - [vue 基础题](questions/vue.md)
   - [react 基础题](questions/reactBase.md)
   - [react](questions/react.md)

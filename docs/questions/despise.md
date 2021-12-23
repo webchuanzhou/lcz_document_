@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 15:57:51
- * @LastEditTime: 2021-12-07 10:32:32
+ * @LastEditTime: 2021-12-15 17:17:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\despise.md
@@ -1139,65 +1139,68 @@ Promise.prototype.finally = function (callback) {
 ```
 
 ## 39.字符串去重
+
 ```js
 String.prototype.unique = function () {
-    var obj = {},
-        str = '',
-        len = this.length;
-    for (var i = 0; i < len; i++) {
-        if (!obj[this[i]]) {
-            str += this[i];
-            obj[this[i]] = true;
-        }
+  var obj = {},
+    str = '',
+    len = this.length
+  for (var i = 0; i < len; i++) {
+    if (!obj[this[i]]) {
+      str += this[i]
+      obj[this[i]] = true
     }
-    return str;
+  }
+  return str
 }
-
 
 function uniq(str) {
-    return str.replace(/(\w)\1+/g, '$1')
+  return str.replace(/(\w)\1+/g, '$1')
 }
-
 ```
+
 ## 40.判断字符串是否是回文
+
 ```js
 function isPalindrome(str) {
-    str = str.replace(/\W/g, '').toLowerCase();
-    console.log(str)
-    return (str == str.split('').reverse().join(''))
+  str = str.replace(/\W/g, '').toLowerCase()
+  console.log(str)
+  return str == str.split('').reverse().join('')
 }
 
 function isPalina(str) {
-    if (Object.prototype.toString.call(str) !== '[object String]') {
-        return false;
+  if (Object.prototype.toString.call(str) !== '[object String]') {
+    return false
+  }
+  var len = str.length
+  for (var i = 0; i < len / 2; i++) {
+    if (str[i] != str[len - 1 - i]) {
+      return false
     }
-    var len = str.length;
-    for (var i = 0; i < len / 2; i++) {
-        if (str[i] != str[len - 1 - i]) {
-            return false;
-        }
-    }
-    return true;
+  }
+  return true
 }
-
 ```
 
-## 41.异步加载script
+## 41.异步加载 script
+
 ```js
 function loadScript(url, callback) {
-    var oscript = document.createElement('script');
-    if (oscript.readyState) { // ie8及以下版本
-        oscript.onreadystatechange = function () {
-            if (oscript.readyState === 'complete' || oscript.readyState === 'loaded') {
-                callback();
-            }
-        }
-    } else {
-        oscript.onload = function () {
-            callback()
-        };
+  var oscript = document.createElement('script')
+  if (oscript.readyState) {
+    // ie8及以下版本
+    oscript.onreadystatechange = function () {
+      if (oscript.readyState === 'complete' || oscript.readyState === 'loaded') {
+        callback()
+      }
     }
-    oscript.src = url;
-    document.body.appendChild(oscript);
+  } else {
+    oscript.onload = function () {
+      callback()
+    }
+  }
+  oscript.src = url
+  document.body.appendChild(oscript)
 }
 ```
+

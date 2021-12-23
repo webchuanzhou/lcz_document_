@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-12-06 11:39:51
- * @LastEditTime: 2021-12-09 15:23:16
+ * @LastEditTime: 2021-12-22 16:09:25
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lcz_document\docs\react\hooks.md
@@ -87,4 +87,99 @@ useAsyncEffect(async () => {
     message.error('门店或者家具接口请求失败')
   }
 }, [])
+```
+
+## useSyncCallback
+> 相当于vue this.$nextClick
+```jsx
+import { useEffect, useState, useCallback } from 'react'
+
+const useSyncCallback = callback => {
+  const [proxyState, setProxyState] = useState(false)
+
+  const fn = useCallback(() => {
+    setProxyState(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [proxyState])
+
+  useEffect(() => {
+    if (proxyState) {
+      setProxyState(false)
+      callback()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [proxyState])
+
+  return fn
+}
+
+export default useSyncCallback
+```
+>使用
+```jsx
+//useState 异步数据变了之后调用useSyncCallback
+const [canvasEcharts, setCharts] = useState('')
+setCharts(echarts.init(document.getElementById('main')))
+drawApi()
+
+
+const drawApi = useSyncCallback(async () => {
+    try {
+      let params = Object.assign({}, queryParams)
+      params.year = new Date(params.year).getFullYear()
+      console.log(params, 2211)
+      let { data } = await storeProfit(params)
+      if (data.length > 0) {
+        setTimeout(() => {
+          let x = Array(13).fill(0),
+            y = Array(13).fill(0),
+            y1 = Array(13).fill(0)
+          console.log(x.length, 22)
+          data.forEach(el => {
+            x[el.x] = el.x
+            y[el.x] = el.y
+            y1[el.x] = el.y1
+          })
+          x = x.map((_, index) => index + '月')
+          dreamEcharts(x.splice(1), y.splice(1), y1.splice(1))
+        }, 500)
+      } else {
+        message.error('暂无数据')
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  })
+```
+
+## useMount
+```jsx
+const useMount = callback => {
+  useEffect(()=>{
+    callback()
+  },[])
+}
+```
+
+##  useDebounce
+```jsx 
+import { useEffect, useState } from 'react';
+
+// 防抖 hooks
+function useDebounce(value, delay = 300) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value)
+    }, delay)
+    return () => {
+      clearTimeout(handler);
+    }
+  }, [value, delay])
+  
+  return debouncedValue;
+}
+export default useDebounce;
+
 ```

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 09:49:25
- * @LastEditTime: 2021-12-14 12:19:45
+ * @LastEditTime: 2021-12-17 15:16:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\base.md
@@ -1110,10 +1110,11 @@ const renderList = async () => {
   console.timeEnd('列表时间')
 }
 ```
->懒加载
-为了比较通俗的讲解，咱们启动一个vue前端项目，后端服务还是开着
-其实实现原理很简单，咱们通过一张图来展示，就是在列表尾部放一个空节点blank，然后先渲染第1页数据，向上滚动，等到blank出现在视图中，就说明到底了，这时候再加载第二页，往后以此类推。
-至于怎么判断blank出现在视图上，可以使用getBoundingClientRect方法获取top属性
+
+> 懒加载
+> 为了比较通俗的讲解，咱们启动一个 vue 前端项目，后端服务还是开着
+> 其实实现原理很简单，咱们通过一张图来展示，就是在列表尾部放一个空节点 blank，然后先渲染第 1 页数据，向上滚动，等到 blank 出现在视图中，就说明到底了，这时候再加载第二页，往后以此类推。
+> 至于怎么判断 blank 出现在视图上，可以使用 getBoundingClientRect 方法获取 top 属性
 
 ```vue
 <script setup lang="ts">
@@ -1150,12 +1151,21 @@ onMounted(async () => {
 
 <template>
   <div id="container" @scroll="handleScroll" ref="container">
-    <div class="sunshine" v-for="(item) in showList" :key="item.tid">
+    <div class="sunshine" v-for="item in showList" :key="item.tid">
       <img :src="item.src" />
       <span>{{ item.text }}</span>
     </div>
     <div ref="blank"></div>
   </div>
 </template>
-
 ```
+
+## less 与 sass 的区别
+
+> 相同点：都是 css 预处理器,嵌套写法相同,&父选择器
+> 不同点:
+
+| 不同点 | less | sass |
+| ------ | ---- | ---- |
+| 变量   | @    | $    |
+|编译环境|Less是需要引入less.js来处理less代码输出css|scss是在服务端处理Node-Sass
