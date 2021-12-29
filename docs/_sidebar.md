@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-12-15 17:18:13
+ * @LastEditTime: 2021-12-29 10:07:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -88,6 +88,8 @@
   - [docker+vue+ftp+linux+Nginx](study/public.md)
   - [cocos2d](study/cocos2d.md)
   - [vue3](study/vue3.md)
+  - [pano2vr](study/pano2vr.md)
+
 - eslint+prettier
 
   - [前端代码规范 eslint+prettier](rules/code.md)
