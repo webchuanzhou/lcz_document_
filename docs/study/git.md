@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-12 19:40:11
- * @LastEditTime: 2021-10-12 17:23:55
+ * @LastEditTime: 2021-12-30 16:40:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /lcz_document/docs/study/git.md
@@ -28,4 +28,9 @@
     git branch --set-upstream-to=origin/newMaster // 本地关联远程
     git pull // 拉取测试
     git fetch // 本地同步远程分支
+```
+
+## git 拉取远端分支到本地
+```js
+    git fetch origin 分支
 ```
