@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-12-30 11:11:34
- * @LastEditTime: 2022-01-05 09:48:11
+ * @LastEditTime: 2022-01-05 17:59:31
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lcz_document\docs\study\blockChain.md
@@ -95,16 +95,215 @@ else:
 > 工作量证明其实相当于提高了做叛徒（发布虚假区块）的成本，在工作量证明下，只有第一个完成证明的节点才能广播区块，竞争难度非常大，需要很高的算力，如果不成功其算力就白白的耗费了（算力是需要成本的），如果有这样的算力作为诚实的节点，同样也可以获得很大的收益（这就是矿工所作的工作），这也实际就不会有做叛徒的动机，整个系统也因此而更稳定。
 
 ## 以太坊网络
-选择以太坊官网测试网络Testnet
+
+选择以太坊官网测试网络 Testnet
 测试网络中，我们可以很容易获得免费的以太币，缺点是需要发很长时间初始化节点。
 
 使用私有链
 创建自己的以太币私有测试网络，通常也称为私有链，我们可以用它来作为一个测试环境来开发、调试和测试智能合约。
-通过上面提到的Geth很容易就可以创建一个属于自己的测试网络，以太币想挖多少挖多少，也免去了同步正式网络的整个区块链数据。
+通过上面提到的 Geth 很容易就可以创建一个属于自己的测试网络，以太币想挖多少挖多少，也免去了同步正式网络的整个区块链数据。
 
 使用开发者网络(模式)
 相比私有链，开发者网络(模式)下，会自动分配一个有大量余额的开发者账户给我们使用。
 
 使用模拟环境
-另一个创建测试网络的方法是使用Ganache，Ganache是普通的应用程序，它在本地使用内存模拟的一个以太坊区块链环境，对于开发调试来说，更方便快捷。而且Ganache会在启动时帮我们创建10个存有资金的测试账户。
-进行合约开发时，可以在Ganache中测试通过后，再部署到Geth节点中去。
+另一个创建测试网络的方法是使用 Ganache，Ganache 是普通的应用程序，它在本地使用内存模拟的一个以太坊区块链环境，对于开发调试来说，更方便快捷。而且 Ganache 会在启动时帮我们创建 10 个存有资金的测试账户。
+进行合约开发时，可以在 Ganache 中测试通过后，再部署到 Geth 节点中去。
+
+## windows 搭建 eth 私有链 参考地址(https://learnblockchain.cn/2018/03/18/create_private_blockchain/)
+
+1. 百度网盘安装 geth
+2. geth -h 查看是否安装完成
+3. genesis.json
+
+```json
+{
+  "config": {
+    "chainId": 10,
+    "homesteadBlock": 0,
+    "eip155Block": 0,
+    "eip158Block": 0
+  },
+  "alloc": {},
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "difficulty": "0x20000",
+  "extraData": "",
+  "gasLimit": "0x2fefd8",
+  "nonce": "0x0000000000000042",
+  "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "timestamp": "0x00"
+}
+```
+
+4. 写入创世链
+
+```js
+cd privatechain
+geth --datadir data0 init genesis.json
+```
+
+5. 启动私有链
+
+```js
+geth --datadir data0 --networkid 1108 console
+```
+
+6. 查看私有链自己的账户
+
+```js
+eth.accounts //[]
+```
+
+7. 创建账户
+
+```js
+> personal.newAccount()
+> Passphrase: jil557749
+> Repeat passphrase: jil557749
+//0xd35b0a0ca4c887370013e3304ea5f51cfccc2e9b
+```
+
+8. 查看账户余额
+
+```js
+eth.getBalance(eth.accounts[0])
+```
+
+9. 开启挖矿
+
+```js
+miner.start(10)
+```
+
+10. 停止挖矿
+
+```js
+miner.stop()
+```
+
+11. 挖矿所得的奖励会进入矿工的账户
+
+```js
+eth.coinbase //查看进入的账户
+```
+
+12. 让其他账户进入 coinbase
+
+```js
+miner.setEtherbase(eth.accounts[1])
+```
+
+13. 查看账户实际有多少 eth
+
+```js
+web3.fromWei(eth.getBalance(eth.accounts[0]), 'ether')
+```
+
+14. 发送交易
+
+```js
+eth.getBalance(eth.accounts[1]) //查看账户1余额
+
+amount = web3.toWei(10, 'ether')
+;('10000000000000000000')
+eth.sendTransaction({ from: eth.accounts[0], to: eth.accounts[1], value: amount })
+//Error: authentication needed: password or unlock  账户被锁定了不能交易
+//  at web3.js:3143:20
+//  at web3.js:6347:15
+//  at web3.js:5081:36
+//  at <anonymous>:1:1
+personal.unlockAccount(eth.accounts[0]) //解锁发送的账户
+//重复交易
+// fullhash=0x1b21bba16dd79b659c83594b0c41de42debb2738b447f6b24e133d51149ae2a6 recipient=0x46B24d04105551498587e3C6CE2c3341d5988938
+// "0x1b21bba16dd79b659c83594b0c41de42debb2738b447f6b24e133d51149ae2a6" 表示交易成功
+//这时候钱还没到账户1，在链上 还没被处理  需要挖矿
+miner.start(1)
+admin.sleepBlocks(1)
+miner.stop()
+// 查看账户1
+web3.fromWei(eth.getBalance(eth.accounts[1]), 'ether')
+```
+
+15. 查看区块信息
+
+```js
+eth.blockNumber
+```
+
+16. 查看交易
+
+```js
+eth.getBlock(66)
+```
+
+17. 通过交易 hash 查看
+
+```js
+eth.getTransaction('0x0aaec862ad25edf1da4f66131a7553c49d1d996e0911e13c47f72e3fdb03f2f3')
+// 0x0aaec862ad25edf1da4f66131a7553c49d1d996e0911e13c47f72e3fdb03f2f3"
+// {
+//   blockHash: "0x1cb368a27cc23c786ff5cdf7cd4351d48f4c8e8aea2e084a5e9d7c480449c79a",
+//   blockNumber: 463,
+//   from: "0x4a3b0216e1644c1bbabda527a6da7fc5d178b58f",
+//   gas: 90000,
+//   gasPrice: 18000000000,
+//   hash: "0x1b21bba16dd79b659c83594b0c41de42debb2738b447f6b24e133d51149ae2a6",
+//   input: "0x",
+//   nonce: 0,
+//   r: "0x31d22686e0d408a16497becf6d47fbfdffe6692d91727e5b7ed3d73ede9e66ea",
+//   s: "0x7ff7c14a20991e2dfdb813c2237b08a5611c8c8cb3c2dcb03a55ed282ce4d9c3",
+//   to: "0x46b24d04105551498587e3c6ce2c3341d5988938",
+//   transactionIndex: 0,
+//   v: "0x38",
+//   value: 10000000000000000000
+// }
+```
+
+18. 推出后如何重新进入（查看 5）
+
+19. 查看私钥
+    npm i keythereum
+
+```js
+let keythereum = require('keythereum')
+let datadir = 'D:\\geth\\privatechain\\data0'
+let keyObject = keythereum.importFromFile('0xd35b0a0ca4c887370013e3304ea5f51cfccc2e9b', datadir)
+let privateKey = keythereum.recover('jil557749', keyObject)
+console.log(privateKey.toString('hex'))
+```
+
+## web3 调用合约方法
+
+```js
+ var infoContract = web3.eth.contract(ABI INFO);
+
+    var info = infoContract.at('CONTRACT ADDRESS');
+
+    info.getInfo(function(error, result){
+        if(!error)
+            {
+                $("#info").html(result[0]+' ('+result[1]+' years old)');
+                console.log(result);
+            }
+        else
+            console.error(error);
+    });
+
+    $("#button").click(function() {
+        info.setInfo($("#name").val(), $("#age").val());
+    });
+```
+
+## 或者使用监听合约的方式
+
+```js
+var instructorEvent = info.Instructor()
+instructorEvent.watch(function (error, result) {
+  if (!error) {
+    $('#info').html(result.args.name + ' (' + result.args.age + ' years old)')
+  } else {
+    console.log(error)
+  }
+})
+```
