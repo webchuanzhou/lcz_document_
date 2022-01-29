@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 09:49:25
- * @LastEditTime: 2021-12-17 15:16:02
+ * @LastEditTime: 2022-01-29 09:52:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\base.md
@@ -114,6 +114,9 @@ foo()
    ....
 
 ## 13.前端的安全性问题 xss csrf 上传 sql
+1. 防止xss攻击：文件上传的时候前后端过滤sql语句 以及 script 标签的代码文件，可以用三方库对文件过滤
+2. 防止csrf攻击: 同源策略，或者请求+验证码
+
 
 ## 14.chrome 如何支持小于 12px 的字体
 
@@ -201,6 +204,8 @@ obj.b.e = obj.b.c(async () => {
 
 ## 17.option 预请求的理解
 
+浏览器对复杂跨域请求在真正发送请求之前,会先进行一次预请求,就是参数为OPTIONS的第一次请求,他的作用是用于试探性的服务器响应是否正确,即是否能接受真正的请求,如果在options请求之后获取到的响应是拒绝性质的,例如500等http状态,那么它就会停止第二次的真正请求的访问。
+
 ## 18.object.create 与 new object 的区别
 
 ## 19.说说对原型的理解，原型链
@@ -212,7 +217,7 @@ obj.b.e = obj.b.c(async () => {
 ## 22.闭包
 
 外层函数包裹内层函数以及受保护的变量，内层函数中调用外层函数保护的变量就是闭包,外层函数并 return 内层函数。
-调用完成后要释放，避免内存泄漏
+调用完成后要释放，避免内存泄漏ßß
 
 > 优点: 变量私有化
 > 缺点: 内存泄露
@@ -272,10 +277,33 @@ function a() {
 ## 41.数组去重的方法
 
 ## 42.websock 使用方式 如何传参
+1. get 的方式
+2. 子协议的传递方式，后段没接到过
 
 ## 43.如何解决移动端 1px 问题
+1. @media device2 设为0.5
+2. transform:scale(0.5)
+3. viewport <meta name="viewport" content="initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no">
+
+```css
+div {
+    border: 1px solid #000;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2) {
+  div {
+    border: .5px solid #000;
+  }
+}
+```
 
 ## 44.异步编程的方式有哪几种，优点缺点是啥
+1. promise
+2. Generator
+3. async await
+4. setTimeout
+5. setInterval
+6. 事件监听 等等
 
 ## 45.promise 的特性，优点缺点，内部实现
 
