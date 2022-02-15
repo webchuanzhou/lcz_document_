@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 09:49:25
- * @LastEditTime: 2022-01-29 09:52:46
+ * @LastEditTime: 2022-02-15 15:01:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\base.md
@@ -71,6 +71,30 @@ foo()
 
 ## 3.es6 用了哪些
 
+1. let const 
+2. ``
+3. 结构
+4. set() 
+5. class
+6. generator
+7. 扩展运算符 ...
+8. module import export
+9. proxy
+10. promise
+11. 数组的方法
+>es7
+12. **
+13. includes
+>es8 
+11. async await 
+12. object.value() object.keys()  Object.entries()
+13. padStart()
+> es9 ..
+>es 10
+14.  Object.fromEntries()
+15. 新增基础类型 BigInt 
+> es 13
+16. at()
 ## 4.vue2.0 跟 3.0 的区别有哪些
 
 待优化
@@ -89,6 +113,10 @@ foo()
 ## 5.this 指向是如何工作的
 
 谁调用 this 就指向谁
+1. 函数中的this 指window
+2. 对象方法中的this  指当前对象
+3. 构造函数中的this 指未来的实列
+4. 箭头函数的this 就是外面的this
 
 ## 6.面向对象的三大特性，封装继承多态
 
@@ -97,32 +125,85 @@ foo()
 多态的形式有哪些
 
 ## 7.js 字符串的方法
+1. toLowerCase() 
+2. toUpperCase()
+3. replace
+4. substring()
+5. substr()
+6. match()
+------------------------------
+没记住（用到会想起） 
+
+------------------------------
+7. indexOf()
+8. lastIndexOf()
+9. slice()
+10. concat()
+11. charAt()
+12. charCodeAt()
+13. split()
 
 ## 8.vue 生命周期
+> vue2.0             
+> 8大生命周期            
+create mounted update destory       
+缓存组件的2大生命周期，注册 摧毁            
+Activated  Deactivated                          
+同上+before
+> vue3.0              
+onBeforeMound onMounted onBeforeUpdate onUpdate  onBeforeUnmount onUnMounted       
+缓存组件的2大生命周期，注册 摧毁  
+onActivated
+onDeactivated
+onErrorCaptured
 
 ## 9.什么是高阶函数，接触过的高阶函数有哪些
+一个函数被当作参数传入函数
+
+-------------------------------
+1. es6 的数组方法
+2. 柯里化函数
+3. 防抖 节流
 
 ## 10.重绘，回流
 
+重绘不一定会回流，回流一定会重绘
+
+---------------------
+重绘：改变background  color 会出现重绘
+回流：top left 位置的偏移transform：translate(x，y)
+重绘性能消耗会比回流大
+
 ## 11.js 计算为什么会有浮点数
+
+二进制（0，1）计算，最大位数53位
+
 
 ## 12.跨域问题，以及解决方案
 
 1. cros
 2. iframe
 3. jsonp
-   ....
+4. proxy 代理
+5. postmessages 的Api（单词忘记）
+....
 
 ## 13.前端的安全性问题 xss csrf 上传 sql
 1. 防止xss攻击：文件上传的时候前后端过滤sql语句 以及 script 标签的代码文件，可以用三方库对文件过滤
 2. 防止csrf攻击: 同源策略，或者请求+验证码
-
+3. 防止ddos，防不住流量对抗
 
 ## 14.chrome 如何支持小于 12px 的字体
 
 transform：translate(0.8)
 
 ## 15.url 输入后的过程
+
+1. 用户输入网址，浏览器发起DNS查询请求
+2. 建立TCP连接
+3. 浏览器向 web 服务器发送一个 HTTP 请求
+4. 发送响应数据给客户端
+5. 浏览器解析http response
 
 ## 16.深拷贝与浅拷贝的区别
 
@@ -207,12 +288,25 @@ obj.b.e = obj.b.c(async () => {
 浏览器对复杂跨域请求在真正发送请求之前,会先进行一次预请求,就是参数为OPTIONS的第一次请求,他的作用是用于试探性的服务器响应是否正确,即是否能接受真正的请求,如果在options请求之后获取到的响应是拒绝性质的,例如500等http状态,那么它就会停止第二次的真正请求的访问。
 
 ## 18.object.create 与 new object 的区别
+中间有一层构造函数的赋值（我的）
+
+---------------------
+new关键字创建的对象会保留原构造函数的属性，而用Object.create()创建的对象不会。
+
 
 ## 19.说说对原型的理解，原型链
-
+每一个对象都有一个__proto__ 熟悉，__proto__ 执行链上级的F.protoType , f的__proto__ ,也指向上级的prototype 直到指到了[object,object] 形成的链就叫原型链，调用一个方法在本对象上没找到会通过原型链往上查找
 ## 20.v-model 的原理
 
+@input + :value 绑定的原理
+俗称绑定元素的监听与值的展示
+
 ## 21.宏任务与微任务
+事件循环机制
+
+----------
+先宏任务,遇到微任务放到微任务队列，遇到宏任务放到宏任务队列，在指向微任务队列中的任务，微任务队列中存在宏任务在存放在宏任务中，依次执行
+宏-》微-》宏-》有微微，没微结
 
 ## 22.闭包
 
@@ -234,29 +328,48 @@ function a() {
 
 ## 23.promise
 
-## 24.es6
 
 ## 25.为什么组件中的 data 必须是个函数
+为了组件私有化，不然data中的数据任何地方都可以改，就肯定会数据紊乱
 
 ## 26.v-if 和 v-show 的区别
+1. v-if： dom 元素渲染不渲染
+2. v-show: display:none 还是block
 
 ## 27.v-for 中的 key
+优化diff算法快速查找到变更的元素，优化性能，数据更新
 
 ## 28.双向数据绑定的原理
+1. vue2 通过发布者与订阅者模式对数据get set的方法的拦截，改变数组8大方法实现伪双向数据绑定
+2. vue3 通过proxy 实现双向数据绑定
 
 ## 29.组件传递
+1. 父子 pros emit $parent ref  prove inject（单词可能有错误） 
+2. 兄弟  Bus
+3. 状态管理工具vuex 菠萝
 
 ## 30.mvvm 和 mvc
 
 ## 31.Computed 和 Watch
-
+1. Computed 有缓存
+2. Watch 监听定义数据的变化
 ## 32.虚拟 Dom 以及 key 的作用
 
 ## 33.那些 vue 的优化
-
+1. 计算属性中的参数结构this，减少this黑盒子的使用
+2. 骨架屏 优化白屏
+3. 路由懒加载
+4. 页面文件过大，页面拆分
+5. UI库 按需引入
+6. 减少HTTP请求 css雪碧图
+7. 合理使用缓存
+8. CDN引入
+9. 图片懒加载
+10. 图片资源获取失败默认图片
 ## 34.cookies，sessionStorage 和 localStorage
-
-## 35.事件循环
+1. cookies 存储比较小5k 请求的时候会在请求头的带来带去
+2. sessionStorage 5Mb 会话关闭就不再记录
+3. localStorage 5Mb 一直存在，除非手动移除
 
 ## 36.事件代理 事件委托机制 ,以及优点
 
@@ -270,15 +383,19 @@ function a() {
 
 ## 39:表单提交可以跨域吗？ 会存在什么问题?
 
+可以，不知道，这个操作实现 超过我的编写年龄
+
 ## 40.检测数据类型的方式有集中
 
-答案: 1.typeOf 2. Object.prototype.toString.call()
+答案: 1.typeOf 2. Object.prototype.toString.call() 3.instanceof
 
 ## 41.数组去重的方法
+[...new Set(arr)]
+for循环+includes或者（indexOf）
 
 ## 42.websock 使用方式 如何传参
 1. get 的方式
-2. 子协议的传递方式，后段没接到过
+2. 子协议的传递方式，后端没接到过
 
 ## 43.如何解决移动端 1px 问题
 1. @media device2 设为0.5
@@ -319,6 +436,8 @@ div {
 plugin 是扩展器，丰富 webpack 本身，loader 结束后，执行 plugin 打包的整个过程
 
 ## 48.如何取消发送出去的请求 后端还没相应的数据
+1. axios 中提供cancelToken 进行取消请求
+2. 原生xml 提供about()  api 来主动断开请求
 
 ## 49.npm install 干了什么事情
 

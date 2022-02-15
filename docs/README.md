@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:38:17
- * @LastEditTime: 2021-08-06 10:10:47
+ * @LastEditTime: 2022-02-11 10:19:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\README.md
@@ -19,3 +19,6 @@ docsify serve ./docs
 > 
 浏览器断点调试
 https://blog.csdn.net/zam183/article/details/89468157
+
+## Node 版本管理工具 nvm
+（有空可以配置玩玩）
