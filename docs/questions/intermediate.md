@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-16 09:50:05
- * @LastEditTime: 2021-08-06 11:35:36
+ * @LastEditTime: 2022-02-15 15:14:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\intermediate.md
@@ -9,7 +9,7 @@
 
 ## 在 JavaScript 中创建对象的可行方法有哪些？
 基础知道的方式
-```html
+```js
     //1.对象字面量语法
     let object = {};
     //2.对象的创建方法
@@ -17,7 +17,7 @@
     //3.对象构造函数
     let obj = new Object();
 ```
-```html
+```js
     //4.构造函数创建对象
     function person(name){
         let obj = {};
@@ -51,7 +51,7 @@ call、apply是立即执行
 bind  创建一个新函数，该函数将this设置为传递给 bind() 的第一个参数
 call与apply 传入的参数不同，一个是数组形式，一个是多参数形式
 call:
-```html
+```js
     var employee1 = {firstName: 'Haiyong', lastName: 'Rodson'};
     var employee2 = {firstName: 'Jimmy', lastName: 'Baily'};
 
@@ -63,7 +63,7 @@ call:
     invite.call(employee2, 'Hello', 'How are you?'); // Hello Jimmy Baily, How are you?
 ```
 apply:
-```html
+```js
     var employee1 = {firstName: 'Haiyong', lastName: 'Rodson'};
     var employee2 = {firstName: 'Jimmy', lastName: 'Baily'};
 
@@ -75,7 +75,7 @@ apply:
     invite.apply(employee2, ['Hello', 'How are you?']); // Hello Jimmy Baily, How are you?
 ```
 bind:
-```html
+```js
     var employee1 = {firstName: 'Haiyong', lastName: 'Rodson'};
     var employee2 = {firstName: 'Jimmy', lastName: 'Baily'};
 
@@ -96,7 +96,7 @@ JSON.styingify();
 ## 5. 数组slice()方法的目的是什么？
 返回新数组 不改变原数组
 裁剪
-```html
+```js
     let arrayIntegers = [1, 2, 3, 4, 5];
     let arrayIntegers1 = arrayIntegers.slice(0,2); // returns [1,2]
     let arrayIntegers2 = arrayIntegers.slice(2,3); // returns [3]
@@ -108,7 +108,7 @@ JSON.styingify();
 修改原来的数组 ，并返回删除的数据
 裁剪
 
-```html
+```js
     let arrayIntegers = [1, 2, 3, 4, 5];
     let arrayIntegers2 = arrayIntegers.splice(0,2) // returns arrayIntegers = [3,4,5] arrayIntegers2 = [1,2];
     let arrayIntegers3 = arrayIntegers.splice(0,2,'a','b','c') // returns arrayIntegers = ['a','b','c',3,4,5] arrayIntegers2 = [1,2];
@@ -142,7 +142,7 @@ Map在涉及频繁添加和删除密钥对的场景中可能表现得更好。
 === 会验证数据类型
 
 ## 10.如何检查一个对象中是否包含某个key
-```html
+```js
     //1.使用in运算符
     "key" in obj
     !("key" in obj) //如果key不存在

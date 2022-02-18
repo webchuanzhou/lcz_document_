@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 09:49:25
- * @LastEditTime: 2022-02-15 15:01:45
+ * @LastEditTime: 2022-02-16 11:57:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\base.md
@@ -1316,3 +1316,37 @@ onMounted(async () => {
 | ------ | ---- | ---- |
 | 变量   | @    | $    |
 |编译环境|Less是需要引入less.js来处理less代码输出css|scss是在服务端处理Node-Sass
+
+## 函数有没有 __ proto __ 属性
+有，函数也是特殊的对象，函数一级公民链上顶层还是[object,object]
+
+## Promise.all 的返回机制是什么
+数组
+```js
+function promiseA() {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			console.log('A')
+			resolve('A')
+		}, 3000)
+	})
+}
+// 方法promiseB，返回一个Promise对象
+function promiseB() {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			console.log('B')
+			resolve('B')
+		}, 1000)
+	})
+}
+// 按照A, B的顺序添加到promise数组中
+Promise.all([promiseA(), promiseB()]).then(resolve => {
+	console.log(resolve)
+})
+// 输出情况
+B
+A 
+Array [ "A", "B" ]
+
+```
