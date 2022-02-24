@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2021-12-30 11:12:00
+ * @LastEditTime: 2022-02-21 14:28:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -103,3 +103,6 @@
 - 源码理解
   - [axios](sourceCode/axios.md)
   - [min-vue](sourceCode/min-vue.md)
+
+- 小玩物
+  - [客户端](Plaything/client.md)
