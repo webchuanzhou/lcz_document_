@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-12-06 11:39:51
- * @LastEditTime: 2021-12-22 16:09:25
+ * @LastEditTime: 2022-02-26 15:53:46
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lcz_document\docs\react\hooks.md
@@ -182,4 +182,70 @@ function useDebounce(value, delay = 300) {
 }
 export default useDebounce;
 
+```
+
+## 内置useContext
+>实际开发需要创建一个context-manager.js 管理文件
+```jsx
+import React,{createContext} from 'react';
+
+export const MyContext = createContext(null);
+```
+>父组件
+```jsx
+import React, { useState } from 'react';
+import Child from './Child';
+import { MyContext } from './context-manager';
+
+const fetchData = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(1);
+        })
+    });
+}
+
+export default (props = {}) => {
+    const [step, setStep] = useState(0);
+    const [count, setCount] = useState(0);
+    const [number, setNumber] = useState(0);
+
+
+    return (
+        <MyContext.Provider value={{ setStep, setCount, setNumber, fetchData }}>
+            <Child step={step} number={number} count={count} />
+        </MyContext.Provider>
+    );
+}
+
+```
+子组件
+```jsx
+import React, { useContext, useEffect, memo } from 'react';
+
+import { MyContext } from './context-manager';
+
+export default memo((props = {}) => {
+    const { setStep, setNumber, setCount, fetchData } = useContext(MyContext);
+
+    useEffect(() => {
+        fetchData().then((res) => {
+            console.log(`FETCH DATA: ${res}`);
+        })
+    }, []);
+
+    return (
+        <div>
+            <p>step is : {props.step}</p>
+            <p>number is : {props.number}</p>
+            <p>count is : {props.count}</p>
+            <hr />
+            <div>
+                <button onClick={() => { setStep(props.step + 1) }}>step ++</button>
+                <button onClick={() => { setNumber(props.number + 1) }}>number ++</button>
+                <button onClick={() => { setCount(props.step + props.number) }}>number + step</button>
+            </div>
+        </div>
+    );
+});
 ```
