@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2022-02-21 14:28:25
+ * @LastEditTime: 2022-03-02 11:07:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -99,7 +99,8 @@
   - [react+进阶之路](readingBooks/reactTo.md)
   - [红宝书 4](readingBooks/red4.md)
   - [effective js](readingBooks/effective.md)
-
+  - [promise Mini](readingBooks/promiseMini.md)
+  - [若川知识库](readingBooks/ruochuan.md)
 - 源码理解
   - [axios](sourceCode/axios.md)
   - [min-vue](sourceCode/min-vue.md)
