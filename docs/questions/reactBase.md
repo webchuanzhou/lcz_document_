@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-10-12 10:15:15
- * @LastEditTime: 2021-12-09 15:06:27
+ * @LastEditTime: 2022-03-03 17:43:51
  * @LastEditors: Please set LastEditors
  * @Description: react 基础面试题
  * @FilePath: \lcz_document\docs\questions\reactBase.md
@@ -9,14 +9,14 @@
 
 ## React 组件间有那些通信方式?
 
-父组件向子组件通信
-1、 通过 props 传递
-子组件向父组件通信
-1、 主动调用通过 props 传过来的方法，并将想要传递的信息，作为参数，传递到父组件的作用域中
-跨层级通信
-1、 使用 react 自带的 Context 进行通信，createContext 创建上下文， useContext 使用上下文。
-2、使用 Redux 或者 Mobx 等状态管理库
-3、使用订阅发布模式
+* 父组件向子组件通信
+* 1、 通过 props 传递
+* 子组件向父组件通信
+* 1、 主动调用通过 props 传过来的方法，并将想要传递的信息，作为参数，传递到父组件的作用域中
+* 跨层级通信
+* 1、 使用 react 自带的 Context 进行通信，createContext 创建上下文， useContext 使用上下文。
+* 2、使用 Redux 或者 Mobx 等状态管理库
+* 3、使用订阅发布模式
 
 ## React 父组件如何调用子组件中的方法？
 
@@ -34,7 +34,7 @@
     const father = (props,ref)=>{
         const child = useRef()
         <>
-            <Child res={child}></Child>
+            <Child ref={child}></Child>
             <button onClick={()=>{child.current.getAlert()}}></button>
         </>
     }
@@ -121,8 +121,8 @@ class ErrorBoundary extends React.Component<IProps, IState> {
 类组件在未来时间切片与并发模式中，由于生命周期带来的复杂度，并不易于优化。而函数组件本身轻量简单，且在 Hooks 的基础上提供了比原先更细粒度的逻辑组织与复用，更能适应 React 的未来发展。
 
 ## React 如何判断什么时候重新渲染组件？
-
-当 React 将要渲染组件时会执行 shouldComponentUpdate 方法来看它是否返回 true（组件应该更新，也就是重新渲染）。所以需要重写 shouldComponentUpdate 方法让它根据情况返回 true 或者 false 来告诉 React 什么时候重新渲染什么时候跳过重新渲染。
+* 生命周期 : shouldComponentUpdate
+* 当 React 将要渲染组件时会执行 shouldComponentUpdate 方法来看它是否返回 true（组件应该更新，也就是重新渲染）。所以需要重写 shouldComponentUpdate 方法让它根据情况返回 true 或者 false 来告诉 React 什么时候重新渲染什么时候跳过重新渲染。
 
 ## 类组件和函数组件之间的区别是啥？
 
@@ -137,8 +137,8 @@ class ErrorBoundary extends React.Component<IProps, IState> {
 | 是否有状态 state | 没有     | 有     |
 
 ## React 中 refs 干嘛用的？
-
-Refs 提供了一种访问在 render 方法中创建的 DOM 节点或者 React 组件的。
+* 类组件:Refs 提供了一种访问在 render 方法中创建的 DOM 节点或者 React 组件的。
+* 函数式组件:访问dom节点 与 保存变量
 
 ## 如何创建 refs
 
@@ -154,7 +154,12 @@ Refs 提供了一种访问在 render 方法中创建的 DOM 节点或者 React �
 this.div = React.createRef()
 ;<div ref={this.div}></div>
 ```
-
+函数式组件
+```jsx
+import {useRef} from 'react'
+let ref =  useRef()
+;<div ref={ref}></div>
+```
 ## state 和 props 区别是啥？
 
 state 是当前组件的状态控制

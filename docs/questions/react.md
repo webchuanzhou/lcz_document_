@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-09-02 09:48:45
- * @LastEditTime: 2021-12-17 10:02:45
+ * @LastEditTime: 2022-03-03 18:11:35
  * @LastEditors: Please set LastEditors
  * @Description: react 面试题
  * @FilePath: \lcz_document\docs\questions\react.md
@@ -244,7 +244,7 @@ React.createClass会自绑定函数方法，导致不必要的性能开销，增
 
 ## 对React的插槽(Portals)(传送门)的理解，如何使用，有哪些使用场景
 
-```html
+```jsx
 const appRoot = document.getElementById('app-root');
 const maskRoot = document.getElementById('mask-root');
 class Mask extends React.Component{
