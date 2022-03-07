@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-09-02 09:48:45
- * @LastEditTime: 2022-03-03 18:11:35
+ * @LastEditTime: 2022-03-07 10:09:33
  * @LastEditors: Please set LastEditors
  * @Description: react 面试题
  * @FilePath: \lcz_document\docs\questions\react.md
@@ -20,7 +20,7 @@ HOC 可以用于以下许多用例
 在调用 super() 方法之前，子类构造函数无法使用this引用，ES6 子类也是如此。将 props 参数传递给 super() 调用的主要原因是在子构造函数中能够通过this.props来获取传入的 props。
 （没有super之前不能调用this，不能访问this.props，调用后才访问）
 例子
-```html
+```jsx
   constructor(props) {
       super(props);
       console.log(this.props);  // { name: 'sudheer',age: 30 }
