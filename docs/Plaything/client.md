@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2022-02-21 14:28:19
- * @LastEditTime: 2022-03-07 22:36:20
+ * @LastEditTime: 2022-03-07 22:38:17
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lcz_document\docs\Plaything\client.md
@@ -19,7 +19,6 @@
 * eth 本地私有链
 
 ## 极光（佛跳墙）
-* 科学上网
 
 ## appupLoader
 * windows 上传ipa 到appstore
