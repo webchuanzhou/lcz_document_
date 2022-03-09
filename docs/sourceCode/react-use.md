@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2022-03-07 11:11:53
- * @LastEditTime: 2022-03-07 15:20:38
+ * @LastEditTime: 2022-03-08 16:18:49
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /lcz_document/docs/sourceCode/react-use.md
@@ -226,3 +226,62 @@ const Demo = () => {
 > 后续补充
 
 # Side-effects
+## useCookie
+```jsx
+import { useCallback, useState } from 'react';
+import Cookies from 'js-cookie';
+
+const useCookie = (
+  cookieName: string
+): [string | null, (newValue: string, options?: Cookies.CookieAttributes) => void, () => void] => {
+  const [value, setValue] = useState<string | null>(() => Cookies.get(cookieName) || null);
+
+  const updateCookie = useCallback(
+    (newValue: string, options?: Cookies.CookieAttributes) => {
+      Cookies.set(cookieName, newValue, options);
+      setValue(newValue);
+    },
+    [cookieName]
+  );
+
+  const deleteCookie = useCallback(() => {
+    Cookies.remove(cookieName);
+    setValue(null);
+  }, [cookieName]);
+
+  return [value, updateCookie, deleteCookie];
+};
+
+export default useCookie;
+```
+* use
+```jsx
+import { useCookie } from "react-use";
+
+const Demo = () => {
+  const [value, updateCookie, deleteCookie] = useCookie("my-cookie");
+  const [counter, setCounter] = useState(1);
+
+  useEffect(() => {
+    deleteCookie();
+  }, []);
+
+  const updateCookieHandler = () => {
+    updateCookie(`my-awesome-cookie-${counter}`);
+    setCounter(c => c + 1);
+  };
+
+  return (
+    <div>
+      <p>Value: {value}</p>
+      <button onClick={updateCookieHandler}>Update Cookie</button>
+      <br />
+      <button onClick={deleteCookie}>Delete Cookie</button>
+    </div>
+  );
+};
+```
+* use
+```jsx
+  const [value, updateCookie, deleteCookie] = useCookie(cookieName: string);
+```

@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2022-03-07 11:12:18
+ * @LastEditTime: 2022-03-09 17:33:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -34,6 +34,7 @@
   - [常用指令封装](vue3.x/directive.md)
 
 - React
+
   - [Hooks](react/hooks.md)
   - [Hoc](react/hoc.md)
 
@@ -59,7 +60,7 @@
   - [中级](questions/intermediate.md)
   - [高级](questions/senior.md)
   - [手写题](questions/despise.md)
-  - [手写题2](questions/despise2.md)
+  - [手写题 2](questions/despise2.md)
   - [vue 基础题](questions/vue.md)
   - [react 基础题](questions/reactBase.md)
   - [react](questions/react.md)
@@ -101,9 +102,14 @@
   - [effective js](readingBooks/effective.md)
   - [promise Mini](readingBooks/promiseMini.md)
   - [若川知识库](readingBooks/ruochuan.md)
+
 - 源码理解
+
   - [axios](sourceCode/axios.md)
   - [min-vue](sourceCode/min-vue.md)
   - [react-use](sourceCode/react-use.md)
+
+- 三方库
+  - [偏门实用没有过的三方库](library/Tripartite.md)
 - 小玩物
   - [客户端](Plaything/client.md)
