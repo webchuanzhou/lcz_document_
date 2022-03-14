@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-12-14 09:40:52
- * @LastEditTime: 2021-12-17 14:57:16
+ * @LastEditTime: 2022-03-10 11:22:32
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lcz_document\docs\questions\vue.md
@@ -196,3 +196,28 @@ const elementVNode = {
 }
 ```
 [设计 VNode](https://github.com/natee/build-your-own-vue-next/blob/master/course/chapter3/2.VNODE.md)
+
+## $nextTick 原理
+* 简单理解就是setTimeout 放到异步后去执行
+* [参考文章](https://blog.csdn.net/frontend_frank/article/details/105942284)
+* 创建了3个变量,callbacks一个队列数组,一个padding状态,一个timerFun,这3个变量其实是闭包,受保护的变量一直在内存中
+* pending 用来标实同一个时间只能执行一次
+* 其实就是判断是否支持原生的promise,是否支持原生的MutationObserver,或者支持原生的setImmediate,否则就用setTimeout
+* 就是对当前环境进行降级处理,主要就是为了把callback执行放进微任务或者宏任务,等下一次事件循环进行执行,
+* 列子
+```js
+  setTimeout(()=>{
+    console.log(1)
+  },0)
+  this.$nextClick(()=>{
+    console.log(2)
+  })
+  this.$nextClick(()=>{
+    console.log(3)
+  })
+  // 2 3 1 
+  // 原理如上进宏任务了, 实际要区分this.$nextClick 在的环境是否支持微任务 promise mutationObserver
+```
+
+## 远离干货
+[原理](https://zhuanlan.zhihu.com/p/101330697)

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 09:49:25
- * @LastEditTime: 2022-02-16 11:57:49
+ * @LastEditTime: 2022-03-13 21:23:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\base.md
@@ -1350,3 +1350,7 @@ A
 Array [ "A", "B" ]
 
 ```
+
+## for in 与Object.keys 哪个能访问到原型链
+* for in可以访问到
+* object.keys是es8推出的,它的封装必定干了啥事情,比如 object.create(null)就访问不到原型链(个人理解)

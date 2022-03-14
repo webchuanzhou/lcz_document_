@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2022-03-07 11:11:53
- * @LastEditTime: 2022-03-08 16:18:49
+ * @LastEditTime: 2022-03-09 18:15:46
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /lcz_document/docs/sourceCode/react-use.md
@@ -284,4 +284,99 @@ const Demo = () => {
 * use
 ```jsx
   const [value, updateCookie, deleteCookie] = useCookie(cookieName: string);
+```
+
+## useCopyToClipboard.ts
+```jsx
+import writeText from 'copy-to-clipboard';
+import { useCallback } from 'react';
+import useMountedState from './useMountedState';
+import useSetState from './useSetState';
+
+export interface CopyToClipboardState {
+  value?: string;
+  noUserInteraction: boolean;
+  error?: Error;
+}
+
+const useCopyToClipboard = (): [CopyToClipboardState, (value: string) => void] => {
+  const isMounted = useMountedState();
+  const [state, setState] = useSetState<CopyToClipboardState>({
+    value: undefined,
+    error: undefined,
+    noUserInteraction: true,
+  });
+
+  const copyToClipboard = useCallback((value) => {
+    if (!isMounted()) {
+      return;
+    }
+    let noUserInteraction;
+    let normalizedValue;
+    try {
+      // only strings and numbers casted to strings can be copied to clipboard
+      if (typeof value !== 'string' && typeof value !== 'number') {
+        const error = new Error(
+          `Cannot copy typeof ${typeof value} to clipboard, must be a string`
+        );
+        if (process.env.NODE_ENV === 'development') console.error(error);
+        setState({
+          value,
+          error,
+          noUserInteraction: true,
+        });
+        return;
+      }
+      // empty strings are also considered invalid
+      else if (value === '') {
+        const error = new Error(`Cannot copy empty string to clipboard.`);
+        if (process.env.NODE_ENV === 'development') console.error(error);
+        setState({
+          value,
+          error,
+          noUserInteraction: true,
+        });
+        return;
+      }
+      normalizedValue = value.toString();
+      noUserInteraction = writeText(normalizedValue);
+      setState({
+        value: normalizedValue,
+        error: undefined,
+        noUserInteraction,
+      });
+    } catch (error) {
+      setState({
+        value: normalizedValue,
+        error,
+        noUserInteraction,
+      });
+    }
+  }, []);
+
+  return [state, copyToClipboard];
+};
+
+export default useCopyToClipboard;
+```
+* use
+```jsx
+const Demo = () => {
+  const [text, setText] = React.useState('');
+  const [state, copyToClipboard] = useCopyToClipboard();
+
+  return (
+    <div>
+      <input value={text} onChange={e => setText(e.target.value)} />
+      <button type="button" onClick={() => copyToClipboard(text)}>copy text</button>
+      {state.error
+        ? <p>Unable to copy value: {state.error.message}</p>
+        : state.value && <p>Copied {state.value}</p>}
+    </div>
+  )
+}
+```
+* use
+```jsx
+const [{value, error, noUserInteraction}, copyToClipboard] = useCopyToClipboard();
 ```
