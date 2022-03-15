@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-12-14 09:40:52
- * @LastEditTime: 2022-03-10 11:22:32
+ * @LastEditTime: 2022-03-14 14:15:01
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lcz_document\docs\questions\vue.md
@@ -219,5 +219,11 @@ const elementVNode = {
   // 原理如上进宏任务了, 实际要区分this.$nextClick 在的环境是否支持微任务 promise mutationObserver
 ```
 
-## 远离干货
+## 原理干货
 [原理](https://zhuanlan.zhihu.com/p/101330697)
+
+## 使用Proxy替代Object.defineProperty
+* Proxy 是对整个对象的代理，而 Object.defineProperty 只能代理某个属性
+* 对象上新增属性，Proxy 可以监听到，Object.defineProperty 不能
+* 数组新增修改，Proxy 可以监听到，Object.defineProperty 不能
+* 若对象内部属性要全部递归代理，Proxy 可以只在调用的时候递归，而 Object. definePropery 需要一次完成所有递归，性能比 Proxy 差
