@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2022-03-09 17:33:49
+ * @LastEditTime: 2022-03-16 23:26:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -86,6 +86,7 @@
 
 - 学习记录
   - [React](study/react.md)
+  - [React2次学习补充](study/react2.md)
   - [docker+vue+ftp+linux+Nginx](study/public.md)
   - [cocos2d](study/cocos2d.md)
   - [vue3](study/vue3.md)
