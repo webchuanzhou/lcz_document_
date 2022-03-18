@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-12 19:40:11
- * @LastEditTime: 2021-12-30 16:40:43
+ * @LastEditTime: 2022-03-18 17:47:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /lcz_document/docs/study/git.md
@@ -33,4 +33,9 @@
 ## git 拉取远端分支到本地
 ```js
     git fetch origin 分支
+```
+
+## 删除远端分支
+```js
+git push origin --delete 分支
 ```
