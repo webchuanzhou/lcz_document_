@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2022-03-07 11:11:53
- * @LastEditTime: 2022-03-09 18:15:46
+ * @LastEditTime: 2022-03-22 17:10:58
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /lcz_document/docs/sourceCode/react-use.md
@@ -226,50 +226,54 @@ const Demo = () => {
 > 后续补充
 
 # Side-effects
+
 ## useCookie
+
 ```jsx
-import { useCallback, useState } from 'react';
-import Cookies from 'js-cookie';
+import { useCallback, useState } from 'react'
+import Cookies from 'js-cookie'
 
 const useCookie = (
   cookieName: string
 ): [string | null, (newValue: string, options?: Cookies.CookieAttributes) => void, () => void] => {
-  const [value, setValue] = useState<string | null>(() => Cookies.get(cookieName) || null);
+  const [value, setValue] = (useState < string) | (null > (() => Cookies.get(cookieName) || null))
 
   const updateCookie = useCallback(
     (newValue: string, options?: Cookies.CookieAttributes) => {
-      Cookies.set(cookieName, newValue, options);
-      setValue(newValue);
+      Cookies.set(cookieName, newValue, options)
+      setValue(newValue)
     },
     [cookieName]
-  );
+  )
 
   const deleteCookie = useCallback(() => {
-    Cookies.remove(cookieName);
-    setValue(null);
-  }, [cookieName]);
+    Cookies.remove(cookieName)
+    setValue(null)
+  }, [cookieName])
 
-  return [value, updateCookie, deleteCookie];
-};
+  return [value, updateCookie, deleteCookie]
+}
 
-export default useCookie;
+export default useCookie
 ```
-* use
+
+- use
+
 ```jsx
-import { useCookie } from "react-use";
+import { useCookie } from 'react-use'
 
 const Demo = () => {
-  const [value, updateCookie, deleteCookie] = useCookie("my-cookie");
-  const [counter, setCounter] = useState(1);
+  const [value, updateCookie, deleteCookie] = useCookie('my-cookie')
+  const [counter, setCounter] = useState(1)
 
   useEffect(() => {
-    deleteCookie();
-  }, []);
+    deleteCookie()
+  }, [])
 
   const updateCookieHandler = () => {
-    updateCookie(`my-awesome-cookie-${counter}`);
-    setCounter(c => c + 1);
-  };
+    updateCookie(`my-awesome-cookie-${counter}`)
+    setCounter(c => c + 1)
+  }
 
   return (
     <div>
@@ -278,20 +282,23 @@ const Demo = () => {
       <br />
       <button onClick={deleteCookie}>Delete Cookie</button>
     </div>
-  );
-};
+  )
+}
 ```
-* use
+
+- use
+
 ```jsx
   const [value, updateCookie, deleteCookie] = useCookie(cookieName: string);
 ```
 
 ## useCopyToClipboard.ts
+
 ```jsx
-import writeText from 'copy-to-clipboard';
-import { useCallback } from 'react';
-import useMountedState from './useMountedState';
-import useSetState from './useSetState';
+import writeText from 'copy-to-clipboard'
+import { useCallback } from 'react'
+import useMountedState from './useMountedState'
+import useSetState from './useSetState'
 
 export interface CopyToClipboardState {
   value?: string;
@@ -300,83 +307,251 @@ export interface CopyToClipboardState {
 }
 
 const useCopyToClipboard = (): [CopyToClipboardState, (value: string) => void] => {
-  const isMounted = useMountedState();
-  const [state, setState] = useSetState<CopyToClipboardState>({
-    value: undefined,
-    error: undefined,
-    noUserInteraction: true,
-  });
-
-  const copyToClipboard = useCallback((value) => {
-    if (!isMounted()) {
-      return;
+  const isMounted = useMountedState()
+  const [state, setState] =
+    useSetState <
+    CopyToClipboardState >
+    {
+      value: undefined,
+      error: undefined,
+      noUserInteraction: true,
     }
-    let noUserInteraction;
-    let normalizedValue;
+
+  const copyToClipboard = useCallback(value => {
+    if (!isMounted()) {
+      return
+    }
+    let noUserInteraction
+    let normalizedValue
     try {
       // only strings and numbers casted to strings can be copied to clipboard
       if (typeof value !== 'string' && typeof value !== 'number') {
-        const error = new Error(
-          `Cannot copy typeof ${typeof value} to clipboard, must be a string`
-        );
-        if (process.env.NODE_ENV === 'development') console.error(error);
+        const error = new Error(`Cannot copy typeof ${typeof value} to clipboard, must be a string`)
+        if (process.env.NODE_ENV === 'development') console.error(error)
         setState({
           value,
           error,
           noUserInteraction: true,
-        });
-        return;
+        })
+        return
       }
       // empty strings are also considered invalid
       else if (value === '') {
-        const error = new Error(`Cannot copy empty string to clipboard.`);
-        if (process.env.NODE_ENV === 'development') console.error(error);
+        const error = new Error(`Cannot copy empty string to clipboard.`)
+        if (process.env.NODE_ENV === 'development') console.error(error)
         setState({
           value,
           error,
           noUserInteraction: true,
-        });
-        return;
+        })
+        return
       }
-      normalizedValue = value.toString();
-      noUserInteraction = writeText(normalizedValue);
+      normalizedValue = value.toString()
+      noUserInteraction = writeText(normalizedValue)
       setState({
         value: normalizedValue,
         error: undefined,
         noUserInteraction,
-      });
+      })
     } catch (error) {
       setState({
         value: normalizedValue,
         error,
         noUserInteraction,
-      });
+      })
     }
-  }, []);
+  }, [])
 
-  return [state, copyToClipboard];
-};
+  return [state, copyToClipboard]
+}
 
-export default useCopyToClipboard;
+export default useCopyToClipboard
 ```
-* use
+
+- use
+
 ```jsx
 const Demo = () => {
-  const [text, setText] = React.useState('');
-  const [state, copyToClipboard] = useCopyToClipboard();
+  const [text, setText] = React.useState('')
+  const [state, copyToClipboard] = useCopyToClipboard()
 
   return (
     <div>
       <input value={text} onChange={e => setText(e.target.value)} />
-      <button type="button" onClick={() => copyToClipboard(text)}>copy text</button>
-      {state.error
-        ? <p>Unable to copy value: {state.error.message}</p>
-        : state.value && <p>Copied {state.value}</p>}
+      <button type='button' onClick={() => copyToClipboard(text)}>
+        copy text
+      </button>
+      {state.error ? <p>Unable to copy value: {state.error.message}</p> : state.value && <p>Copied {state.value}</p>}
     </div>
   )
 }
 ```
-* use
+
+- use
+
 ```jsx
-const [{value, error, noUserInteraction}, copyToClipboard] = useCopyToClipboard();
+const [{ value, error, noUserInteraction }, copyToClipboard] = useCopyToClipboard()
+```
+
+## useAsyncFn
+
+```jsx
+/*
+ * @Author: your name
+ * @Date: 2022-03-22 16:08:51
+ * @LastEditTime: 2022-03-22 16:24:27
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /r-mobile/src/hooks/useHooks/useAsyncFn.js
+ */
+import { useCallback, useRef, useState } from 'react'
+import useMountedState from './useMountedState'
+
+export default function useAsyncFn(fn, deps, initialState = { loading: false }) {
+  const lastCallId = useRef(0)
+  const isMounted = useMountedState()
+  const [state, set] = useState(initialState)
+
+  const callback = useCallback((...args) => {
+    const callId = ++lastCallId.current
+    if (!state.loading) {
+      set(prevState => ({ ...prevState, loading: true }))
+    }
+
+    return fn(...args).then(
+      value => {
+        isMounted() && callId === lastCallId.current && set({ value, loading: false })
+
+        return value
+      },
+      error => {
+        isMounted() && callId === lastCallId.current && set({ error, loading: false })
+
+        return error
+      }
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps)
+
+  return [state, callback]
+}
+```
+
+- use
+
+```jsx
+const [state, doFetch] = useAsyncFn(async () => {
+  const { response } = await GetMarketByPage()
+  setTimeout(() => {}, 3000)
+  setPage(page + 1)
+  return response.dataCount
+}, [])
+```
+
+- dom
+
+```jsx
+ <div
+    onClick={() => {
+      doFetch()
+    }}
+  >
+    request
+  </div>
+  <div>{state.value}</div>
+```
+
+## useAsync
+
+```jsx
+import { useEffect } from 'react'
+import useAsyncFn from './useAsyncFn'
+
+export default function useAsync(fn, deps = []) {
+  const [state, callback] = useAsyncFn(fn, deps, {
+    loading: true,
+  })
+
+  useEffect(() => {
+    callback()
+  }, [callback])
+
+  return state.value
+}
+```
+
+- use
+
+```jsx
+const state2 = useAsync(async () => {
+  const { response } = await GetMarketByPage()
+  return response.dataCount
+}, [])
+```
+
+- dom
+
+```jsx
+<div>{state2}</div>
+```
+
+## useCookie
+
+```jsx
+/*
+ * @Author: your name
+ * @Date: 2022-03-22 17:06:35
+ * @LastEditTime: 2022-03-22 17:06:36
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /r-mobile/src/hooks/useHooks/useCookie.js
+ */
+import { useCallback, useState } from 'react'
+import Cookies from 'js-cookie'
+
+const useCookie = cookieName => {
+  const [value, setValue] = useState(() => Cookies.get(cookieName) || null)
+
+  const updateCookie = useCallback(
+    (newValue, options = {}) => {
+      Cookies.set(cookieName, newValue, options)
+      setValue(newValue)
+    },
+    [cookieName]
+  )
+
+  const deleteCookie = useCallback(() => {
+    Cookies.remove(cookieName)
+    setValue(null)
+  }, [cookieName])
+
+  return [value, updateCookie, deleteCookie]
+}
+
+export default useCookie
+```
+
+- use
+
+```jsx
+const [cValue, setCvalue, removeCvalue] = useCookie('token')
+```
+
+- dom
+
+```jsx
+<div
+  onClick={() => {
+    setCvalue('12111222')
+  }}
+>
+  setToken
+</div>
+<div
+  onClick={() => {
+    removeCvalue()
+  }}
+>
+  removeToken
+</div>
 ```
