@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-16 09:49:25
- * @LastEditTime: 2022-03-14 22:39:14
+ * @LastEditTime: 2022-03-22 20:36:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\questions\base.md
@@ -1351,29 +1351,3 @@ Array [ "A", "B" ]
 
 ```
 
-## for in 与Object.keys 哪个能访问到原型链
-* for in可以访问到
-* object.keys是es8推出的,它的封装必定干了啥事情,比如 object.create(null)就访问不到原型链(个人理解)
-
-## git merge 与 git rebase 的区别
-* git merge <branch> 合并指定分支到当前分支
-* git rebase <basebranch> <topicbranch> 即提取在<topicbranch>上的补丁和修改，然后在<basebranch>的基础上应用一次。
-* git merge 在大项目中分支比较多会比较杂乱
-* git rebase 合并后会在同一条链上比较清晰
-
-##  Http1.0/Http1.1/Http2.0这三个版本的主要区别
-* HTTP1.0 每建立一次TCP连接，只提供一次 request 请求和 response 请求，一次请求结束后，自动断开TCP连接,弊端：连接无法复用，每次请求都要经历三次握手和慢启动
-* 支持持续长连接(Response Headers头中出现Connection:keep-alive)，添加了请求流水线串行化单线程处理可以同时在一个TCP连接上发送多个请求，但是只有响应是有顺序的，只有上一个请求完成后，下一个才能响应，并且后续任务仍然受到头部阻塞的影响
-* 采用多路复用，大幅度提升了web心梗，在与HTTP/1.1语义完全兼容的基础上，进一步减少了网络延迟和传输的安全性，支持明文传输，消息头压缩，二进制分帧 xxxxx
-* WebSocket是HTML5中的协议，本质上是基于TCP,先通过HTTP/HTTPS协议发起一条特殊HTTP请求进行握手后创建一个用于交换数据的TCP连接，也是支持长连接的.WebSocket是由HTTP先发起的，然后在转为WebSocket。当然在HTML5规范下还有SSE（Server-Sent Events，服务器推送事件）这种方式比长轮询（Long Polling)更高效，需要使用EventSource对象。
-
-## anmation 动画用什么会影响性能
-* layout相关的属性，则会触发重新布局，导致渲染和绘制所需要的时间将会更长,避免width, height, margin, padding, border, display, top, right, bottom ,left, position, float, overflow
-* transform(其中的translate, rotate, scale), color, background等
-* transform: translate3d(0, 0, 0);开GPU加速
-
-## 如何修改远端分支名字
-* git branch -m 原分支名  现分支名
-
-## 如何查看端口被占用
-* lsof -i linux(我谢谢那个面试官)

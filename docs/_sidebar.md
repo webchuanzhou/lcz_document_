@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2022-03-18 17:47:25
+ * @LastEditTime: 2022-03-22 20:35:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -64,6 +64,7 @@
   - [vue 基础题](questions/vue.md)
   - [react 基础题](questions/reactBase.md)
   - [react](questions/react.md)
+  - [不知道的答案](questions/noKnow.md)
 
 - 项目总结
 
@@ -87,7 +88,7 @@
 - 学习记录
   - [git](study/git.md)
   - [React](study/react.md)
-  - [React2次学习补充](study/react2.md)
+  - [React2 次学习补充](study/react2.md)
   - [docker+vue+ftp+linux+Nginx](study/public.md)
   - [cocos2d](study/cocos2d.md)
   - [vue3](study/vue3.md)
