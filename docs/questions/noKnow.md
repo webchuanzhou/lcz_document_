@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-03-22 20:35:16
- * @LastEditTime: 2022-03-22 21:54:39
+ * @LastEditTime: 2022-03-25 17:23:09
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /lcz_document/docs/questions/noKnow.md
@@ -128,12 +128,57 @@ hasLetter('21212') // false
 ## 继承的实现方式(后续补充)
 
 ## git 回滚
-* 不过这种覆盖是不可逆的，之前的提交记录都没有了。所以平时开发中尽量注意，避免使用reset。
-* reset 回滚 revert还原
+
+- 不过这种覆盖是不可逆的，之前的提交记录都没有了。所以平时开发中尽量注意，避免使用 reset。
+- reset 回滚 revert 还原
+
 ```js
 git reset --hard HEAD^ 回退到上个版本
 git reset --hard HEAD~3 回退到前3次提交之前，以此类推，回退到n次提交之前
 git reset --hard commit_id 退到/进到，指定commit的哈希码（这次提交之前或之后的提交都会回滚）
 git revert //用法同上
 ```
-* reset会舍弃原来的分支,revert不会舍弃原来的提交记录，而是生成了一次新的提交。
+
+- reset 会舍弃原来的分支,revert 不会舍弃原来的提交记录，而是生成了一次新的提交。
+
+## 数组与伪数组的区别
+
+- 伪数组拥有 length ,他不要调用数组的方法,因为他是以对象的形式存在
+
+```jsx
+var fakeArray = {
+  length: 3,
+  0: 'first',
+  1: 'second',
+  2: 'third',
+}
+```
+
+## flex 布局
+
+flex-basis 的默认值不是 auto 而是 0%
+flex-grow:使用的默认值不是 0 而是 1
+
+```css
+flex: 1; // flex:1 1 0%;
+flex: 100px; //flex: 1 1 100px
+```
+
+| 单值语法      | 等同于         | 备注         |
+| ------------- | -------------- | ------------ |
+| flex: initial | flex: 0 1 auto | 初始值，常用 |
+| flex: 0       | flex: 0 1 0%   | 适用场景少   |
+| flex: none    | flex: 0 0 auto | 推荐         |
+| flex:         | 1 flex: 1 1 0% | 推荐         |
+| flex: auto    | flex: 1 1 auto | 适用场景少   |
+
+* flex:initial表示默认的flex状态，无需专门设置，适合小控件元素的分布布局，或者某一项内容动态变化的布局；
+* flex:0适用场景较少，适合设置在替换元素的父元素上；
+* flex:none适用于不换行的内容固定或者较少的小控件元素上，如按钮。
+* flex:1适合等分布局；
+* flex:auto适合基于内容动态适配的布局；
+
+## hooks 中为什么不能写if else
+* 要确保hooks 的执行顺序一致
+
+官方文档一直强调 React Hooks 的调用只能放在函数组件/自定义 Hooks 函数体的顶层，这是因为我们只能通过 Hooks 调用的顺序来与实际保存的数据结构来关联

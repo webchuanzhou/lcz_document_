@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-09-02 09:48:45
- * @LastEditTime: 2022-03-07 10:09:33
+ * @LastEditTime: 2022-03-28 15:55:29
  * @LastEditors: Please set LastEditors
  * @Description: react 面试题
  * @FilePath: \lcz_document\docs\questions\react.md
@@ -421,3 +421,14 @@ new Greeting()
     → React.Component.prototype
       → Object.prototype
 ```
+
+## useEffect 与 useLayoutEffect 有什么区别
+* useEffect 是异步执行的，而 useLayoutEffect 是同步执行的，会阻塞浏览器更新渲染
+* 总结有操作dom的使用useLayoutEffect,没有操作dom的用useEffect
+
+##  setState 真的是异步的吗
+* 它的执行是同步的,只是他里面的合成机制是异步的,所以他也是异步执行(个人)
+* setState 的“异步”并不是说内部由异步代码实现，其实本身执行的过程和代码都是同步的，只是合成事件和 hook() 的调用顺序在更新之前，导致在合成事件和钩子函数中没法立马拿到更新后的值，形式了所谓的“异步”，
+
+## 为什么不能直接使用 this.state 改变数据
+* 因为setState是通过队列的机制来实现state的更新的,队列机制可以更高效的实现批量更新,直接修改this.state不会放入状态队列中,当下次队列合并的时候会被忽略
