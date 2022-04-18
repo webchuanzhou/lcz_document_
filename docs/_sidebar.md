@@ -1,8 +1,8 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2022-03-22 20:35:54
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-04-18 10:43:36
+ * @LastEditors: lcz
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
 -->
@@ -11,6 +11,7 @@
   - [布局](css/layout.md)
   - [重置样式基础](css/reset.md)
   - [积累](css/accumulation.md)
+
 - JavaScript 基础篇
 
   - [基础](js/base.md)
@@ -46,6 +47,9 @@
 
   - [Fetch 封装](request/fetch.md)
   - [axios 封装](request/axios.md)
+
+- daydayUp
+  - [2022-04](2022/04.md)
 
 - 优化
 
@@ -114,5 +118,6 @@
 
 - 三方库
   - [偏门实用没有过的三方库](library/Tripartite.md)
+  
 - 小玩物
   - [客户端](Plaything/client.md)
