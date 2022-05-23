@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2022-04-18 10:43:36
+ * @LastEditTime: 2022-05-23 11:26:26
  * @LastEditors: lcz
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -11,6 +11,7 @@
   - [布局](css/layout.md)
   - [重置样式基础](css/reset.md)
   - [积累](css/accumulation.md)
+  - [响应式布局](css/Responsive.md)
 
 - JavaScript 基础篇
 
@@ -49,6 +50,7 @@
   - [axios 封装](request/axios.md)
 
 - daydayUp
+
   - [2022-04](2022/04.md)
 
 - 优化
@@ -80,6 +82,7 @@
   - [react 后台管理](project/reactAntdAdmin.md)
   - [cocos2d](project/cocos2dJs.md)
   - [H5 微信 JS-SDK](project/H5WX_JS_SDK.md)
+  - [web3 区块链项目](project/web3Block.md)
 
 - 基础用法
 
@@ -90,6 +93,7 @@
   - [regexp](baseuse/regexp.md)
 
 - 学习记录
+
   - [git](study/git.md)
   - [React](study/react.md)
   - [React2 次学习补充](study/react2.md)
@@ -98,6 +102,10 @@
   - [vue3](study/vue3.md)
   - [pano2vr](study/pano2vr.md)
   - [区块链概念](study/blockChain.md)
+
+- 组件
+  - [vue](components/vue.md)
+  - [react](components/react.md)
 - eslint+prettier
 
   - [前端代码规范 eslint+prettier](rules/code.md)
@@ -118,6 +126,5 @@
 
 - 三方库
   - [偏门实用没有过的三方库](library/Tripartite.md)
-  
 - 小玩物
   - [客户端](Plaything/client.md)

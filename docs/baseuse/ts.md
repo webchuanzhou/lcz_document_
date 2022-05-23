@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-06-15 10:14:57
- * @LastEditTime: 2022-05-10 17:57:35
+ * @LastEditTime: 2022-05-12 18:05:52
  * @LastEditors: lcz
  * @Description: ts base
  * @FilePath: \lcz_document\docs\baseuse\ts.md
@@ -315,4 +315,30 @@ let point: Point = {
 type Partial<T>{
   [P in keyof T]?:T[P]
 }
+```
+
+##  深入理解 TypeScript 
+* 参考地址 https://jkchao.github.io/typescript-book-chinese/typings/overview.html#%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B
+
+### 交叉类型 也就是合并
+```ts
+function extend<T extends object, U extends object>(first: T, second: U): T & U {
+  const result = <T & U>{};
+  for (let id in first) {
+    (<T>result)[id] = first[id];
+  }
+  for (let id in second) {
+    if (!result.hasOwnProperty(id)) {
+      (<U>result)[id] = second[id];
+    }
+  }
+
+  return result;
+}
+
+const x = extend({ a: 'hello' }, { b: 42 });
+
+// 现在 x 拥有了 a 属性与 b 属性
+const a = x.a;
+const b = x.b;
 ```
