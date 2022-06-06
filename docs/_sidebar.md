@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2022-05-23 11:26:26
+ * @LastEditTime: 2022-06-05 10:00:43
  * @LastEditors: lcz
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -12,6 +12,7 @@
   - [重置样式基础](css/reset.md)
   - [积累](css/accumulation.md)
   - [响应式布局](css/Responsive.md)
+  - [scss](css/scss.md)
 
 - JavaScript 基础篇
 
