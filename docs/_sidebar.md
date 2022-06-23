@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2022-06-05 10:00:43
+ * @LastEditTime: 2022-06-12 15:30:12
  * @LastEditors: lcz
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -129,3 +129,9 @@
   - [偏门实用没有过的三方库](library/Tripartite.md)
 - 小玩物
   - [客户端](Plaything/client.md)
+
+- mendix
+  - [components](mendix/components)
+
+- 大唐融合企业培训
+  - [1](train/1.md)
