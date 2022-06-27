@@ -1,7 +1,7 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
- * @LastEditTime: 2022-06-12 15:30:12
+ * @LastEditTime: 2022-06-27 14:35:35
  * @LastEditors: lcz
  * @Description: In User Settings Edit
  * @FilePath: \lczdocs\_sidebar.md
@@ -53,6 +53,7 @@
 - daydayUp
 
   - [2022-04](2022/04.md)
+  - [2022-06](2022/06.md)
 
 - 优化
 
