@@ -1,4 +1,11 @@
 <!--
+ * @Description: 
+ * @Autor: lcz
+ * @Date: 2022-02-24 14:12:12
+ * @LastEditors: lcz
+ * @LastEditTime: 2022-06-30 21:24:42
+-->
+<!--
  * @Author: lcz
  * @Date: 2021-03-11 15:09:19
  * @LastEditTime: 2022-06-27 14:35:35
@@ -136,3 +143,6 @@
 
 - 大唐融合企业培训
   - [1](train/1.md)
+
+- linux
+  - [前端上传](linux/web.md)
