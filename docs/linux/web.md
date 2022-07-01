@@ -3,8 +3,26 @@
  * @Autor: lcz
  * @Date: 2022-06-30 21:18:00
  * @LastEditors: lcz
- * @LastEditTime: 2022-07-01 09:55:27
+ * @LastEditTime: 2022-07-01 10:54:22
 -->
+# tar 压缩解压
+> 必须选
+* -c 压缩
+* -x 解压
+* -t 查看备份内容
+> 辅选
+* -z gzip 压缩或者解压
+* -j bzip2 压缩或者解压
+* -v 解压或者压缩过程
+* -f 压缩解压后的名字
+> xx 名称 xxx 目录
+> tar -czvf xx xxx 压缩
+> tar -xzvf xx 解压
+
+## 服务器登陆方式
+* ssh -i developer@dev.hz.bjdv.com.pem -p 56622 developer@dev.hz.bjdv.com
+
+
 ## 查看当前文件夹路径
 * pwd
 
@@ -33,5 +51,4 @@ cd ~/.ssh
 
 * tar -zxvf admin-ui.tar.gz
 
-## 服务器登陆方式
-* ssh -i developer@dev.hz.bjdv.com.pem -p 56622 developer@dev.hz.bjdv.com
+
