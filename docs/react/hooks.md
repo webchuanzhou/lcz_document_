@@ -1,8 +1,8 @@
 <!--
  * @Author: lcz
  * @Date: 2021-12-06 11:39:51
- * @LastEditTime: 2022-03-03 16:07:23
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-07-01 14:39:01
+ * @LastEditors: lcz
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \lcz_document\docs\react\hooks.md
 -->
@@ -847,3 +847,48 @@ const useEffect = (callback, deps) => {
 3. useEffect hook ---> useLayoutffect hook
 * 执行顺序 effect保存在fiber.updateQueue对应的hook中
 1. useLayoutEffect ----> useEffect
+
+## useStateWithCall 
+
+```jsx
+import { useRef, useState, useEffect } from "react";
+
+const useStateWithCall = (initValue)=>{
+  const ref = useRef(0)
+  const callFRef = useRef()
+  const setFuncRef = useRef()
+  let [state,setState] = useState(initValue)
+  if(!ref.current){
+    ref.current = 1;
+    setFuncRef.current = (newData,callF)=>{
+      callFRef.current = callF;
+      setState(newData)
+      return Promise.resolve(newData)
+    }
+  }
+  useEffect(()=>{
+    callFRef.current?.(state)
+  },[state])
+  return [state,setFuncRef.current]
+}
+
+export default useStateWithCall;
+
+```
+* use
+```jsx
+const [test,setTest] = useStateWithCall(-1);
+```
+callback
+```jsx
+// 设置新数据 
+setTest(1,(newState)=>{
+    console.log("新值"+newState)
+})
+```
+.then
+```jsx
+setTest(type).then((newState)=>{
+    console.log("新值"+newState)
+})
+```

@@ -3,7 +3,7 @@
  * @Autor: lcz
  * @Date: 2022-06-30 21:18:00
  * @LastEditors: lcz
- * @LastEditTime: 2022-07-01 10:54:22
+ * @LastEditTime: 2022-07-01 11:01:53
 -->
 # tar 压缩解压
 > 必须选
@@ -18,6 +18,11 @@
 > xx 名称 xxx 目录
 > tar -czvf xx xxx 压缩
 > tar -xzvf xx 解压
+
+# scp命令
+* -i 从指定文件中读取传输时使用的密钥文件，此参数直接传递给ssh。
+* -P 是指定数据传输用到的端口号
+* -r 递归复制整个文件
 
 ## 服务器登陆方式
 * ssh -i developer@dev.hz.bjdv.com.pem -p 56622 developer@dev.hz.bjdv.com
