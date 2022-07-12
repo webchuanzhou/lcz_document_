@@ -1,8 +1,8 @@
 <!--
  * @Author: lcz
  * @Date: 2021-03-11 15:38:17
- * @LastEditTime: 2022-02-11 10:19:23
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-07-12 17:13:10
+ * @LastEditors: lcz
  * @Description: In User Settings Edit
  * @FilePath: \lcz_document\docs\README.md
 -->
@@ -21,4 +21,4 @@ docsify serve ./docs
 https://blog.csdn.net/zam183/article/details/89468157
 
 ## Node 版本管理工具 nvm
-（有空可以配置玩玩）
+[nvm github下载地址](https://github.com/coreybutler/nvm-windows/releases)

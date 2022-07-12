@@ -3,7 +3,7 @@
  * @Autor: lcz
  * @Date: 2022-02-24 14:12:12
  * @LastEditors: lcz
- * @LastEditTime: 2022-06-30 21:24:42
+ * @LastEditTime: 2022-07-12 17:12:46
 -->
 <!--
  * @Author: lcz
@@ -140,7 +140,7 @@
 
 - mendix
   - [components](mendix/components)
-
+  
 - 大唐融合企业培训
   - [1](train/1.md)
 
