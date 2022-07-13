@@ -3,7 +3,7 @@
  * @Autor: lcz
  * @Date: 2022-02-24 14:12:12
  * @LastEditors: lcz
- * @LastEditTime: 2022-07-12 17:12:46
+ * @LastEditTime: 2022-07-12 17:17:40
 -->
 <!--
  * @Author: lcz
@@ -140,9 +140,10 @@
 
 - mendix
   - [components](mendix/components)
+  - [官方组件修改操作方式](mendix/official)
   
-- 大唐融合企业培训
-  - [1](train/1.md)
+<!-- - 大唐融合企业培训
+  - [1](train/1.md) -->
 
 - linux
   - [前端上传](linux/web.md)
